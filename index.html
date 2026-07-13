@@ -441,13 +441,76 @@
   a[id]{scroll-margin-top:80px}
 </style>
 <script>try{var _t=localStorage.getItem('etap_theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+<style>
+  /* ===== v2 restyle — Kris feedback 2026-07-13 (light-only, minimalist) ===== */
+
+  /* mobile-first: real side padding + tighter leading */
+  .wrap{max-width:600px;padding:0 22px}
+  @media(min-width:460px){.wrap{padding:0 30px}}
+  .prose{margin-top:14px}
+  .prose p{font-size:15.5px;line-height:1.5;margin-top:13px;color:var(--ink)}
+  .prose em{font-style:italic}
+  .uu{text-decoration:none;background:linear-gradient(transparent 60%,var(--sky) 60%);padding:0 1px;border-radius:2px}
+  .mkw{color:var(--mark);font-weight:700}
+
+  /* eyebrow -> minimal mono chip with dashed border */
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-style:normal;font-weight:600;
+    font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mark);
+    border:1px dashed var(--sky-deep);border-radius:30px;padding:4px 12px;
+    display:inline-block;line-height:1}
+  .hero .eyebrow{color:var(--sky);border-color:rgba(166,220,236,.45)}
+  .preface .eyebrow{color:var(--mark);border-color:var(--mark)}
+
+  /* heading complex: bigger, set apart in a dashed container */
+  .hero h1{font-size:clamp(42px,12vw,62px)}
+  .shead{border:1.5px dashed var(--line);border-radius:16px;padding:18px 18px 16px;
+    margin:0 0 20px;background:var(--card)}
+  .shead .eyebrow{display:inline-block;margin-bottom:13px}
+  .shead.center .eyebrow{display:inline-block}
+  .shead h2{font-size:29px;letter-spacing:-.02em;line-height:1.09}
+  .shead p{font-size:15px;margin-top:12px}
+
+  /* callouts: ONE style = light card, dark border (no loud fill) */
+  .note,.note.dark{background:var(--card);border:1.5px solid var(--ink);
+    border-left:1.5px solid var(--ink);border-radius:14px;color:var(--ink);
+    font-size:15px;line-height:1.55;padding:18px 20px;margin-top:18px}
+  .note b,.note.dark b{color:var(--ink)}
+  .note .ph,.note.dark .ph{color:var(--mark)}
+  .note i,.note em{font-style:italic}
+  /* inference-style hierarchy: lead is the anchor, applied text is smaller */
+  .note .big{display:block;font-size:17.5px;line-height:1.34;font-weight:700;color:var(--ink)}
+  .note .sub{font-size:13.5px;line-height:1.52;color:var(--ink-soft);margin-top:9px}
+  .note .gi{font-style:italic;color:var(--mark);font-weight:600}
+
+  /* pull-quote: own dark container, blue italic */
+  .pull{background:var(--ink);color:var(--sky);border-left:none;
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:500;
+    font-size:19px;line-height:1.42;border-radius:18px;padding:30px 26px 26px;
+    margin:26px 0;position:relative}
+  .pull:before{content:'\201C';position:absolute;top:8px;left:18px;font-size:56px;
+    color:var(--sky-deep);opacity:.5;font-family:'Playfair Display',serif;line-height:1}
+
+  /* trust strip near the top */
+  .trust{margin-top:24px;border:1.5px dashed var(--sky-deep);border-radius:16px;
+    padding:18px 20px;background:var(--card)}
+  .trust .eyebrow{margin-bottom:12px}
+  .trust p{font-size:15px;line-height:1.55;color:var(--ink);margin-top:10px}
+  .trust p:first-of-type{margin-top:0}
+  .trust b{color:var(--mark)}
+
+  /* about-me photo slot */
+  .mecard{display:flex;gap:16px;align-items:flex-start}
+  .mephoto{width:84px;height:84px;border-radius:18px;flex:none;object-fit:cover;
+    background:var(--ink);border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono';font-size:10px;color:var(--sky);text-align:center;overflow:hidden}
+</style>
 </head>
 <body>
 
 <div class="topbar"><div class="in">
   <div class="brand" data-jump="top">AI-<i>First</i></div>
   <div class="actions">
-    <button class="tbtn" id="tbtn" aria-label="Тема">🌙</button>
     <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
   </div>
 </div></div>
@@ -476,6 +539,12 @@
   <div class="preface">
     <div class="pf-top"><span class="pf-ava">К</span><div><span class="eyebrow">предисловие</span><div class="pf-name">Кристина &middot; @kris.usti</div></div></div>
     <p>Я собрала этот гайд как ту самую карту, которой мне так не хватало на старте. Без воды и без сложных терминов: провести тебя за руку от нуля до первого результата и увлечь так, чтобы ИИ стал естественной частью твоей рутины.</p>
+  </div>
+
+  <div class="trust">
+    <span class="eyebrow">коротко обо мне</span>
+    <p><b>5+ лет</b> я работала бизнес-ассистентом в международных компаниях, а потом ушла в свое. Сейчас я основательница, вайбкодер и энтузиаст ИИ: собираю команду ИИ-агентов и на ней запускаю проекты и продукты &mdash; для себя и для клиентов.</p>
+    <p>Свой первый проект я написала сама, в связке с ИИ и без бэкграунда в коде. Дальше в гайде &mdash; тот самый путь, который я прошла, разложенный по шагам.</p>
   </div>
 
   <div class="shead" style="margin-top:34px"><span class="eyebrow">00 &middot; честно о себе</span><h2>Я сама начинала отсюда</h2></div>
@@ -560,7 +629,7 @@
     <div class="floor f3"><span class="you">ты здесь</span>
       <span class="cap">этаж 3 &middot; твой офис</span><b>Харнесы и оболочки</b>
       <small>Интерфейс, в котором ты работаешь. Именно тут живем мы с тобой: даем модели инструменты, контекст и навыки.</small></div>
-    <div class="tside"><span class="plus">+</span>надстройка &mdash; <b>харнес.</b> Дает голой модели руки: доступ в интернет, к почте, календарю, готовые скрипты. Это <span class="ph">[Claude&nbsp;Code]</span>, Codex и подобные оболочки.</div>
+    <div class="tside"><span class="plus">+</span>надстройка &mdash; <b>харнес.</b> Дает голой модели руки: доступ в интернет, к почте, календарю, готовые скрипты. Это Claude Code, Codex и подобные оболочки.</div>
     <div class="tarrow">работает на &darr;</div>
 
     <div class="floor f2"><span class="cap">этаж 2 &middot; мозги</span><b>Сами модели</b>
@@ -582,16 +651,19 @@
   <div class="shead" style="margin-top:38px"><span class="eyebrow">этаж 1 &middot; фундамент</span><h2 style="font-size:20px">Железо и вычисления</h2>
     <p>На этом держится вообще все: физические серверы, чипы и дата-центры, на которых нейросети обучаются и работают.</p></div>
   <div class="prose">
-    <p>Здесь безоговорочно правит Nvidia &mdash; сейчас это самая дорогая компания в мире, а весь рынок железа оценивается в невероятные 5 триллионов долларов.<a class="fn" href="#f1">1</a> Чипы стоят безумных денег: серверные связки B200 обходятся в сотни тысяч долларов. Но главное слово на этом этаже &mdash; <b>инференс</b> (исполнение).</p>
+    <p>Здесь безоговорочно правит Nvidia &mdash; сейчас это самая дорогая компания в мире, а весь рынок железа оценивается в невероятные 5 триллионов долларов.<a class="fn" href="#f1">1</a> Чипы стоят безумных денег: серверные связки B200 обходятся в сотни тысяч долларов. Но главное слово на этом этаже &mdash; <b>инференс</b> (<em>исполнение</em>).</p>
   </div>
-  <div class="note dark"><b>Инференс &mdash; это когда модель физически «думает» над твоей задачей.</b> Относись к нему как к электричеству. Каждый раз, когда ты отправляешь промпт, серверы расходуют энергию на вычисления. Спрос на этот «ток» настолько огромный, что рынок инференса в 2026 пробил $100+ млрд,<a class="fn" href="#f2">2</a> и появляются отдельные компании (вроде стартапа Etched с оценкой в $5 млрд), которые делают железо исключительно под «думанье» ИИ.</div>
+  <div class="note">
+    <b class="big">Инференс &mdash; это когда модель физически «думает» над твоей задачей.</b>
+    <p class="sub">Относись к нему как к <span class="gi">электричеству</span>: каждый раз, когда ты отправляешь промпт, серверы расходуют энергию на вычисления. Спрос на этот «ток» настолько огромный, что рынок инференса в 2026 пробил $100+ млрд,<a class="fn" href="#f2">2</a> и появляются отдельные компании (вроде стартапа Etched с оценкой $5 млрд), которые делают железо исключительно под «думанье» ИИ.</p>
+  </div>
   <div class="prose">
     <p>Только в этом году мир потратит на ИИ-инфраструктуру около 2,5 триллиона долларов.<a class="fn" href="#f3">3</a> Именно поэтому самые умные модели не могут быть бесплатными: за их размышления кто-то должен платить электричеством. Но для тебя это уже упаковано в подписку, спускаться в подвал к железу не нужно.</p>
   </div>
 
   <!-- этаж 2 -->
   <div class="shead" style="margin-top:38px"><span class="eyebrow">этаж 2 &middot; мозги</span><h2 style="font-size:20px">Сами модели</h2>
-    <p>Модель &mdash; это чистый интеллект. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p></div>
+    <p>Модель &mdash; это <em>чистый интеллект</em>. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p></div>
   <div class="prose">
     <p>Здесь идет жесточайшая война корпораций. Обучение передовой модели с нуля стоит от 50 до 500 миллионов долларов, а с учетом исследований затраты доходят до миллиардов.<a class="fn" href="#f4">4</a> Игроков немного, и их легко поделить на три полки.</p>
   </div>
@@ -652,7 +724,7 @@
   <div class="keybox">
     <span class="cap">твой рабочий сетап</span>
     <b>Сильный подрядчик плюс хороший офис</b>
-    <p>Когда ты покупаешь доступ к продвинутым кодинг-агентам вроде <span class="ph">[Claude&nbsp;Code]</span>, Codex или используешь <span class="ph">[открытый инструмент &mdash; уточню название]</span>, ты арендуешь не просто модель, а сразу мощную оболочку вокруг нее. Модель плюс харнес &mdash; это и есть тот сетап, который дает прорывную производительность и освобождает твое время.</p>
+    <p>Когда ты покупаешь доступ к продвинутым кодинг-агентам вроде <b>Claude Code</b> или <b>Codex</b>, либо используешь открытые <b>Hermes</b> и <b>OpenClaw</b>, ты арендуешь не просто модель, а сразу мощную оболочку вокруг нее. Модель плюс харнес &mdash; это и есть тот сетап, который дает прорывную производительность и освобождает твое время.</p>
   </div>
 
   <div style="margin-top:26px"><button class="btn block sky" data-jump="mindset">Перейти к мышлению AI-First <span class="go">&darr;</span></button></div>
@@ -678,7 +750,7 @@
 
   <div class="shead" style="margin-top:36px"><span class="eyebrow">конец эпохи</span><h2 style="font-size:20px">Узких специалистов больше нет</h2></div>
   <div class="prose">
-    <p>Раньше мы сами загоняли себя в рамки и присваивали себе границы, но теперь этот ограничивающий ярлык «я всего лишь узкий специалист в чем-то одном» пропадает. ИИ навсегда снимает потолок: радикально снижает барьеры и сокращает циклы работы. Сегодня один любопытный человек способен тянуть процессы, на которые раньше требовалась целая команда, и участвовать в нескольких проектах одновременно.</p>
+    <p>Раньше мы сами загоняли себя в рамки и присваивали себе границы, но теперь этот ограничивающий ярлык «я всего лишь узкий специалист в чем-то одном» пропадает. ИИ <span class="uu">навсегда снимает потолок</span>: радикально снижает барьеры и сокращает циклы работы. Сегодня один любопытный человек способен тянуть процессы, на которые раньше требовалась целая команда, и участвовать в нескольких проектах одновременно.</p>
     <p>Я хочу показать тебе, какой это увлекательный путь &mdash; быть энтузиастом. Не категоризировать себя, а быть человеком-мультифункционалом. Быть вовлеченным в жизнь, в инновации, в проектирование. В этот момент происходит магия: привычка залипать в чужую ленту сменяется азартом собирать что-то свое. Ты начинаешь получать дофамин не от пассивного потребления контента, а от созидания.</p>
   </div>
 
@@ -699,8 +771,11 @@
 <div class="wrap"><section>
   <div class="cta">
     <span class="eyebrow">обо мне</span>
-    <h3>Кристина &middot; @kris.usti</h3>
-    <p>Я прошла этот тернистый путь сама, учась на ошибках и синтезируя тонны информации с рынка, чтобы понять, что реально работает. Теперь моя миссия &mdash; быть тем проводником, которого мне не хватало, и помогать обычным людям встроить ИИ в работу и жизнь.</p>
+    <div class="mecard" style="margin-top:12px">
+      <div class="mephoto" id="mephoto">фото<br>скоро</div>
+      <h3 style="align-self:center">Кристина<br>@kris.usti</h3>
+    </div>
+    <p style="margin-top:16px">Я прошла этот тернистый путь сама, учась на ошибках и синтезируя тонны информации с рынка, чтобы понять, что реально работает. Теперь моя миссия &mdash; быть тем проводником, которого мне не хватало, и помогать обычным людям встроить ИИ в работу и жизнь.</p>
     <a class="btn block" href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">Instagram &mdash; @kris.usti <span class="go">&rarr;</span></a>
     <div style="margin-top:10px"><a class="btn ghost block" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал <span class="go">&rarr;</span></a></div>
   </div>
@@ -736,20 +811,6 @@
 <div class="wrap"><div class="foot">AI-First &middot; гайд для тех, кто откладывал ИИ &middot; @kris.usti</div></div>
 
 <script>
-  /* theme */
-  var TK='aifirst_theme';
-  var tbtn=document.getElementById('tbtn');
-  function applyTheme(t){
-    document.documentElement.setAttribute('data-theme',t);
-    tbtn.textContent = t==='dark' ? '☀️' : '🌙';
-  }
-  var savedT='light'; try{savedT=localStorage.getItem(TK)||'light'}catch(e){}
-  applyTheme(savedT);
-  tbtn.addEventListener('click',function(){
-    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
-    applyTheme(t); try{localStorage.setItem(TK,t)}catch(e){}
-  });
-
   /* burger */
   var menu=document.getElementById('menu'), burger=document.getElementById('burger');
   function closeMenu(){menu.classList.remove('open');burger.classList.remove('x')}
