@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Этап зиро — твой план с 0 в AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEBE4; --paper-2:#F5F3EC; --card:#FBFAF6;
+    --ink:#2B211C; --ink-soft:#6B5D52; --line:#DBD6C9;
+    --sky:#A6DCEC; --sky-deep:#6FB9D6; --mark:#4C93B0;
+    --r:14px;
+    /* two container schemes, semantics: MAIN = blue bg + dark text; REST/deep = brown bg + light text */
+    --onblue:#2f4650;      /* secondary text on a blue container */
+    --onbrown:#CFC7BC;     /* secondary text on a brown container */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    font-weight:500;font-size:16px;line-height:1.45;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.1}
+  .fancy{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;letter-spacing:0}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .eyebrow{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;
+    font-size:16px;color:var(--sky-deep)}
+  .mk{color:var(--mark);font-weight:700}
+  .ph{color:var(--ink-soft);font-style:italic}
+  .tag-skel{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:80;
+    background:var(--ink);color:var(--sky);font-family:'JetBrains Mono';font-size:11px;
+    padding:5px 12px;border-radius:20px;opacity:.85;letter-spacing:.02em}
+
+  /* TOP BAR + BURGER */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(237,235,228,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .in{max-width:640px;margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:700;font-size:15px;letter-spacing:-.01em;cursor:pointer}
+  .brand i{font-family:'Playfair Display';font-style:italic;font-weight:500;color:var(--sky-deep)}
+  .burger{width:42px;height:38px;border:1px solid var(--sky-deep);border-radius:10px;
+    background:var(--ink);display:flex;flex-direction:column;justify-content:center;
+    align-items:center;gap:4px;cursor:pointer;padding:0}
+  .burger span{width:18px;height:2px;background:var(--sky);border-radius:2px;transition:.2s}
+  .burger.x span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .burger.x span:nth-child(2){opacity:0}
+  .burger.x span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .menu{position:fixed;inset:0;z-index:60;background:var(--ink);
+    transform:translateY(-100%);transition:transform .32s cubic-bezier(.5,0,.2,1);
+    display:flex;flex-direction:column;padding:78px 24px 30px;overflow-y:auto}
+  .menu.open{transform:translateY(0)}
+  .menu .lbl{font-family:'Playfair Display';font-style:italic;color:var(--sky);
+    font-size:15px;margin:8px 0 14px}
+  .menu a{color:var(--paper);text-decoration:none;font-weight:600;font-size:22px;
+    letter-spacing:-.02em;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);
+    display:flex;align-items:center;gap:14px;cursor:pointer}
+  .menu a .n{font-family:'JetBrains Mono';font-size:13px;color:var(--sky);flex:none;width:24px}
+  .menu a.plain{font-size:18px;color:#CFC7BC;font-weight:500}
+  .menu a.sub{font-size:17px;font-weight:500;color:#CFC7BC;padding:9px 0 9px 38px;
+    border-bottom:none;position:relative}
+  .menu a.sub:before{content:"—";position:absolute;left:16px;color:var(--sky);opacity:.6}
+
+  /* BREADCRUMBS */
+  .crumbbar{position:sticky;top:63px;z-index:45;display:none;align-items:center;gap:10px;
+    max-width:640px;margin:0 auto;padding:9px 20px;background:rgba(237,235,228,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .crumbbar.on{display:flex}
+  .cback{border:none;background:none;font-size:24px;color:var(--mark);cursor:pointer;line-height:1;padding:0 2px 3px 0;flex:none}
+  .ctrail{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:11.5px}
+  .ci{color:var(--ink-soft);cursor:pointer}
+  .ci.cur{color:var(--ink);font-weight:600}
+  .csep{color:var(--sky-deep)}
+  .swipehint{margin-left:auto;font-family:'JetBrains Mono';font-size:10px;color:var(--sky-deep);opacity:.7}
+
+  /* SCREENS */
+  .screen{display:none;animation:fade .35s ease}
+  .screen.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  section{padding:34px 0}
+
+  /* HERO */
+  .hero{background:var(--ink);color:var(--paper);padding:48px 0 42px}
+  .hero .eyebrow{color:var(--sky)}
+  .hero h1{font-size:clamp(34px,10vw,52px);font-weight:800;letter-spacing:-.03em;margin:14px 0 0}
+  .hero h1 .fancy{color:var(--sky);font-weight:500}
+  .hero .lede{font-size:17px;color:#D8D0C6;margin-top:18px;line-height:1.42}
+
+  /* generic section head */
+  .shead{margin:0 0 4px}
+  .shead.center{text-align:center}
+  .shead.center .eyebrow{margin-left:auto;margin-right:auto;width:fit-content}
+  .shead .eyebrow{display:block;margin-bottom:8px}
+  .shead h2{font-size:26px}
+  .shead p{color:var(--ink-soft);margin-top:10px;font-size:15px}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
+    border:none;border-radius:12px;padding:15px 22px;font-family:inherit;font-weight:700;
+    font-size:16px;cursor:pointer;text-decoration:none;transition:.15s}
+  .btn:active{transform:scale(.99)}
+  .btn.sky{background:var(--sky);color:var(--ink)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--sky-deep)}
+  .btn.block{display:flex;width:100%;justify-content:center}
+  .btn .go{font-size:19px}
+
+  /* preface (Kris intro) — MAIN, blue */
+  .preface{margin-top:30px;background:var(--sky);border-radius:var(--r);padding:22px 20px}
+  .pf-top{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+  .pf-ava{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--sky);
+    display:flex;align-items:center;justify-content:center;font-family:'Playfair Display';
+    font-style:italic;font-weight:600;font-size:22px;flex:none}
+  .pf-name{font-weight:700;font-size:15px;margin-top:2px;color:var(--ink)}
+  .preface .eyebrow{color:var(--mark)}
+  .preface p{font-size:15.5px;line-height:1.55;color:var(--onblue)}
+  .preface .ph{color:#4b6068}
+
+  /* two steps — one row */
+  .entries{margin-top:20px;display:flex;flex-direction:row;gap:12px}
+  .entry{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+    text-align:left;font-family:inherit;cursor:pointer;background:var(--sky);color:var(--ink);
+    border:none;border-radius:var(--r);padding:18px 16px;transition:.15s}
+  .entry:active{transform:scale(.99)}
+  .entry .no{font-family:'JetBrains Mono';font-size:12px;font-weight:600;color:var(--sky);
+    background:var(--ink);padding:5px 11px;border-radius:20px;flex:none}
+  .entry b{display:block;font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  .entry small{display:block;font-size:13px;line-height:1.4;color:var(--onblue)}
+
+  /* theme toggle */
+  .tbtn{width:42px;height:38px;border:1px solid var(--sky-deep);border-radius:10px;background:var(--ink);
+    color:var(--sky);cursor:pointer;font-size:17px;line-height:1;display:flex;align-items:center;
+    justify-content:center;margin-right:8px}
+  .topbar .in .actions{display:flex;align-items:center}
+
+  /* KEY box — MAIN, blue bg + dark border  (symmetric mirror of .branch: brown bg + blue border) */
+  .keybox{margin-top:22px;background:var(--sky);color:var(--ink);border:2px solid var(--ink);
+    border-radius:var(--r);padding:20px}
+  .keybox .cap{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--mark);display:block;margin-bottom:8px}
+  .keybox b{font-size:18px;font-weight:800;letter-spacing:-.01em;display:block;line-height:1.2}
+  .keybox p{margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--onblue)}
+  .keybox .ph{color:#4b6068}
+
+  /* nav list (into sub-topics) */
+  .navlist{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+  .navitem{display:flex;align-items:center;gap:12px;background:var(--sky);color:var(--ink);
+    border:none;border-radius:12px;padding:15px 16px;width:100%;text-align:left;font-family:inherit;cursor:pointer;transition:.15s}
+  .navitem:active{transform:scale(.99)}
+  .navitem b{font-size:16px;font-weight:800;display:block}
+  .navitem small{display:block;font-size:12.5px;color:var(--onblue);margin-top:2px}
+  .navitem .go{margin-left:auto;font-size:19px;color:var(--mark);flex:none}
+  .navitem.deep{background:var(--ink);color:var(--paper)}
+  .navitem.deep small{color:var(--onbrown)}
+  .navitem.deep .go{color:var(--sky)}
+
+  /* info notes — blue by default (main), .dark = brown (rest/deep) */
+  .note{margin-top:18px;background:var(--sky);border-left:4px solid var(--mark);
+    border-radius:12px;padding:16px 18px;font-size:14.5px;color:var(--onblue);line-height:1.5}
+  .note b{color:var(--ink)}
+  .note .ph{color:#4b6068}
+  .note.dark{background:var(--ink);border-left-color:var(--sky);color:var(--onbrown)}
+  .note.dark b{color:var(--sky)}
+  .note.dark .ph{color:#B7AC9F}
+
+  /* ===== LAYERS (market strata) — on the depth screen ===== */
+  .mviz{margin-top:24px;position:relative}
+  .mviz .hint{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--sky-deep);margin-bottom:14px;display:block}
+  /* harness = branch off the top layer — brown bg + blue dashed border */
+  .branch{position:relative;margin:0 0 18px 44px;padding:14px 16px 14px 52px;
+    border:2px dashed var(--sky);border-radius:14px;background:var(--ink);color:var(--paper)}
+  .branch .bl{position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:8px;
+    background:var(--sky);color:var(--ink);display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono';font-size:17px;font-weight:600}
+  .branch b{display:block;font-size:15.5px;font-weight:800;color:var(--paper)}
+  .branch small{display:block;margin-top:3px;font-size:13px;color:var(--onbrown);line-height:1.45}
+  .branch .ph{color:#B7AC9F}
+  .branch .cap{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--sky);display:block;margin-bottom:2px}
+  .branch:after{content:"";position:absolute;left:26px;bottom:-18px;width:2px;height:18px;background:var(--sky)}
+  .layers{display:flex;flex-direction:column;gap:0}
+  .layer{padding:17px 18px;border-radius:14px}
+  .layer .cap{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    opacity:.8;display:block;margin-bottom:3px}
+  .layer b{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .layer small{display:block;margin-top:3px;font-size:13.5px;line-height:1.45;opacity:.9}
+  .layer .ph{opacity:1}
+  .ldrop{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.03em;color:var(--sky-deep);
+    text-align:center;padding:7px 0}
+  .l3{background:#BFE6F1;color:var(--ink)}
+  .l2{background:#8FCFE4;color:var(--ink)}
+  .l1{background:var(--ink);color:var(--paper)}
+  .l1 small{color:var(--onbrown)} .l1 .ph{color:#B7AC9F}
+  .l3 .cap,.l2 .cap{color:var(--mark)}  .l1 .cap{color:var(--sky)}
+  .l3 .ph,.l2 .ph{color:#3a555f}
+
+  /* ===== TOWER (funnel): 3 floors, narrows to the top = you at the tip ===== */
+  .tower{margin-top:22px;display:flex;flex-direction:column;align-items:center}
+  .tower .thead{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--sky-deep);text-align:center;margin-bottom:18px;max-width:82%;line-height:1.5}
+  .floor{position:relative;border-radius:14px;padding:16px 18px;text-align:center}
+  .floor .cap{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.04em;text-transform:uppercase;
+    display:block;margin-bottom:3px}
+  .floor b{display:block;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .floor small{display:block;margin-top:4px;font-size:13px;line-height:1.45}
+  .f3{width:62%;background:#BFE6F1;color:var(--ink)}
+  .f2{width:80%;background:#8FCFE4;color:var(--ink)}
+  .f1{width:100%;background:var(--ink);color:var(--paper)}
+  .f3 .cap,.f2 .cap{color:var(--mark)} .f1 .cap{color:var(--sky)}
+  .f1 small{color:var(--onbrown)}
+  .floor .you{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+    background:var(--mark);color:#fff;font-family:'JetBrains Mono';font-size:10px;
+    letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .tarrow{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.03em;color:var(--sky-deep);padding:9px 0}
+  .tside{width:80%;margin:11px 0 2px;font-size:12.5px;line-height:1.45;color:var(--ink-soft);
+    border:1.5px dashed var(--sky-deep);border-radius:12px;padding:10px 14px;background:var(--paper-2);text-align:left}
+  .tside .plus{display:inline-flex;width:18px;height:18px;border-radius:6px;background:var(--sky);color:var(--ink);
+    align-items:center;justify-content:center;font-weight:800;font-size:12px;margin-right:5px;vertical-align:-3px}
+  .tside b{color:var(--ink)}
+
+  /* ===== SLICE (one vertical cut = one player: company → app → model) ===== */
+  .slice{margin-top:18px;display:flex;align-items:stretch;gap:6px}
+  .scol{flex:1;background:var(--sky);color:var(--ink);border-radius:12px;padding:13px 8px;text-align:center}
+  .scol .sk{font-family:'JetBrains Mono';font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--mark);display:block;margin-bottom:5px}
+  .scol b{font-size:16px;font-weight:800}
+  .sar{align-self:center;color:var(--sky-deep);font-size:18px;font-weight:800;flex:none}
+
+  /* ===== STATS strip — real numbers to give the map substance ===== */
+  .stats{display:flex;gap:8px;margin-top:20px}
+  .stat{flex:1;background:var(--paper-2);border:1.5px solid var(--sky);border-radius:12px;
+    padding:13px 9px;text-align:center}
+  .stat b{display:block;font-size:19px;font-weight:800;color:var(--mark);font-family:'JetBrains Mono';letter-spacing:-.02em}
+  .stat span{display:block;font-size:10.5px;line-height:1.35;color:var(--ink-soft);margin-top:5px}
+
+  /* ===== TREE (company → app → model) — frontier = blue (main), rest = brown ===== */
+  .tree{margin-top:22px;display:flex;flex-direction:column;gap:16px}
+  .trow{background:var(--sky);color:var(--ink);border-radius:var(--r);padding:16px 16px 18px}
+  .trow.rest{background:var(--ink);color:var(--paper)}
+  .troot{font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px}
+  .troot .dot{width:9px;height:9px;border-radius:50%;background:var(--mark);flex:none}
+  .trow.rest .troot .dot{background:var(--sky)}
+  .tbranch{margin-top:6px;padding-left:12px}
+  .tnode{position:relative;padding:9px 0 9px 26px;font-family:'JetBrains Mono';font-size:13.5px}
+  .tnode:before{content:"";position:absolute;left:4px;top:0;width:2px;height:100%;background:rgba(43,33,28,.28)}
+  .tnode:last-child:before{height:22px}
+  .tnode:after{content:"";position:absolute;left:4px;top:20px;width:16px;height:2px;background:rgba(43,33,28,.28)}
+  .tnode .k{font-size:11px;text-transform:uppercase;letter-spacing:.03em;opacity:.7}
+  .tnode .v{font-weight:600;font-size:14.5px}
+  .tleaves{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .leaf{font-family:'JetBrains Mono';font-size:12px;background:var(--sky);color:var(--ink);
+    border-radius:20px;padding:5px 11px}
+
+  /* ===== COMPARISON TABLE (остальные) — brown table (rest) ===== */
+  .ctable{margin-top:20px;border-radius:var(--r);overflow:hidden;border:2px solid var(--sky)}
+  .ctable table{width:100%;border-collapse:collapse;font-size:13.5px}
+  .ctable th{background:var(--sky);color:var(--ink);font-weight:800;text-align:left;
+    padding:12px 12px;font-size:12.5px;letter-spacing:.01em}
+  .ctable td{padding:12px 12px;border-top:1.5px solid #3E332C;vertical-align:top;
+    line-height:1.4;background:var(--ink);color:var(--paper)}
+  .ctable td:first-child{font-weight:700}
+  .ctable tr:nth-child(even) td{background:#241B16}
+  .ctable .good{color:var(--sky);font-weight:800}
+  .ctable .warn{color:#E0A46A;font-weight:800}
+  .ctable .ph{color:#B7AC9F}
+
+  /* track cards — one row of three; main = blue, rest = brown */
+  .tracks{margin-top:22px;display:flex;flex-direction:row;gap:10px}
+  .tcard{flex:1;min-width:0;background:var(--sky);color:var(--ink);border-radius:var(--r);
+    padding:16px 13px;cursor:pointer;text-align:left;font-family:inherit;transition:.15s;
+    display:flex;flex-direction:column;gap:7px;min-height:132px}
+  .tcard:active{transform:scale(.99)}
+  .tcard.alt{background:var(--ink);color:var(--paper)}
+  .tcard b{font-size:17px;font-weight:800;letter-spacing:-.02em;display:block;line-height:1.1}
+  .tcard .desc{font-size:12.5px;line-height:1.35;color:var(--onblue)}
+  .tcard.alt .desc{color:var(--onbrown)}
+  .tcard .go{font-size:20px;margin-top:auto;align-self:flex-end;color:var(--mark)}
+  .tcard.alt .go{color:var(--sky)}
+
+  /* quiz CTA — MAIN path, blue */
+  .quizcta{margin-top:24px;background:var(--sky);color:var(--ink);border-radius:var(--r);
+    padding:22px 20px;text-align:center}
+  .quizcta .eyebrow{color:var(--mark)}
+  .quizcta p{color:var(--onblue);font-size:15px;margin:8px 0 16px}
+
+  /* quiz */
+  .qbar{height:4px;background:var(--line);border-radius:4px;margin:0 0 22px;overflow:hidden}
+  .qbar i{display:block;height:100%;background:var(--sky-deep);width:0;transition:.3s}
+  .qstep b{font-family:'JetBrains Mono';font-size:13px;color:var(--sky-deep)}
+  .qstep h2{font-size:23px;margin-top:8px}
+  .opts{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .opt{background:var(--sky);border:none;border-radius:12px;padding:17px 18px;
+    text-align:left;width:100%;font-family:inherit;font-weight:700;font-size:16px;color:var(--ink);
+    cursor:pointer;transition:.12s}
+  .opt:active{transform:scale(.99)}
+  .opt small{display:block;color:var(--onblue);font-weight:500;font-size:13.5px;margin-top:3px}
+
+  /* result — brown (payoff card, stands out against blue flow) */
+  .resbox{margin-top:22px;background:var(--ink);color:var(--paper);border-radius:var(--r);padding:24px 20px}
+  .resbox .lead{font-family:'Playfair Display';font-style:italic;color:var(--sky);font-size:15px;margin-bottom:6px}
+  .resline{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-top:1.5px solid rgba(166,220,236,.22)}
+  .resline .rk{font-family:'JetBrains Mono';font-size:11px;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--sky);width:92px;flex:none}
+  .resline b{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--paper)}
+  .resline span:not(.rk){font-size:15px;color:#E4DED4}
+  .reswhy{margin-top:12px;font-size:14px;color:var(--onbrown);line-height:1.5}
+  .resstep{margin-top:14px;padding-top:12px;border-top:1.5px solid rgba(166,220,236,.22);font-size:14px;line-height:1.5}
+  .resstep .cap{display:block;font-family:'JetBrains Mono';font-size:11px;text-transform:uppercase;
+    letter-spacing:.04em;color:var(--sky);margin-bottom:4px}
+  .resstep .ph{color:#B7AC9F}
+
+  /* CTA — blue */
+  .cta{margin-top:32px;background:var(--sky);border-radius:var(--r);padding:26px 22px}
+  .cta .eyebrow{color:var(--mark)}
+  .cta h3{font-size:22px;margin:8px 0 10px;color:var(--ink)}
+  .cta p{font-size:15px;color:var(--onblue);line-height:1.5;margin-bottom:18px}
+  .cta .ph{color:#4b6068}
+
+  /* ===== FAQ (accordion) — brown cards (support) ===== */
+  .faq{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  .qa{background:var(--ink);color:var(--paper);border-radius:12px;overflow:hidden}
+  .qa .q{padding:16px 18px;font-weight:700;font-size:15.5px;cursor:pointer;
+    display:flex;justify-content:space-between;gap:14px;align-items:center}
+  .qa .q .pm{font-size:22px;color:var(--sky);flex:none;transition:.2s}
+  .qa.open .q .pm{transform:rotate(45deg)}
+  .qa .a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .qa .a p{padding:0 18px 16px;font-size:14.5px;color:var(--onbrown);line-height:1.5}
+  .qa .a .ph{color:#B7AC9F}
+
+  /* ===== GLOSSARY ===== */
+  .gloss{margin-top:22px;display:flex;flex-direction:column;gap:2px}
+  .gterm{padding:16px 2px;border-bottom:1.5px solid var(--sky-deep)}
+  .gterm dt{font-weight:800;font-size:16.5px;color:var(--ink)}
+  .gterm dd{color:var(--ink-soft);font-size:14.5px;margin-top:5px;line-height:1.55}
+  .gterm.hl{background:var(--sky);border-radius:12px;padding:16px 16px;border-bottom:0}
+  .gterm.hl dt,.gterm.hl dd{color:var(--ink)}
+
+  .foot{border-top:1px solid var(--line);margin-top:40px;padding:26px 0 90px;
+    color:var(--ink-soft);font-size:13px;text-align:center}
+
+  /* ===== DARK THEME — cool only: no brown; text sky/light; dark containers get light/sky border ===== */
+  :root[data-theme="dark"]{
+    --paper:#0E1113; --paper-2:#16191C; --card:#14181B; --line:#28323A; --ink-soft:#9BA7AC;
+    --onblue:#C4D6DC; --onbrown:#C4D6DC;
+  }
+  :root[data-theme="dark"] body{background:#0E1113;color:#ECEFF1}
+  :root[data-theme="dark"] .topbar,:root[data-theme="dark"] .crumbbar{background:rgba(14,17,19,.9);border-bottom-color:#28323A}
+  :root[data-theme="dark"] .brand{color:#ECEFF1}
+  :root[data-theme="dark"] .burger,:root[data-theme="dark"] .tbtn{background:#14181B;border-color:#3A5561}
+  :root[data-theme="dark"] .shead p,:root[data-theme="dark"] .ph{color:#9BA7AC}
+  :root[data-theme="dark"] .ci{color:#9BA7AC} :root[data-theme="dark"] .ci.cur{color:#ECEFF1}
+  /* every container gets a light/sky hairline border in dark */
+  :root[data-theme="dark"] .preface,:root[data-theme="dark"] .entry,:root[data-theme="dark"] .keybox,
+  :root[data-theme="dark"] .navitem,:root[data-theme="dark"] .navitem.deep,:root[data-theme="dark"] .trow,
+  :root[data-theme="dark"] .trow.rest,:root[data-theme="dark"] .tcard,:root[data-theme="dark"] .tcard.alt,
+  :root[data-theme="dark"] .opt,:root[data-theme="dark"] .note,:root[data-theme="dark"] .note.dark,
+  :root[data-theme="dark"] .quizcta,:root[data-theme="dark"] .cta,:root[data-theme="dark"] .resbox,
+  :root[data-theme="dark"] .qa{border:1px solid rgba(140,200,224,.30)}
+  /* MAIN (blue-origin) containers -> deep teal + light text */
+  :root[data-theme="dark"] .preface,:root[data-theme="dark"] .entry,:root[data-theme="dark"] .keybox,
+  :root[data-theme="dark"] .navitem,:root[data-theme="dark"] .trow,:root[data-theme="dark"] .tcard,
+  :root[data-theme="dark"] .opt,:root[data-theme="dark"] .note,:root[data-theme="dark"] .quizcta,
+  :root[data-theme="dark"] .cta{background:#15333C;color:#ECEFF1}
+  :root[data-theme="dark"] .keybox{border-color:var(--sky)}
+  :root[data-theme="dark"] .entry b,:root[data-theme="dark"] .pf-name,:root[data-theme="dark"] .keybox b,
+  :root[data-theme="dark"] .navitem b,:root[data-theme="dark"] .note b,:root[data-theme="dark"] .cta h3,
+  :root[data-theme="dark"] .tnode .v{color:#ECEFF1}
+  :root[data-theme="dark"] .preface .eyebrow,:root[data-theme="dark"] .cta .eyebrow,
+  :root[data-theme="dark"] .quizcta .eyebrow{color:var(--sky)}
+  :root[data-theme="dark"] .leaf{background:#0E1113;color:#ECEFF1;border:1px solid rgba(140,200,224,.30)}
+  /* SECONDARY (was brown) containers -> cool near-black, sky border, light text */
+  :root[data-theme="dark"] .navitem.deep,:root[data-theme="dark"] .trow.rest,
+  :root[data-theme="dark"] .tcard.alt,:root[data-theme="dark"] .note.dark,
+  :root[data-theme="dark"] .resbox,:root[data-theme="dark"] .branch,
+  :root[data-theme="dark"] .qa,:root[data-theme="dark"] .ctable td{background:#111619;color:#ECEFF1}
+  :root[data-theme="dark"] .branch{border-color:var(--sky)}
+  :root[data-theme="dark"] .ctable tr:nth-child(even) td{background:#151B1F}
+  :root[data-theme="dark"] .ctable{border-color:rgba(140,200,224,.30)}
+  :root[data-theme="dark"] .ctable th{background:#15333C;color:#ECEFF1}
+  :root[data-theme="dark"] .ctable td{border-top-color:#28323A}
+  :root[data-theme="dark"] .layers{border-color:rgba(140,200,224,.34)}
+  :root[data-theme="dark"] .layer+.layer{border-top-color:rgba(140,200,224,.20)}
+  :root[data-theme="dark"] .l3{background:#153039;color:#ECEFF1}
+  :root[data-theme="dark"] .l2{background:#0F262D;color:#ECEFF1}
+  :root[data-theme="dark"] .l1{background:#111619;color:#ECEFF1}
+  :root[data-theme="dark"] .layer .cap{color:var(--sky);opacity:1}
+  :root[data-theme="dark"] .l1 small,:root[data-theme="dark"] .branch small,
+  :root[data-theme="dark"] .tcard.alt .desc,:root[data-theme="dark"] .navitem.deep small{color:#C4D6DC}
+  :root[data-theme="dark"] .branch .ph,:root[data-theme="dark"] .l1 .ph,:root[data-theme="dark"] .note.dark .ph,
+  :root[data-theme="dark"] .resstep .ph,:root[data-theme="dark"] .qa .a .ph,:root[data-theme="dark"] .reswhy{color:#9BA7AC}
+  :root[data-theme="dark"] .tnode:before,:root[data-theme="dark"] .tnode:after{background:#3A5561}
+  :root[data-theme="dark"] .gterm{border-bottom-color:#3A5561}
+  :root[data-theme="dark"] .gterm dt{color:#ECEFF1}
+  :root[data-theme="dark"] .gterm.hl{background:#15333C;border:1px solid rgba(140,200,224,.30)}
+  :root[data-theme="dark"] .gterm.hl dt,:root[data-theme="dark"] .gterm.hl dd{color:#ECEFF1}
+  :root[data-theme="dark"] .btn.ghost{color:#ECEFF1;border-color:#3A5561}
+  :root[data-theme="dark"] .f3{background:#153039;color:#ECEFF1;border:1px solid rgba(140,200,224,.30)}
+  :root[data-theme="dark"] .f2{background:#0F262D;color:#ECEFF1;border:1px solid rgba(140,200,224,.30)}
+  :root[data-theme="dark"] .f1{background:#111619;color:#ECEFF1;border:1px solid rgba(140,200,224,.30)}
+  :root[data-theme="dark"] .f3 .cap,:root[data-theme="dark"] .f2 .cap{color:var(--sky)}
+  :root[data-theme="dark"] .f1 small{color:#C4D6DC}
+  :root[data-theme="dark"] .tside{background:#111619;color:#C4D6DC;border-color:rgba(140,200,224,.34)}
+  :root[data-theme="dark"] .tside b{color:#ECEFF1}
+  :root[data-theme="dark"] .scol{background:#15333C;color:#ECEFF1;border:1px solid rgba(140,200,224,.30)}
+  :root[data-theme="dark"] .scol .sk{color:var(--sky)}
+  :root[data-theme="dark"] .stat{background:#111619;border-color:rgba(140,200,224,.34)}
+  :root[data-theme="dark"] .stat b{color:var(--sky)}
+  :root[data-theme="dark"] .stat span{color:#C4D6DC}
+  :root[data-theme="dark"] .foot{border-top-color:#28323A;color:#9BA7AC}
+  /* --- linear-read additions --- */
+  .prose{margin-top:16px}
+  .prose p{font-size:16px;line-height:1.62;color:var(--ink);margin-top:14px}
+  .prose p:first-child{margin-top:0}
+  :root[data-theme="dark"] .prose p{color:#ECEFF1}
+  .pull{font-family:'Playfair Display';font-style:italic;font-weight:500;font-size:20px;
+    line-height:1.42;color:var(--mark);border-left:3px solid var(--sky-deep);
+    padding:8px 0 8px 18px;margin:24px 0}
+  :root[data-theme="dark"] .pull{color:var(--sky)}
+  .fears{margin:18px 0;display:flex;flex-direction:column;gap:10px}
+  .fear{background:var(--ink);color:var(--paper);border-radius:12px;padding:13px 18px;
+    font-family:'Playfair Display';font-style:italic;font-size:16px;display:flex;gap:12px;align-items:center}
+  .fear .x{color:#8FA3AD;font-weight:800;font-style:normal;font-family:'JetBrains Mono';flex:none}
+  :root[data-theme="dark"] .fear{background:#111619;border:1px solid rgba(140,200,224,.28);color:#ECEFF1}
+  .ph{background:rgba(224,164,106,.20);border-bottom:1px dashed #C98A4E;border-radius:3px;
+    padding:0 3px;font-style:normal}
+  :root[data-theme="dark"] .ph{background:rgba(224,164,106,.16);border-bottom-color:#E0A46A}
+  .fn{font-family:'JetBrains Mono';font-size:10px;vertical-align:super;line-height:0;
+    color:var(--sky-deep);text-decoration:none;padding:0 1px;font-weight:700}
+  :root[data-theme="dark"] .fn{color:var(--sky)}
+  .fnbox{margin-top:40px;border-top:1px solid var(--line);padding-top:20px}
+  .fnbox h4{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--sky-deep);margin-bottom:14px}
+  .fnbox ol{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .fnbox li{position:relative;font-size:12.5px;line-height:1.5;color:var(--ink-soft);scroll-margin-top:80px}
+  .fnbox li .fn{margin-left:6px;font-size:13px}
+  :root[data-theme="dark"] .fnbox{border-top-color:#28323A}
+  :root[data-theme="dark"] .fnbox li{color:#9BA7AC}
+  a[id]{scroll-margin-top:80px}
+</style>
+<script>try{var _t=localStorage.getItem('etap_theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
+</head>
+<body>
+
+<div class="topbar"><div class="in">
+  <div class="brand" data-jump="top">AI-<i>First</i></div>
+  <div class="actions">
+    <button class="tbtn" id="tbtn" aria-label="Тема">🌙</button>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</div></div>
+
+<nav class="menu" id="menu">
+  <div class="lbl">Гайд для тех, кто откладывал ИИ</div>
+  <a data-jump="top"><span class="n">00</span>Я сама начинала отсюда</a>
+  <a data-jump="fears"><span class="n">01</span>Почему мы тормозим</a>
+  <a data-jump="market"><span class="n">02</span>Дом в три этажа</a>
+  <a data-jump="mindset"><span class="n">03</span>Мышление AI-First</a>
+  <div class="lbl" style="margin-top:22px">Справка</div>
+  <a class="plain" data-jump="gloss">Словарь терминов</a>
+  <a class="plain" data-jump="about">Обо мне</a>
+</nav>
+
+<!-- HERO -->
+<a id="top"></a>
+<div class="hero"><div class="wrap">
+  <span class="eyebrow">гайд · для тех, кто откладывал ИИ</span>
+  <h1>AI-<span class="fancy">First</span></h1>
+  <p class="lede">Карта рынка и готовый сценарий: от полного нуля до первого живого результата, без каши в голове.</p>
+</div></div>
+
+<!-- 00 STORY -->
+<div class="wrap"><section>
+  <div class="preface">
+    <div class="pf-top"><span class="pf-ava">К</span><div><span class="eyebrow">предисловие</span><div class="pf-name">Кристина &middot; @kris.usti</div></div></div>
+    <p>Я собрала этот гайд как ту самую карту, которой мне так не хватало на старте. Без воды и без сложных терминов: провести тебя за руку от нуля до первого результата и увлечь так, чтобы ИИ стал естественной частью твоей рутины.</p>
+  </div>
+
+  <div class="shead" style="margin-top:34px"><span class="eyebrow">00 &middot; честно о себе</span><h2>Я сама начинала отсюда</h2></div>
+
+  <div class="prose">
+    <p>Признаюсь честно: я сама избегала и откладывала ИИ до последнего. Еще в 2023 году, когда я на четвертом курсе работала в IT-стартапе, мне закидывали удочки: пора внедрять. Я попробовала. Две недели проб и ошибок, вечные лимиты, которые не дают дойти до результата, а оплачивать каждую попытку я тогда не могла. В итоге разочаровалась и забила на это еще на два года.</p>
+    <p>Все это время я использовала бесплатный ChatGPT просто вместо поисковика и ловила жуткое FOMO. Казалось, что все вокруг давно в теме, а я вообще не понимаю прикола. ИИ выдавал мне плоские ответы с каким-то заискивающим тоном. Я постоянно их переписывала и в итоге решала, что мне проще и быстрее все сделать самой.</p>
+    <p>Вокруг мелькали непонятные термины и названия: Perplexity, MidJourney, Claude, Codex, Gemini, DeepSeek. Как сказал один мой знакомый, появилось «100500 продуктов от ChatGPT». Я сохраняла все подряд, но даже не открывала эти подборки с промптами: они казались дешевыми «волшебными таблетками». Знания копились обрывками: сегодня чей-то секретный совет, завтра новый тренд, а в голове хаос, который никак не складывался в систему. Я каждый раз будто начинала с нуля и не могла найти примеры того, как применить это конкретно к моей рутине и моим задачам. Казалось, что со мной что-то не так.</p>
+  </div>
+
+  <div class="pull">Я все надеялась, что понимание как-то само придет в мою жизнь. Но после ухода из найма стало ясно: никто не придет и не научит. Надо копать самой.</div>
+
+  <div class="prose">
+    <p>На рынке просто не было информации для старта. Авторы либо лили воду без результатов, либо это были разработчики, которые сыпали сложными терминами. Профи показывали крутые результаты, но сразу предупреждали: «Это не для новичков». Людей, которые реально понимают, как все устроено, и готовы делиться этим системно, единицы. Обычно они сидят за кадром и тихо пилят свои продукты. А мне нужна была просто структура: чтобы на пальцах объяснили базу, от большего к меньшему, чтобы я научилась отсеивать шум и брать только то, что нужно.</p>
+    <p>Сдвиг случился, когда мой молодой человек убедил меня взять его проект и сделать все с помощью ИИ, вообще без знаний кода. Год назад для этого еще нужно было подключать нейросети к терминалу и работать в интерфейсе, от которого у новичка дергается глаз. Он стал моим проводником.</p>
+    <p>Было сложно. Жутко бесило. Получалось с пятнадцатой попытки. Но знаете что? Меня затянуло. Свой первый проект я полностью написала сама, работая в связке с ИИ, хотя до этого в глаза не видела код.</p>
+  </div>
+
+  <div class="keybox">
+    <span class="cap">и самое главное</span>
+    <b>Все это было год назад, а сегодня технических преград уже нет</b>
+    <p>Точка входа стала доступной: сейчас человек с любым опытом может с нуля спроектировать проект и автоматизировать свою рутину без единой строчки кода.</p>
+  </div>
+
+  <div style="margin-top:26px"><button class="btn block sky" data-jump="fears">Почему мы тормозим на самом деле <span class="go">&darr;</span></button></div>
+</section></div>
+
+<!-- 01 FEARS -->
+<a id="fears"></a>
+<div class="wrap"><section>
+  <div class="shead"><span class="eyebrow">01 &middot; страхи</span><h2>Почему мы тормозим и чего боимся на самом деле</h2>
+    <p>Изучая рынок, я увидела четкий паттерн. Многие застряли ровно в той же точке, где была я.</p></div>
+
+  <div class="prose">
+    <p>Есть огромный пласт людей, которые даже боятся открыть чат с нейросетью. Страшно попробовать и признаться себе, что ты сильно отстала. Мы сидим и ждем, что появится время, силы или придет кто-то и сделает все за нас. Но этого момента не наступит никогда. Чтобы начать, нужен стимул.</p>
+    <p>Людей останавливает бытовуха: рутина съедает весь день, вечером нет сил, и кажется, что освоение ИИ &mdash; это огромная, тяжелая задача, на которую просто нет ресурса. Возникает выученная беспомощность:</p>
+  </div>
+
+  <div class="fears">
+    <div class="fear"><span class="x">&times;</span>«Это слишком сложно»</div>
+    <div class="fear"><span class="x">&times;</span>«Это только для айтишников и людей с техническим бэкграундом»</div>
+    <div class="fear"><span class="x">&times;</span>«В моей сфере это точно не применить»</div>
+  </div>
+
+  <div class="prose">
+    <p>К этому добавляется перфекционизм и страх ошибки. Кажется, что если начнешь и сделаешь что-то не так, разочаруешься в себе еще больше. Поэтому проще сказать «это не мое» и даже не пробовать. А информационный шум вокруг только давит: нейросетей так много, что непонятно, за что вообще хвататься.</p>
+  </div>
+
+  <div class="note"><b>Но давай начистоту: все эти страхи &mdash; навязанные стереотипы.</b> Освоить ИИ сегодня &mdash; это как в свое время освоить компьютер или интернет. Это закрывает задачи в абсолютно любой индустрии и на любой позиции.</div>
+
+  <div class="prose">
+    <p>Смысл не в том, чтобы найти «единственно правильное решение» или скопировать чужой промпт. Правильных путей бесконечное множество, и твой будет уникальным. Смысл в том, чтобы освоить AI-First мышление. Это глобальный навык: ты мыслишь прагматически и стратегически, критически анализируешь информацию и умеешь выстраивать причинно-следственные связи. Он применяется ко всей жизни, а не только к работе.</p>
+  </div>
+
+  <div class="pull">Моя миссия сейчас &mdash; стать тем самым проводником, которого мне так не хватало. Провести тебя за руку шаг за шагом, от полного нуля до первых результатов.</div>
+
+  <div class="keybox">
+    <span class="cap">главное, что стоит усвоить</span>
+    <b>ИИ &mdash; это не замена тебе, а твой мощный усилитель</b>
+    <p>Он адаптируется именно под твой контекст, под твои ограничения и задачи. С ним ты можешь реализовать буквально любую идею, которая придет в голову. Это не просто модное слово, а твое конкурентное преимущество: компании уже ищут тех, кто умеет работать с нейросетями, потому что такие люди делают процессы быстрее и дешевле. Это тот навык, который сделает тебя свободнее в деньгах и времени.</p>
+  </div>
+
+  <div class="prose">
+    <p>Этот гайд &mdash; готовый сценарий и та самая карта рынка. Мы разберем все по полочкам, снизу доверху, и к концу чтения у тебя не останется вопроса «что вообще происходит и с чего мне начать».</p>
+  </div>
+
+  <div style="margin-top:26px"><button class="btn block sky" data-jump="market">Разобрать карту рынка <span class="go">&darr;</span></button></div>
+</section></div>
+
+<!-- 02 MARKET -->
+<a id="market"></a>
+<div class="wrap"><section>
+  <div class="shead"><span class="eyebrow">02 &middot; карта рынка</span><h2>Архитектура рынка: дом в три этажа</h2>
+    <p>Кажется, что рынок несется как сумасшедший: каждую неделю новости про «новый лучший ИИ». Но чтобы не теряться в шуме, достаточно понять одну вещь.</p></div>
+
+  <div class="note"><b>Почему новинки каждую неделю.</b> Модели вышли на уровень, когда могут генерировать синтетические данные и учить сами себя: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. Гнаться за каждым релизом не нужно.</div>
+
+  <!-- ГЕРОЙ: башня-воронка -->
+  <div class="tower">
+    <span class="thead">сверху &mdash; то, чем ты пользуешься &middot; снизу &mdash; то, на чем все держится</span>
+
+    <div class="floor f3"><span class="you">ты здесь</span>
+      <span class="cap">этаж 3 &middot; твой офис</span><b>Харнесы и оболочки</b>
+      <small>Интерфейс, в котором ты работаешь. Именно тут живем мы с тобой: даем модели инструменты, контекст и навыки.</small></div>
+    <div class="tside"><span class="plus">+</span>надстройка &mdash; <b>харнес.</b> Дает голой модели руки: доступ в интернет, к почте, календарю, готовые скрипты. Это <span class="ph">[Claude&nbsp;Code]</span>, Codex и подобные оболочки.</div>
+    <div class="tarrow">работает на &darr;</div>
+
+    <div class="floor f2"><span class="cap">этаж 2 &middot; мозги</span><b>Сами модели</b>
+      <small>GPT, Opus/Sonnet, Gemini, китайские. Это чистый интеллект, который думает. Но сам по себе он как гениальный спец в пустой комнате: без стола и компьютера ничего не сделает.</small></div>
+    <div class="tarrow">стоит на &darr;</div>
+
+    <div class="floor f1"><span class="cap">этаж 1 &middot; фундамент</span><b>Железо и вычисления</b>
+      <small>Nvidia, чипы, дата-центры. Инференс здесь как электричество: без него «мозг» просто не включится.</small></div>
+  </div>
+
+  <!-- цифры для масштаба -->
+  <div class="stats">
+    <div class="stat"><b>$5 трлн</b><span>рынок железа &mdash; фундамент всего<a class="fn" id="r1" href="#f1">1</a></span></div>
+    <div class="stat"><b>$100+ млрд</b><span>рынок инференса в 2026<a class="fn" id="r2" href="#f2">2</a></span></div>
+    <div class="stat"><b>$2,5 трлн</b><span>мир потратит на ИИ-инфраструктуру за год<a class="fn" id="r3" href="#f3">3</a></span></div>
+  </div>
+
+  <!-- этаж 1 -->
+  <div class="shead" style="margin-top:38px"><span class="eyebrow">этаж 1 &middot; фундамент</span><h2 style="font-size:20px">Железо и вычисления</h2>
+    <p>На этом держится вообще все: физические серверы, чипы и дата-центры, на которых нейросети обучаются и работают.</p></div>
+  <div class="prose">
+    <p>Здесь безоговорочно правит Nvidia &mdash; сейчас это самая дорогая компания в мире, а весь рынок железа оценивается в невероятные 5 триллионов долларов.<a class="fn" href="#f1">1</a> Чипы стоят безумных денег: серверные связки B200 обходятся в сотни тысяч долларов. Но главное слово на этом этаже &mdash; <b>инференс</b> (исполнение).</p>
+  </div>
+  <div class="note dark"><b>Инференс &mdash; это когда модель физически «думает» над твоей задачей.</b> Относись к нему как к электричеству. Каждый раз, когда ты отправляешь промпт, серверы расходуют энергию на вычисления. Спрос на этот «ток» настолько огромный, что рынок инференса в 2026 пробил $100+ млрд,<a class="fn" href="#f2">2</a> и появляются отдельные компании (вроде стартапа Etched с оценкой в $5 млрд), которые делают железо исключительно под «думанье» ИИ.</div>
+  <div class="prose">
+    <p>Только в этом году мир потратит на ИИ-инфраструктуру около 2,5 триллиона долларов.<a class="fn" href="#f3">3</a> Именно поэтому самые умные модели не могут быть бесплатными: за их размышления кто-то должен платить электричеством. Но для тебя это уже упаковано в подписку, спускаться в подвал к железу не нужно.</p>
+  </div>
+
+  <!-- этаж 2 -->
+  <div class="shead" style="margin-top:38px"><span class="eyebrow">этаж 2 &middot; мозги</span><h2 style="font-size:20px">Сами модели</h2>
+    <p>Модель &mdash; это чистый интеллект. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p></div>
+  <div class="prose">
+    <p>Здесь идет жесточайшая война корпораций. Обучение передовой модели с нуля стоит от 50 до 500 миллионов долларов, а с учетом исследований затраты доходят до миллиардов.<a class="fn" href="#f4">4</a> Игроков немного, и их легко поделить на три полки.</p>
+  </div>
+
+  <div class="tree">
+    <div class="trow"><div class="troot"><span class="dot"></span>Фронтир &middot; США</div>
+      <div class="tbranch">
+        <div class="tnode"><span class="k">кто</span><span class="v">OpenAI, Anthropic, Google</span></div>
+        <div class="tnode"><span class="k">суть</span><span class="v">самые умные модели рынка</span></div>
+      </div>
+      <div class="tleaves"><span class="leaf">сотни $ млн в обучение</span><span class="leaf">удобно пользователю</span><span class="leaf">твой старт</span></div>
+    </div>
+    <div class="trow rest"><div class="troot"><span class="dot"></span>Азия &middot; Китай</div>
+      <div class="tbranch">
+        <div class="tnode"><span class="k">кто</span><span class="v">DeepSeek, Qwen, Kimi, Minimax</span></div>
+        <div class="tnode"><span class="k">суть</span><span class="v">отстают чуть-чуть, но в 20&ndash;30 раз дешевле</span></div>
+      </div>
+      <div class="tleaves"><span class="leaf">DeepSeek обучен за ~$6&ndash;7 млн</span><span class="leaf">часто open-source</span></div>
+    </div>
+    <div class="trow rest"><div class="troot"><span class="dot"></span>Россия</div>
+      <div class="tbranch">
+        <div class="tnode"><span class="k">кто</span><span class="v">YandexGPT, GigaChat</span></div>
+        <div class="tnode"><span class="k">суть</span><span class="v">догоняют, ограничены в мощностях</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="note dark"><b>Про «бесплатные» китайские модели.</b> Сама модель может быть бесплатной (open-source), но чтобы она заработала на тебя, нужно купить сервер за десятки тысяч долларов. Поэтому для обычного пользователя это не вариант для старта.</div>
+
+  <!-- правило: компания != приложение != модель -->
+  <div class="shead" style="margin-top:38px"><span class="eyebrow">чтобы не путаться в новостях</span><h2 style="font-size:20px">Компания &ne; приложение &ne; модель</h2></div>
+  <div class="slice">
+    <div class="scol"><span class="sk">компания</span><b>OpenAI</b></div>
+    <div class="sar">&rarr;</div>
+    <div class="scol"><span class="sk">приложение</span><b>ChatGPT</b></div>
+    <div class="sar">&rarr;</div>
+    <div class="scol"><span class="sk">модель внутри</span><b>GPT</b></div>
+  </div>
+  <div class="slice">
+    <div class="scol"><span class="sk">компания</span><b>Anthropic</b></div>
+    <div class="sar">&rarr;</div>
+    <div class="scol"><span class="sk">приложение</span><b>Claude</b></div>
+    <div class="sar">&rarr;</div>
+    <div class="scol"><span class="sk">модель внутри</span><b>Opus / Sonnet</b></div>
+  </div>
+  <div class="note"><b>Как с телефоном.</b> Компания &mdash; Apple, продукт в руках &mdash; iPhone, система внутри &mdash; iOS. В ИИ ровно так же. ChatGPT, которым пользуется около миллиарда человек, &mdash; это просто приложение, интерфейс. А внутри крутятся мозги: модели семейства GPT.</div>
+
+  <!-- этаж 3 -->
+  <div class="shead" style="margin-top:38px"><span class="eyebrow">этаж 3 &middot; твой офис</span><h2 style="font-size:20px">Харнесы и оболочки</h2>
+    <p>Со второго этажа мы взяли гениального подрядчика, но он голый и без инструментов. Чтобы он начал приносить пользу, ему нужна оболочка &mdash; харнес (harness).</p></div>
+  <div class="prose">
+    <p>Харнес &mdash; это современный, полностью укомплектованный офис для модели. И это тот этаж, на котором живем и работаем мы с тобой. Слоем между тобой и голой моделью выступает интерфейс, внутри которого мы даем ИИ-сотруднику все необходимое:</p>
+  </div>
+  <div class="mviz" style="margin-top:18px">
+    <div class="branch"><span class="bl">&#128295;</span><span class="cap">инструменты</span><b>Руки</b><small>доступ к интернету, почте, CRM-системе, календарю</small></div>
+    <div class="branch"><span class="bl">&#128220;</span><span class="cap">контекст и ограничения</span><b>Правила</b><small>форматы и должностные инструкции (промпты)</small></div>
+    <div class="branch"><span class="bl">&#9881;</span><span class="cap">навыки</span><b>Скрипты</b><small>готовый код и сценарии, чтобы модель запускала процессы сама</small></div>
+  </div>
+  <div class="keybox">
+    <span class="cap">твой рабочий сетап</span>
+    <b>Сильный подрядчик плюс хороший офис</b>
+    <p>Когда ты покупаешь доступ к продвинутым кодинг-агентам вроде <span class="ph">[Claude&nbsp;Code]</span>, Codex или используешь <span class="ph">[открытый инструмент &mdash; уточню название]</span>, ты арендуешь не просто модель, а сразу мощную оболочку вокруг нее. Модель плюс харнес &mdash; это и есть тот сетап, который дает прорывную производительность и освобождает твое время.</p>
+  </div>
+
+  <div style="margin-top:26px"><button class="btn block sky" data-jump="mindset">Перейти к мышлению AI-First <span class="go">&darr;</span></button></div>
+</section></div>
+
+<!-- 03 MINDSET -->
+<a id="mindset"></a>
+<div class="wrap"><section>
+  <div class="shead"><span class="eyebrow">03 &middot; мышление</span><h2>Переход к мышлению AI-First</h2>
+    <p>У нас есть мощный мозг (модель) и правильный офис (харнес). Что дальше? Идти качать сборники «1000 лучших промптов»? Нет.</p></div>
+
+  <div class="prose">
+    <p>Главная ошибка новичков &mdash; пытаться скопировать чужой путь. Слепое копирование готовых шаблонов почти не работает: то, что дало результат одному человеку, может выдать полнейший бред у тебя. Вариантов достижения цели бесконечно много, и под твои задачи путь все равно будет своим.</p>
+  </div>
+
+  <div class="keybox">
+    <span class="cap">что такое AI-First на практике</span>
+    <b>Ты подходишь к задаче прагматично и стратегически</b>
+    <p>Критически анализируешь информацию, умеешь выстраивать причинно-следственные связи и раскладываешь сложный процесс на простые шаги.</p>
+  </div>
+
+  <div class="note dark"><b>Главная ловушка &mdash; залипнуть на эффекте «вау».</b> Сгенерировать красивую картинку &mdash; это игрушка на один раз, которая вызывает восторг, но не приносит денег. Настоящая ценность начинается там, где ты привязываешь к генерациям свои реальные данные, продумываешь бизнес-сценарий и превращаешь все это в рабочий инструмент под свою задачу.</div>
+
+  <div class="shead" style="margin-top:36px"><span class="eyebrow">конец эпохи</span><h2 style="font-size:20px">Узких специалистов больше нет</h2></div>
+  <div class="prose">
+    <p>Раньше мы сами загоняли себя в рамки и присваивали себе границы, но теперь этот ограничивающий ярлык «я всего лишь узкий специалист в чем-то одном» пропадает. ИИ навсегда снимает потолок: радикально снижает барьеры и сокращает циклы работы. Сегодня один любопытный человек способен тянуть процессы, на которые раньше требовалась целая команда, и участвовать в нескольких проектах одновременно.</p>
+    <p>Я хочу показать тебе, какой это увлекательный путь &mdash; быть энтузиастом. Не категоризировать себя, а быть человеком-мультифункционалом. Быть вовлеченным в жизнь, в инновации, в проектирование. В этот момент происходит магия: привычка залипать в чужую ленту сменяется азартом собирать что-то свое. Ты начинаешь получать дофамин не от пассивного потребления контента, а от созидания.</p>
+  </div>
+
+  <div class="shead" style="margin-top:36px"><span class="eyebrow">итог</span><h2 style="font-size:20px">ИИ &mdash; это твой мультипликатор</h2></div>
+  <div class="prose">
+    <p>Дискурс вокруг ИИ сильно поляризован: одни кричат, что он лишит нас самостоятельности, другие мечтают о безусловном базовом доходе. Обе крайности вредны. ИИ &mdash; это все еще инструмент, ориентированный на человека, и управляешь им ты. Усилив одного человека, мы потенциально увеличиваем число новых проектов и расширяем возможности целых бизнесов.</p>
+  </div>
+
+  <div class="keybox">
+    <span class="cap">зачем это тебе</span>
+    <b>Овладение ИИ &mdash; это не просто строчка в резюме, а всеобъемлющий навык, который делает жизнь свободнее</b>
+    <p>У тебя схлопывается рутина, освобождается время и растет уверенность в своем будущем на рынке. И самое главное &mdash; появляется ресурс, финансовый и временной, на то, чтобы осуществлять те мечты и цели, которые ты так давно откладывала. Главное &mdash; проявить любопытство и начать.</p>
+  </div>
+</section></div>
+
+<!-- ABOUT + CTA -->
+<a id="about"></a>
+<div class="wrap"><section>
+  <div class="cta">
+    <span class="eyebrow">обо мне</span>
+    <h3>Кристина &middot; @kris.usti</h3>
+    <p>Я прошла этот тернистый путь сама, учась на ошибках и синтезируя тонны информации с рынка, чтобы понять, что реально работает. Теперь моя миссия &mdash; быть тем проводником, которого мне не хватало, и помогать обычным людям встроить ИИ в работу и жизнь.</p>
+    <a class="btn block" href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">Instagram &mdash; @kris.usti <span class="go">&rarr;</span></a>
+    <div style="margin-top:10px"><a class="btn ghost block" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал <span class="go">&rarr;</span></a></div>
+  </div>
+</section></div>
+
+<!-- GLOSSARY -->
+<a id="gloss"></a>
+<div class="wrap"><section>
+  <div class="shead"><span class="eyebrow">если что-то непонятно</span><h2>Словарь терминов</h2></div>
+  <div class="gloss">
+    <dl class="gterm hl"><dt>Модель</dt><dd>«Мозг», который думает и генерирует ответ. Например, GPT, Opus, Sonnet.</dd></dl>
+    <dl class="gterm"><dt>Приложение</dt><dd>Оболочка над моделью, которой ты пользуешься: ChatGPT, Claude, Perplexity.</dd></dl>
+    <dl class="gterm"><dt>Харнес (агентская оболочка)</dt><dd>«Офис», который дает модели руки: инструменты, контекст и скрипты. Так работают продвинутые кодинг-агенты.</dd></dl>
+    <dl class="gterm"><dt>Фронтир-модель</dt><dd>Самые сильные модели переднего края. Сейчас это OpenAI, Anthropic, Google.</dd></dl>
+    <dl class="gterm"><dt>Инференс</dt><dd>«Исполнение» мысли модели &mdash; вычисление, ради которого и нужно железо. Как электричество для «мозга».</dd></dl>
+    <dl class="gterm"><dt>Чип</dt><dd>Видеокарты и железо, на которых обучаются и работают модели. Крупнейший игрок &mdash; Nvidia.</dd></dl>
+    <dl class="gterm"><dt>Open-source</dt><dd>Модель, выложенная в открытый доступ. Формально бесплатна, но требует свое железо.</dd></dl>
+    <dl class="gterm"><dt>AI-First мышление</dt><dd>Навык подходить к задаче прагматично: раскладывать сложное на простые шаги и выстраивать причинно-следственные связи.</dd></dl>
+  </div>
+
+  <!-- FOOTNOTES -->
+  <div class="fnbox">
+    <h4>Сноски &middot; о числах</h4>
+    <ol>
+      <li id="f1">Рынок ИИ-железа и капитализация Nvidia &mdash; порядок величины по рыночным оценкам 2026 года. Цифры показывают масштаб, а не точную сумму. <a href="#r1" class="fn">&#8617;</a></li>
+      <li id="f2">Объем рынка инференса в 2026 &mdash; оценка отрасли, порядок $100+ млрд. <a href="#r2" class="fn">&#8617;</a></li>
+      <li id="f3">Совокупные траты мира на ИИ-инфраструктуру за год &mdash; рыночная оценка 2026, порядок $2,5 трлн. <a href="#r3" class="fn">&#8617;</a></li>
+      <li id="f4">Стоимость обучения передовой модели &mdash; диапазон отраслевых оценок ($50&ndash;500 млн без учета исследований). <a href="#r4" class="fn">&#8617;</a></li>
+    </ol>
+  </div>
+</section></div>
+
+<div class="wrap"><div class="foot">AI-First &middot; гайд для тех, кто откладывал ИИ &middot; @kris.usti</div></div>
+
+<script>
+  /* theme */
+  var TK='aifirst_theme';
+  var tbtn=document.getElementById('tbtn');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme',t);
+    tbtn.textContent = t==='dark' ? '☀️' : '🌙';
+  }
+  var savedT='light'; try{savedT=localStorage.getItem(TK)||'light'}catch(e){}
+  applyTheme(savedT);
+  tbtn.addEventListener('click',function(){
+    var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    applyTheme(t); try{localStorage.setItem(TK,t)}catch(e){}
+  });
+
+  /* burger */
+  var menu=document.getElementById('menu'), burger=document.getElementById('burger');
+  function closeMenu(){menu.classList.remove('open');burger.classList.remove('x')}
+  burger.addEventListener('click',function(){menu.classList.toggle('open');burger.classList.toggle('x')});
+
+  /* smooth anchor jumps + FAQ + footnote flash */
+  document.addEventListener('click',function(e){
+    var j=e.target.closest('[data-jump]');
+    if(j){
+      var id=j.getAttribute('data-jump');
+      var el=document.getElementById(id);
+      if(el){ closeMenu(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+      return;
+    }
+    var q=e.target.closest('.qa .q');
+    if(q){
+      var qa=q.parentElement; qa.classList.toggle('open');
+      var a=qa.querySelector('.a');
+      a.style.maxHeight = qa.classList.contains('open') ? a.scrollHeight+'px' : 0;
+    }
+  });
+</script>
+</body>
+</html>
