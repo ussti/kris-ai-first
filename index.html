@@ -6,7 +6,7 @@
 <title>Этап зиро — твой план с 0 в AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#EDEBE4; --paper-2:#F5F3EC; --card:#FBFAF6;
@@ -95,7 +95,7 @@
   .shead.center .eyebrow{margin-left:auto;margin-right:auto;width:fit-content}
   .shead .eyebrow{display:block;margin-bottom:8px}
   .shead h2{font-size:26px}
-  .shead p{color:var(--ink-soft);margin-top:10px;font-size:15px}
+  .shead p{color:var(--ink-soft);margin-top:8px;font-size:15px}
 
   /* buttons */
   .btn{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
@@ -136,7 +136,7 @@
   .topbar .in .actions{display:flex;align-items:center}
 
   /* KEY box — MAIN, blue bg + dark border  (symmetric mirror of .branch: brown bg + blue border) */
-  .keybox{margin-top:22px;background:var(--sky);color:var(--ink);border:2px solid var(--ink);
+  .keybox{margin-top:16px;background:var(--sky);color:var(--ink);border:2px solid var(--ink);
     border-radius:var(--r);padding:20px}
   .keybox .cap{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.04em;
     text-transform:uppercase;color:var(--mark);display:block;margin-bottom:8px}
@@ -198,7 +198,7 @@
   .l3 .ph,.l2 .ph{color:#3a555f}
 
   /* ===== TOWER (funnel): 3 floors, narrows to the top = you at the tip ===== */
-  .tower{margin-top:22px;display:flex;flex-direction:column;align-items:center}
+  .tower{margin-top:16px;display:flex;flex-direction:column;align-items:center}
   .tower .thead{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
     color:var(--sky-deep);text-align:center;margin-bottom:18px;max-width:82%;line-height:1.5}
   .floor{position:relative;border-radius:14px;padding:16px 18px;text-align:center}
@@ -237,7 +237,7 @@
   .stat span{display:block;font-size:10.5px;line-height:1.35;color:var(--ink-soft);margin-top:5px}
 
   /* ===== TREE (company → app → model) — frontier = blue (main), rest = brown ===== */
-  .tree{margin-top:22px;display:flex;flex-direction:column;gap:16px}
+  .tree{margin-top:16px;display:flex;flex-direction:column;gap:16px}
   .trow{background:var(--sky);color:var(--ink);border-radius:var(--r);padding:16px 16px 18px}
   .trow.rest{background:var(--ink);color:var(--paper)}
   .troot{font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px}
@@ -250,7 +250,7 @@
   .tnode:after{content:"";position:absolute;left:4px;top:20px;width:16px;height:2px;background:rgba(43,33,28,.28)}
   .tnode .k{font-size:11px;text-transform:uppercase;letter-spacing:.03em;opacity:.7}
   .tnode .v{font-weight:600;font-size:14.5px}
-  .tleaves{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .tleaves{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
   .leaf{font-family:'JetBrains Mono';font-size:12px;background:var(--sky);color:var(--ink);
     border-radius:20px;padding:5px 11px}
 
@@ -268,7 +268,7 @@
   .ctable .ph{color:#B7AC9F}
 
   /* track cards — one row of three; main = blue, rest = brown */
-  .tracks{margin-top:22px;display:flex;flex-direction:row;gap:10px}
+  .tracks{margin-top:16px;display:flex;flex-direction:row;gap:10px}
   .tcard{flex:1;min-width:0;background:var(--sky);color:var(--ink);border-radius:var(--r);
     padding:16px 13px;cursor:pointer;text-align:left;font-family:inherit;transition:.15s;
     display:flex;flex-direction:column;gap:7px;min-height:132px}
@@ -291,7 +291,7 @@
   .qbar i{display:block;height:100%;background:var(--sky-deep);width:0;transition:.3s}
   .qstep b{font-family:'JetBrains Mono';font-size:13px;color:var(--sky-deep)}
   .qstep h2{font-size:23px;margin-top:8px}
-  .opts{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .opts{margin-top:16px;display:flex;flex-direction:column;gap:11px}
   .opt{background:var(--sky);border:none;border-radius:12px;padding:17px 18px;
     text-align:left;width:100%;font-family:inherit;font-weight:700;font-size:16px;color:var(--ink);
     cursor:pointer;transition:.12s}
@@ -299,15 +299,15 @@
   .opt small{display:block;color:var(--onblue);font-weight:500;font-size:13.5px;margin-top:3px}
 
   /* result — brown (payoff card, stands out against blue flow) */
-  .resbox{margin-top:22px;background:var(--ink);color:var(--paper);border-radius:var(--r);padding:24px 20px}
+  .resbox{margin-top:16px;background:var(--ink);color:var(--paper);border-radius:var(--r);padding:24px 20px}
   .resbox .lead{font-family:'Playfair Display';font-style:italic;color:var(--sky);font-size:15px;margin-bottom:6px}
   .resline{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-top:1.5px solid rgba(166,220,236,.22)}
   .resline .rk{font-family:'JetBrains Mono';font-size:11px;text-transform:uppercase;letter-spacing:.04em;
     color:var(--sky);width:92px;flex:none}
   .resline b{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--paper)}
   .resline span:not(.rk){font-size:15px;color:#E4DED4}
-  .reswhy{margin-top:12px;font-size:14px;color:var(--onbrown);line-height:1.5}
-  .resstep{margin-top:14px;padding-top:12px;border-top:1.5px solid rgba(166,220,236,.22);font-size:14px;line-height:1.5}
+  .reswhy{margin-top:8px;font-size:14px;color:var(--onbrown);line-height:1.5}
+  .resstep{margin-top:16px;padding-top:12px;border-top:1.5px solid rgba(166,220,236,.22);font-size:14px;line-height:1.5}
   .resstep .cap{display:block;font-family:'JetBrains Mono';font-size:11px;text-transform:uppercase;
     letter-spacing:.04em;color:var(--sky);margin-bottom:4px}
   .resstep .ph{color:#B7AC9F}
@@ -320,7 +320,7 @@
   .cta .ph{color:#4b6068}
 
   /* ===== FAQ (accordion) — brown cards (support) ===== */
-  .faq{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  .faq{margin-top:16px;display:flex;flex-direction:column;gap:10px}
   .qa{background:var(--ink);color:var(--paper);border-radius:12px;overflow:hidden}
   .qa .q{padding:16px 18px;font-weight:700;font-size:15.5px;cursor:pointer;
     display:flex;justify-content:space-between;gap:14px;align-items:center}
@@ -331,7 +331,7 @@
   .qa .a .ph{color:#B7AC9F}
 
   /* ===== GLOSSARY ===== */
-  .gloss{margin-top:22px;display:flex;flex-direction:column;gap:2px}
+  .gloss{margin-top:16px;display:flex;flex-direction:column;gap:2px}
   .gterm{padding:16px 2px;border-bottom:1.5px solid var(--sky-deep)}
   .gterm dt{font-weight:800;font-size:16.5px;color:var(--ink)}
   .gterm dd{color:var(--ink-soft);font-size:14.5px;margin-top:5px;line-height:1.55}
@@ -412,7 +412,7 @@
   :root[data-theme="dark"] .foot{border-top-color:#28323A;color:#9BA7AC}
   /* --- linear-read additions --- */
   .prose{margin-top:16px}
-  .prose p{font-size:16px;line-height:1.62;color:var(--ink);margin-top:14px}
+  .prose p{font-size:16px;line-height:1.62;color:var(--ink);margin-top:16px}
   .prose p:first-child{margin-top:0}
   :root[data-theme="dark"] .prose p{color:#ECEFF1}
   .pull{font-family:'Playfair Display';font-style:italic;font-weight:500;font-size:20px;
@@ -447,7 +447,7 @@
   /* mobile-first: real side padding + tighter leading */
   .wrap{max-width:600px;padding:0 22px}
   @media(min-width:460px){.wrap{padding:0 30px}}
-  .prose{margin-top:14px}
+  .prose{margin-top:16px}
   .prose p{font-size:15px;line-height:1.46;margin-top:13px;color:var(--ink)}
   .prose em,.note em,.trust em,.keybox em,.pull em{font-style:italic}
   .uu{text-decoration:none;background:linear-gradient(transparent 60%,var(--sky) 60%);padding:0 1px;border-radius:2px}
@@ -473,7 +473,7 @@
   .shead .eyebrow{display:inline-block;margin-bottom:14px}
   .shead.center .eyebrow{display:inline-block}
   .shead h2{font-size:32px;letter-spacing:-.025em;line-height:1.06}
-  .shead p{font-size:14.5px;margin-top:12px;line-height:1.45}
+  .shead p{font-size:14.5px;margin-top:8px;line-height:1.45}
 
   /* callouts: ONE style = light card, dark border; compact text, roomy padding */
   .note,.note.dark{background:var(--card);border:1.5px solid var(--ink);
@@ -499,7 +499,7 @@
   .trust{margin-top:24px;border:1.5px dashed var(--ink);border-radius:16px;
     padding:20px 24px;background:var(--card)}
   .trust .eyebrow{margin-bottom:13px}
-  .trust p{font-size:14px;line-height:1.45;color:var(--ink);margin-top:10px}
+  .trust p{font-size:14px;line-height:1.45;color:var(--ink);margin-top:8px}
   .trust p:first-of-type{margin-top:0}
   .trust b{color:var(--mark)}
 
@@ -533,6 +533,74 @@
   /* no blue-on-blue: label caps on sky bg go dark */
   .scol .sk{color:var(--onblue)}
 </style>
+<style>
+  /* ===== v5 — Kris feedback: ONE font, 3-size type scale, 3-tier spacing,
+     dotted underlines, dark heading containers with blue border ===== */
+
+  /* single font everywhere */
+  body,body *{font-family:'Inter',system-ui,-apple-system,sans-serif !important}
+
+  /* type scale: S=13 / M=15 / L=24 (hero h1 is the display exception) */
+  body{font-size:15px}
+  .prose p,.note,.note .big,.note .sub,.keybox p,.keybox b,.preface p,.cta p,.trust p,
+  .pull,.qa .q,.qa .a p,.opt,.fear,.reswhy,.resstep,.branch b,.branch small,
+  .floor b,.floor small,.tside,.ctable table,.resline b,.resline span,
+  .hero .lede,.gterm dt,.gterm dd,.troot,.tnode .v,.entry b,.entry small,
+  .stat b,.pf-name,.cta h3,h3{font-size:15px !important;line-height:1.5}
+  .eyebrow,.cap,.fn,.fnbox li,.fnbox h4,.stat span,.leaf,.tnode .k,.qstep b,
+  .thead,.tarrow,.resline .rk,.foot,.scol .sk,.menu .lbl,.you,.opt small,
+  .resbox .lead,.gterm dd,.branch small,.floor small,.tside,.fnbox li,
+  .note .sub,.qa .a p,.reswhy{font-size:13px !important;line-height:1.5}
+  h2,.shead h2,.qstep h2{font-size:24px !important;letter-spacing:-.02em;line-height:1.15}
+  .hero h1{font-size:clamp(42px,12vw,60px)}
+  .eyebrow{font-size:11px !important;letter-spacing:.13em}
+
+  /* spacing: 3 tiers — 8 / 16 / 32 */
+  section{padding:32px 0}
+  .shead{margin:0 0 16px}
+  .shead .eyebrow{margin-bottom:8px}
+  .shead p{margin-top:8px}
+  .prose{margin-top:16px}
+  .prose p{margin-top:16px}
+  .note,.keybox,.tree,.stats,.tower,.faq,.gloss,.fears,.trust,.ctable,.mviz,.qbar{margin-top:16px}
+  .pull{margin:32px 0}
+
+  /* heading container: DARK, light text, blue border */
+  .shead{background:var(--ink);border:2px solid var(--sky);border-radius:16px;
+    padding:16px 18px}
+  .shead h2{color:var(--paper)}
+  .shead p{color:#CFC7BC}
+  .shead .eyebrow{color:var(--sky);border-color:var(--sky)}
+  .shead .u{border-bottom-color:var(--paper)}
+  .shead .nm{border-bottom-color:var(--sky)}
+  .shead em{color:var(--sky)}
+
+  /* underlines: dotted, as before — links blue, emphasis brown (light on dark) */
+  .nm{border-bottom:1.5px dotted var(--mark)}
+  .nm:hover{border-bottom-style:solid}
+  .trow.rest .nm,.resbox .nm,.pull .nm,.ctable td .nm,.fear .nm,.hero .nm,
+  .note.dark .nm,.branch .nm,.resstep .nm{border-bottom-color:var(--sky)}
+  .u{border-bottom:1.5px dotted var(--ink)}
+  .trow.rest .u,.resbox .u,.pull .u,.note.dark .u,.branch .u,.hero .u{border-bottom-color:var(--paper)}
+
+  /* quotes: same font, readable */
+  .pull{font-style:italic;font-weight:500;padding:24px}
+  .pull:before{display:none}
+  .resbox .lead{font-style:italic}
+
+  /* harness sub-blocks: no icon slot, simple stack under the main keybox */
+  .branch{margin:0 0 8px;padding:14px 16px}
+  .branch:after{display:none}
+
+  /* compact glossary */
+  .gterm{padding:8px 2px}
+  .gterm dd{margin-top:2px}
+  .gterm.hl{padding:8px 10px}
+
+  /* dark theme: shead stays dark with blue border */
+  :root[data-theme="dark"] .shead{background:#111619;border-color:rgba(140,200,224,.55)}
+  :root[data-theme="dark"] .shead h2{color:#ECEFF1}
+</style>
 </head>
 <body>
 
@@ -550,7 +618,7 @@
   <a data-jump="market"><span class="n">02</span>Один цифровой сотрудник</a>
   <a data-jump="mindset"><span class="n">03</span>Мышление AI-First</a>
   <a data-jump="quiz"><span class="n">04</span>Опрос: подбор трека</a>
-  <div class="lbl" style="margin-top:22px">Справка</div>
+  <div class="lbl" style="margin-top:16px">Справка</div>
   <a class="plain" data-jump="faq">Частые вопросы</a>
   <a class="plain" data-jump="gloss">Словарь терминов</a>
   <a class="plain" data-jump="about">Обо мне</a>
@@ -574,10 +642,10 @@
   <div class="trust">
     <span class="eyebrow">коротко обо мне</span>
     <p><b>5+ лет</b> я работала бизнес-ассистентом в международных компаниях, а потом ушла в свое. Сейчас я основательница, вайбкодер и энтузиаст ИИ: собираю команду ИИ-агентов и на ней запускаю проекты и продукты &mdash; для себя и для клиентов.</p>
-    <p>Свой первый проект я написала сама, в связке с ИИ и без бэкграунда в коде. Дальше в гайде &mdash; тот самый путь, который я прошла, разложенный по шагам.</p>
+    <p>Дальше в гайде &mdash; тот самый путь, который я прошла с нуля, разложенный по шагам.</p>
   </div>
 
-  <div class="shead" style="margin-top:34px"><span class="eyebrow">00 &middot; честно о себе</span><h2>Я сама начинала отсюда</h2></div>
+  <div class="shead" style="margin-top:32px"><span class="eyebrow">00 &middot; честно о себе</span><h2>Я сама начинала отсюда</h2></div>
 
   <div class="prose">
     <p>Признаюсь честно: я сама избегала и откладывала ИИ до последнего. Еще в 2023 году, когда я на четвертом курсе работала в IT-стартапе, мне закидывали удочки: пора внедрять. Я попробовала. Две недели проб и ошибок, <span class="u">вечные лимиты, которые не дают дойти до результата</span>, а оплачивать каждую попытку я тогда не могла. В итоге разочаровалась и забила на это еще на два года.</p>
@@ -599,7 +667,7 @@
     <p>Точка входа стала доступной: сейчас человек с любым опытом может с нуля спроектировать проект и автоматизировать свою рутину <span class="u">без единой строчки кода</span>.</p>
   </div>
 
-  <div style="margin-top:26px"><button class="btn block sky" data-jump="fears">Почему мы тормозим на самом деле <span class="go">&darr;</span></button></div>
+  <div style="margin-top:16px"><button class="btn block sky" data-jump="fears">Почему мы тормозим на самом деле <span class="go">&darr;</span></button></div>
 </section></div>
 
 <!-- 01 FEARS -->
@@ -629,7 +697,7 @@
     <p>Смысл не в том, чтобы найти «единственно правильное решение» или скопировать чужой промпт. Правильных путей бесконечное множество, и твой будет уникальным. Смысл в том, чтобы <span class="u">освоить AI-First мышление</span>. Это глобальный навык: ты мыслишь прагматически и стратегически, критически анализируешь информацию и умеешь выстраивать причинно-следственные связи. Он применяется ко всей жизни, а не только к работе.</p>
   </div>
 
-  <div class="pull">Моя миссия сейчас &mdash; стать тем самым проводником, которого мне так не хватало. Провести тебя за руку шаг за шагом, от полного нуля до первых результатов.</div>
+  <div class="pull">Моя миссия сейчас &mdash; стать тем самым проводником, которого мне так не хватало на старте.</div>
 
   <div class="keybox">
     <span class="cap">главное, что стоит усвоить</span>
@@ -641,7 +709,7 @@
     <p>Этот гайд &mdash; готовый сценарий и та самая карта рынка. Мы разложим все по полочкам, снизу доверху, и к концу чтения у тебя не останется вопроса «что вообще происходит и с чего мне начать».</p>
   </div>
 
-  <div style="margin-top:26px"><button class="btn block sky" data-jump="market">Разобрать карту рынка <span class="go">&darr;</span></button></div>
+  <div style="margin-top:16px"><button class="btn block sky" data-jump="market">Разобрать карту рынка <span class="go">&darr;</span></button></div>
 </section></div>
 
 <!-- 02 MARKET -->
@@ -650,10 +718,10 @@
   <div class="shead"><span class="eyebrow">02 &middot; карта рынка</span><h2>Архитектура рынка: один цифровой сотрудник</h2>
     <p>Кажется, что рынок несется как сумасшедший: каждую неделю новости про «новый лучший ИИ». Но чтобы не теряться в шуме, достаточно понять одну вещь.</p></div>
 
-  <div class="note"><b>Почему новинки каждую неделю.</b> Модели вышли на уровень, когда могут генерировать синтетические данные и <span class="u">учить сами себя</span>: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. <span class="u">Гнаться за каждым релизом не нужно</span>.</div>
-
   <div class="note"><b class="big">Весь рынок ИИ &mdash; это не хаос, а один цифровой сотрудник.</b>
     <p class="sub">Собери его из трех частей: <span class="gi">мозг</span> &mdash; это сама модель; <span class="gi">руки и рабочее место</span> &mdash; харнес вокруг нее; <span class="gi">энергия</span>, которая все это питает, &mdash; железо и вычисления. Разберем каждую часть снизу вверх.</p></div>
+
+  <div class="note"><b>Почему новинки каждую неделю.</b> Модели вышли на уровень, когда могут генерировать синтетические данные и <span class="u">учить сами себя</span>: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. <span class="u">Гнаться за каждым релизом не нужно</span>.</div>
 
   <!-- ГЕРОЙ: башня-воронка -->
   <div class="tower">
@@ -666,7 +734,7 @@
     <div class="tarrow">работает на &darr;</div>
 
     <div class="floor f2"><span class="cap">мозг</span><b>Сами модели</b>
-      <small>GPT, Opus/Sonnet, Gemini, китайские. Это чистый интеллект, который думает. Но сам по себе он как гениальный спец в пустой комнате: без стола и компьютера ничего не сделает.</small></div>
+      <small>GPT от OpenAI, Claude от Anthropic, Gemini от Google, китайские DeepSeek и Qwen. Это чистый интеллект, который думает. Но сам по себе он как гениальный спец в пустой комнате: без стола и компьютера ничего не сделает.</small></div>
     <div class="tarrow">питается от &darr;</div>
 
     <div class="floor f1"><span class="cap">энергия</span><b>Железо и вычисления</b>
@@ -681,7 +749,7 @@
   </div>
 
   <!-- часть 1: энергия -->
-  <div class="shead" style="margin-top:38px"><span class="eyebrow">часть 1 &middot; энергия</span><h2 style="font-size:20px">Железо и вычисления</h2>
+  <div class="shead" style="margin-top:32px"><span class="eyebrow">часть 1 &middot; энергия</span><h2>Железо и вычисления</h2>
     <p>На этом держится вообще все: физические серверы, чипы и дата-центры, на которых нейросети обучаются и работают.</p></div>
   <div class="prose">
     <p>Здесь безоговорочно правит <a class="nm" href="https://www.nvidia.com" target="_blank" rel="noopener">Nvidia</a> &mdash; сейчас это <span class="u">самая дорогая компания в мире</span>, а весь рынок железа оценивается в невероятные 5 триллионов долларов.<a class="fn" href="#f1">1</a> Чипы стоят безумных денег: серверные связки B200 обходятся в сотни тысяч долларов. Но главное слово на этом уровне &mdash; <b>инференс</b> (<em>исполнение</em>).</p>
@@ -695,110 +763,60 @@
   </div>
 
   <!-- часть 2: мозг -->
-  <div class="shead" style="margin-top:38px"><span class="eyebrow">часть 2 &middot; мозг</span><h2 style="font-size:20px">Сами модели</h2>
+  <div class="shead" style="margin-top:32px"><span class="eyebrow">часть 2 &middot; мозг</span><h2>Сами модели</h2>
     <p>Модель &mdash; это <em>чистый интеллект</em>. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p></div>
   <div class="prose">
     <p>Здесь идет жесточайшая война корпораций. Обучение передовой модели с нуля стоит <span class="u">от 50 до 500 миллионов долларов</span>, а с учетом исследований затраты доходят до миллиардов.<a class="fn" href="#f4">4</a> Игроков немного, и их легко расставить <span class="u">по трем полкам</span>.</p>
   </div>
 
-  <div class="tree">
-    <div class="trow"><div class="troot"><span class="dot"></span>&#9733; Фронтир &middot; США</div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">кто</span><span class="v"><a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a>, <a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>, <a class="nm" href="https://deepmind.google" target="_blank" rel="noopener">Google</a></span></div>
-        <div class="tnode"><span class="k">суть</span><span class="v">самые умные модели рынка</span></div>
-      </div>
-      <div class="tleaves"><span class="leaf">сотни $ млн в обучение</span><span class="leaf">удобно пользователю</span><span class="leaf">твой старт</span></div>
-    </div>
-    <div class="trow rest"><div class="troot"><span class="dot"></span>Азия &middot; Китай</div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">кто</span><span class="v"><a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>, <a class="nm" href="https://chat.qwen.ai" target="_blank" rel="noopener">Qwen</a>, <a class="nm" href="https://www.kimi.com" target="_blank" rel="noopener">Kimi</a>, <a class="nm" href="https://www.minimax.io" target="_blank" rel="noopener">Minimax</a></span></div>
-        <div class="tnode"><span class="k">суть</span><span class="v">отстают чуть-чуть, но в 20&ndash;30 раз дешевле</span></div>
-      </div>
-      <div class="tleaves"><span class="leaf">DeepSeek обучен за ~$6&ndash;7 млн</span><span class="leaf">часто open-source</span></div>
-    </div>
-    <div class="trow rest"><div class="troot"><span class="dot"></span>Россия</div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">кто</span><span class="v"><a class="nm" href="https://ya.ru/ai/gpt" target="_blank" rel="noopener">YandexGPT</a>, <a class="nm" href="https://giga.chat" target="_blank" rel="noopener">GigaChat</a></span></div>
-        <div class="tnode"><span class="k">суть</span><span class="v">догоняют, ограничены в мощностях</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="note dark"><b>Про «бесплатные» китайские модели.</b> Сама модель может быть бесплатной (open-source), но чтобы она заработала на тебя, нужно <span class="u">купить сервер за десятки тысяч долларов</span>. Поэтому для обычного пользователя это не вариант для старта.</div>
-
-  <!-- правило: компания != приложение != модель -->
-  <div class="shead" style="margin-top:38px"><span class="eyebrow">чтобы не путаться в новостях</span><h2 style="font-size:20px">Компания &ne; приложение &ne; модель</h2></div>
-  <div class="slice">
-    <div class="scol"><span class="sk">компания</span><b><a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a></b></div>
-    <div class="sar">&rarr;</div>
-    <div class="scol"><span class="sk">приложение</span><b><a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a></b></div>
-    <div class="sar">&rarr;</div>
-    <div class="scol"><span class="sk">модель внутри</span><b><a class="nm" href="https://openai.com" target="_blank" rel="noopener">GPT</a></b></div>
-  </div>
-  <div class="slice">
-    <div class="scol"><span class="sk">компания</span><b><a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a></b></div>
-    <div class="sar">&rarr;</div>
-    <div class="scol"><span class="sk">приложение</span><b><a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a></b></div>
-    <div class="sar">&rarr;</div>
-    <div class="scol"><span class="sk">модель внутри</span><b><a class="nm" href="https://www.anthropic.com/claude" target="_blank" rel="noopener">Opus / Sonnet</a></b></div>
-  </div>
-  <div class="note"><b>Как с телефоном.</b> Компания &mdash; <a class="nm" href="https://www.apple.com" target="_blank" rel="noopener">Apple</a>, продукт в руках &mdash; <a class="nm" href="https://www.apple.com/iphone/" target="_blank" rel="noopener">iPhone</a>, система внутри &mdash; <a class="nm" href="https://www.apple.com/ios/" target="_blank" rel="noopener">iOS</a>. В ИИ ровно так же. ChatGPT, которым пользуется около миллиарда человек, &mdash; это просто приложение, интерфейс. А внутри крутятся мозги: модели семейства GPT.</div>
-
-  <!-- Карта актуальных моделей -->
-  <div class="shead" style="margin-top:38px"><span class="eyebrow">чтобы не путаться в именах</span><h2 style="font-size:20px">Карта актуальных моделей</h2>
-    <p>Держи ту же сцепку в голове: <span class="u">компания &ne; приложение &ne; модель</span>. Дальше &mdash; кто есть кто и как называются мозги внутри.</p></div>
-  <div class="tree">
-    <div class="trow"><div class="troot"><span class="dot"></span>&#9733; <a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a></div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">приложение</span><span class="v"><a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> и рабочая среда ChatGPT Work</span></div>
-        <div class="tnode"><span class="k">флагман</span><span class="v">линейка GPT-5.6, делится по мощности</span></div>
-      </div>
-      <div class="tleaves"><span class="leaf">Sol &mdash; для сложных задач</span><span class="leaf">Terra &mdash; сбалансированная</span><span class="leaf">Luna &mdash; легкая и быстрая</span></div>
-    </div>
-    <div class="trow"><div class="troot"><span class="dot"></span>&#9733; <a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a></div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">приложение</span><span class="v"><a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, а также среда <a class="nm" href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a></span></div>
-        <div class="tnode"><span class="k">линейка</span><span class="v">по мощности снизу вверх</span></div>
-      </div>
-      <div class="tleaves"><span class="leaf">Haiku &mdash; быстрая и дешевая</span><span class="leaf">Sonnet &mdash; стандарт на каждый день</span><span class="leaf">Opus &mdash; аналитика, логика, код</span><span class="leaf">Fable &mdash; вершина, автономное рассуждение</span></div>
-    </div>
-    <div class="trow"><div class="troot"><span class="dot"></span>&#9733; <a class="nm" href="https://deepmind.google" target="_blank" rel="noopener">Google</a></div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">модель</span><span class="v"><a class="nm" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a></span></div>
-        <div class="tnode"><span class="k">сила</span><span class="v">мультимодальность: текст, видео, аудио и графика разом</span></div>
-      </div>
-    </div>
-    <div class="trow rest"><div class="troot"><span class="dot"></span>Китайский блок</div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">кто</span><span class="v"><a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>, <a class="nm" href="https://chat.qwen.ai" target="_blank" rel="noopener">Qwen</a>, <a class="nm" href="https://www.kimi.com" target="_blank" rel="noopener">Kimi</a>, <a class="nm" href="https://www.minimax.io" target="_blank" rel="noopener">Minimax</a></span></div>
-        <div class="tnode"><span class="k">суть</span><span class="v">открытые модели, в разы дешевле; но нужна своя инфраструктура для развертывания</span></div>
-      </div>
-    </div>
-    <div class="trow rest"><div class="troot"><span class="dot"></span>Российский блок</div>
-      <div class="tbranch">
-        <div class="tnode"><span class="k">кто</span><span class="v"><a class="nm" href="https://ya.ru/ai/gpt" target="_blank" rel="noopener">YandexGPT</a>, <a class="nm" href="https://giga.chat" target="_blank" rel="noopener">GigaChat</a></span></div>
-        <div class="tnode"><span class="k">суть</span><span class="v">отечественные разработки, пока догоняют из-за ограничений по железу</span></div>
-      </div>
-    </div>
-  </div>
+  <div class="ctable"><table>
+    <tr><th>Компания</th><th>Приложение</th><th>Модели внутри</th></tr>
+    <tr>
+      <td>&#9733; <a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a><br><span class="ph">США &middot; фронтир</span></td>
+      <td><a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> и рабочая среда ChatGPT Work</td>
+      <td>линейка GPT-5.6: Sol &mdash; для сложных задач, Terra &mdash; сбалансированная, Luna &mdash; легкая и быстрая</td>
+    </tr>
+    <tr>
+      <td>&#9733; <a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a><br><span class="ph">США &middot; фронтир</span></td>
+      <td><a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, а также среда <a class="nm" href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a></td>
+      <td>Haiku &mdash; быстрая и дешевая, Sonnet &mdash; стандарт на каждый день, Opus &mdash; аналитика и код, Fable &mdash; вершина линейки</td>
+    </tr>
+    <tr>
+      <td>&#9733; <a class="nm" href="https://deepmind.google" target="_blank" rel="noopener">Google</a><br><span class="ph">США &middot; фронтир</span></td>
+      <td><a class="nm" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a></td>
+      <td>Gemini &mdash; сильна мультимодальностью: текст, видео, аудио и графика разом</td>
+    </tr>
+    <tr>
+      <td>Китай<br><span class="ph">догоняет, в 20&ndash;30 раз дешевле</span></td>
+      <td>свои чаты и открытые сборки</td>
+      <td><a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>, <a class="nm" href="https://chat.qwen.ai" target="_blank" rel="noopener">Qwen</a>, <a class="nm" href="https://www.kimi.com" target="_blank" rel="noopener">Kimi</a>, <a class="nm" href="https://www.minimax.io" target="_blank" rel="noopener">Minimax</a> &mdash; часто open-source</td>
+    </tr>
+    <tr>
+      <td>Россия<br><span class="ph">ограничена в мощностях</span></td>
+      <td>Алиса, GigaChat</td>
+      <td><a class="nm" href="https://ya.ru/ai/gpt" target="_blank" rel="noopener">YandexGPT</a>, <a class="nm" href="https://giga.chat" target="_blank" rel="noopener">GigaChat</a></td>
+    </tr>
+  </table></div>
+  <div class="note dark"><b>Про «бесплатные» китайские модели.</b> Сама модель может быть бесплатной (open-source), но чтобы она заработала на тебя, нужно <span class="u">купить сервер за десятки тысяч долларов</span>. Поэтому для обычного пользователя это не вариант для старта. Твой старт &mdash; фронтир: у него самые умные модели и все уже упаковано в подписку.</div>
 
   <!-- часть 3: руки и рабочее место -->
-  <div class="shead" style="margin-top:38px"><span class="eyebrow">часть 3 &middot; руки и рабочее место</span><h2 style="font-size:20px">Харнесы и оболочки</h2>
+  <div class="shead" style="margin-top:32px"><span class="eyebrow">часть 3 &middot; руки и рабочее место</span><h2>Харнесы и оболочки</h2>
     <p>Мозг у нас уже есть &mdash; гениальный, но голый и без инструментов. Чтобы он начал приносить пользу, ему нужна оболочка &mdash; харнес (harness).</p></div>
-  <div class="prose">
-    <p>Харнес &mdash; это современное, <span class="u">полностью укомплектованное рабочее место для модели</span>. И это та часть, где живем и работаем мы с тобой. Слоем между тобой и голой моделью выступает интерфейс, внутри которого мы даем ИИ-сотруднику все необходимое:</p>
-  </div>
-  <div class="mviz" style="margin-top:18px">
-    <div class="branch"><span class="bl">&#128295;</span><span class="cap">инструменты</span><b>Руки</b><small>доступ к интернету, почте, CRM-системе, календарю</small></div>
-    <div class="branch"><span class="bl">&#128220;</span><span class="cap">контекст и ограничения</span><b>Правила</b><small>форматы и должностные инструкции (промпты)</small></div>
-    <div class="branch"><span class="bl">&#9881;</span><span class="cap">навыки</span><b>Скрипты</b><small>готовый код и сценарии, чтобы модель запускала процессы сама</small></div>
-  </div>
   <div class="keybox">
     <span class="cap">твой рабочий сетап</span>
     <b>Сильный подрядчик плюс хороший офис</b>
     <p>Когда ты покупаешь доступ к продвинутым кодинг-агентам вроде <a class="nm" href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a> или <a class="nm" href="https://openai.com/codex" target="_blank" rel="noopener">Codex</a>, либо используешь открытые <a class="nm" href="https://nousresearch.com" target="_blank" rel="noopener">Hermes</a> и <a class="nm" href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a>, ты арендуешь не просто модель, а сразу мощную оболочку вокруг нее. <span class="u">Модель плюс харнес</span> &mdash; это и есть тот сетап, который дает прорывную производительность и освобождает твое время.</p>
   </div>
+  <div class="prose">
+    <p>Харнес &mdash; это современное, <span class="u">полностью укомплектованное рабочее место для модели</span>. И это та часть, где живем и работаем мы с тобой. Слоем между тобой и голой моделью выступает интерфейс, внутри которого мы даем ИИ-сотруднику все необходимое:</p>
+  </div>
+  <div class="mviz">
+    <div class="branch"><span class="cap">инструменты</span><b>Руки</b><small>доступ к интернету, почте, CRM-системе, календарю</small></div>
+    <div class="branch"><span class="cap">контекст и ограничения</span><b>Правила</b><small>форматы и должностные инструкции (промпты)</small></div>
+    <div class="branch"><span class="cap">навыки</span><b>Скрипты</b><small>готовый код и сценарии, чтобы модель запускала процессы сама</small></div>
+  </div>
 
-  <div style="margin-top:26px"><button class="btn block sky" data-jump="mindset">Перейти к мышлению AI-First <span class="go">&darr;</span></button></div>
+  <div style="margin-top:16px"><button class="btn block sky" data-jump="mindset">Перейти к мышлению AI-First <span class="go">&darr;</span></button></div>
 </section></div>
 
 <!-- 03 MINDSET -->
@@ -819,13 +837,13 @@
 
   <div class="note dark"><b>Главная ловушка &mdash; залипнуть на эффекте «вау».</b> Сгенерировать красивую картинку &mdash; это игрушка на один раз, которая вызывает восторг, но не приносит денег. Настоящая ценность начинается там, где ты <span class="u">привязываешь к генерациям свои реальные данные</span>, продумываешь бизнес-сценарий и превращаешь все это в рабочий инструмент под свою задачу.</div>
 
-  <div class="shead" style="margin-top:36px"><span class="eyebrow">конец эпохи</span><h2 style="font-size:20px">Узких специалистов больше нет</h2></div>
+  <div class="shead" style="margin-top:32px"><span class="eyebrow">конец эпохи</span><h2>Узких специалистов больше нет</h2></div>
   <div class="prose">
     <p>Раньше мы сами загоняли себя в рамки и ставили себе границы, но теперь этот ограничивающий ярлык «я всего лишь узкий специалист в чем-то одном» пропадает. ИИ <span class="u">навсегда снимает потолок</span>: радикально снижает барьеры и сокращает циклы работы. Сегодня <span class="u">один любопытный человек способен тянуть процессы, на которые раньше требовалась целая команда</span>, и участвовать в нескольких проектах одновременно.</p>
     <p>Я хочу показать тебе, какой это увлекательный путь &mdash; быть энтузиастом. Не категоризировать себя, а быть <span class="u">человеком-мультифункционалом</span>. Быть вовлеченным в жизнь, в инновации, в проектирование. В этот момент происходит магия: привычка залипать в чужую ленту сменяется азартом собирать что-то свое. Ты начинаешь получать дофамин не от пассивного потребления контента, а от созидания.</p>
   </div>
 
-  <div class="shead" style="margin-top:36px"><span class="eyebrow">итог</span><h2 style="font-size:20px">ИИ &mdash; это твой мультипликатор</h2></div>
+  <div class="shead" style="margin-top:32px"><span class="eyebrow">итог</span><h2>ИИ &mdash; это твой мультипликатор</h2></div>
   <div class="prose">
     <p>Дискурс вокруг ИИ сильно поляризован: одни кричат, что он лишит нас самостоятельности, другие мечтают о безусловном базовом доходе. Обе крайности вредны. ИИ &mdash; это все еще инструмент, ориентированный на человека, и <span class="u">управляешь им ты</span>. Усилив одного человека, мы потенциально увеличиваем число новых проектов и расширяем возможности целых бизнесов.</p>
   </div>
@@ -836,7 +854,7 @@
     <p>У тебя <span class="u">схлопывается рутина, освобождается время</span> и растет уверенность в своем будущем на рынке. И самое главное &mdash; появляется ресурс, финансовый и временной, на то, чтобы осуществлять те мечты и достигать тех целей, которые ты так давно откладывала. Главное &mdash; проявить любопытство и начать.</p>
   </div>
 
-  <div style="margin-top:26px"><button class="btn block sky" data-jump="quiz">Подобрать мой трек <span class="go">&darr;</span></button></div>
+  <div style="margin-top:16px"><button class="btn block sky" data-jump="quiz">Подобрать мой трек <span class="go">&darr;</span></button></div>
 </section></div>
 
 <!-- 04 QUIZ -->
@@ -856,7 +874,7 @@
       <p class="reswhy" id="resWhy"></p>
       <div class="resstep"><span class="cap">первый шаг</span><span id="resStep"></span></div>
     </div>
-    <div style="margin-top:14px"><button class="btn ghost block" id="qRestart">Пройти заново</button></div>
+    <div style="margin-top:16px"><button class="btn ghost block" id="qRestart">Пройти заново</button></div>
   </div>
 </section></div>
 
@@ -880,14 +898,14 @@
 <div class="wrap"><section>
   <div class="cta">
     <span class="eyebrow">обо мне</span>
-    <div class="mecard" style="margin-top:12px">
+    <div class="mecard" style="margin-top:8px">
       <img class="mephoto" id="mephoto" src="kris.jpg" alt="Кристина">
 
       <h3 style="align-self:center">Кристина<br>@kris.usti</h3>
     </div>
     <p style="margin-top:16px">Я прошла этот тернистый путь сама, учась на ошибках и синтезируя тонны информации с рынка, чтобы понять, что реально работает. Теперь моя миссия &mdash; быть тем проводником, которого мне не хватало, и помогать обычным людям встроить ИИ в работу и жизнь.</p>
     <a class="btn block" href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">Instagram &mdash; @kris.usti <span class="go">&rarr;</span></a>
-    <div style="margin-top:10px"><a class="btn ghost block" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал <span class="go">&rarr;</span></a></div>
+    <div style="margin-top:8px"><a class="btn ghost block" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал <span class="go">&rarr;</span></a></div>
   </div>
 </section></div>
 
@@ -896,13 +914,28 @@
 <div class="wrap"><section>
   <div class="shead"><span class="eyebrow">если что-то непонятно</span><h2>Словарь терминов</h2></div>
   <div class="gloss">
-    <dl class="gterm hl"><dt>Модель</dt><dd>«Мозг», который думает и генерирует ответ. Например, GPT, Opus, Sonnet.</dd></dl>
+    <dl class="gterm hl"><dt>Нейросеть (LLM)</dt><dd>Большая языковая модель: программа, обученная на огромном массиве текстов. Умеет понимать язык и отвечать на нем.</dd></dl>
+    <dl class="gterm"><dt>Модель</dt><dd>Конкретный «мозг», который думает и генерирует ответ: GPT, Sonnet, Gemini.</dd></dl>
     <dl class="gterm"><dt>Приложение</dt><dd>Оболочка над моделью, которой ты пользуешься: ChatGPT, Claude, Perplexity.</dd></dl>
+    <dl class="gterm"><dt>Чат-бот</dt><dd>Самый привычный формат приложения: окно диалога, куда ты пишешь, а модель отвечает.</dd></dl>
+    <dl class="gterm"><dt>Промпт</dt><dd>Твой запрос к модели. Чем больше контекста и конкретики, тем точнее ответ.</dd></dl>
+    <dl class="gterm"><dt>Генерация</dt><dd>То, что модель выдает в ответ: текст, картинка, код, таблица.</dd></dl>
+    <dl class="gterm"><dt>Токен</dt><dd>Кусочек текста, которым модель измеряет объем работы. В токенах считаются лимиты и цены.</dd></dl>
+    <dl class="gterm"><dt>Контекстное окно</dt><dd>Сколько информации модель «держит в голове» в рамках одного диалога.</dd></dl>
+    <dl class="gterm"><dt>Мультимодальность</dt><dd>Умение работать не только с текстом, но и с картинками, аудио и видео.</dd></dl>
+    <dl class="gterm"><dt>Агент</dt><dd>ИИ, который не просто отвечает, а сам выполняет задачу по шагам: ищет, пишет, запускает процессы.</dd></dl>
     <dl class="gterm"><dt>Харнес (агентская оболочка)</dt><dd>«Офис», который дает модели руки: инструменты, контекст и скрипты. Так работают продвинутые кодинг-агенты.</dd></dl>
-    <dl class="gterm"><dt>Фронтир-модель</dt><dd>Самые сильные модели переднего края. Сейчас это OpenAI, Anthropic, Google.</dd></dl>
-    <dl class="gterm"><dt>Инференс</dt><dd>«Исполнение» мысли модели &mdash; вычисление, ради которого и нужно железо. Как электричество для «мозга».</dd></dl>
-    <dl class="gterm"><dt>Чип</dt><dd>Видеокарты и железо, на которых обучаются и работают модели. Крупнейший игрок &mdash; Nvidia.</dd></dl>
-    <dl class="gterm"><dt>Open-source</dt><dd>Модель, выложенная в открытый доступ. Формально бесплатна, но требует свое железо.</dd></dl>
+    <dl class="gterm"><dt>Терминал</dt><dd>Текстовое окно управления компьютером. Там живут Claude Code и Codex; новичку он уже не обязателен.</dd></dl>
+    <dl class="gterm"><dt>Вайбкодинг</dt><dd>Создание сайтов и инструментов в диалоге с ИИ, без знания языков программирования.</dd></dl>
+    <dl class="gterm"><dt>Фронтир-модели</dt><dd>Самые сильные модели переднего края. Сейчас это модели от OpenAI, Anthropic, Google.</dd></dl>
+    <dl class="gterm"><dt>Open-source</dt><dd>Модель, выложенная в открытый доступ. Формально бесплатна, но требует своего железа.</dd></dl>
+    <dl class="gterm"><dt>Подписка и лимиты</dt><dd>Подписка &mdash; доступ к умным моделям за месячную плату; лимиты &mdash; квота запросов, после которой просят подождать или доплатить.</dd></dl>
+    <dl class="gterm"><dt>Агрегатор</dt><dd>Сервис-посредник, который продает доступ к зарубежным нейросетям за рубли.</dd></dl>
+    <dl class="gterm"><dt>VPN</dt><dd>Способ открыть сервисы, которые недоступны из России напрямую.</dd></dl>
+    <dl class="gterm"><dt>Инференс</dt><dd>«Исполнение» мысли модели: вычисление, ради которого и нужно железо. Как электричество для «мозга».</dd></dl>
+    <dl class="gterm"><dt>Чипы (GPU)</dt><dd>Видеокарты и железо, на которых обучаются и работают модели. Крупнейший игрок &mdash; Nvidia.</dd></dl>
+    <dl class="gterm"><dt>Дата-центр</dt><dd>Здание с тысячами серверов, где физически «думают» модели.</dd></dl>
+    <dl class="gterm"><dt>Синтетические данные</dt><dd>Учебные данные, которые модели генерируют сами для себя, поэтому новые версии выходят так часто.</dd></dl>
     <dl class="gterm"><dt>AI-First мышление</dt><dd>Навык подходить к задаче прагматично: раскладывать сложное на простые шаги и выстраивать причинно-следственные связи.</dd></dl>
   </div>
 
