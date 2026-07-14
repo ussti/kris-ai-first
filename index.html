@@ -663,6 +663,320 @@
     display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;margin-top:1px}
   :root[data-theme="dark"] .ck{background:#14181B;border-color:#3A5561}
 </style>
+<style>
+  /* ===== v7 — Kris design pass 2026-07-14: 3-color lockdown, contrast, tags ===== */
+
+  /* (1) убрать оранжевый: .ph — нейтральный маркер в палитре, .warn больше не оранжевый */
+  .ph{background:none !important;border-bottom:none !important;padding:0 !important}
+  :root[data-theme="dark"] .ph{background:none !important;border-bottom:none !important}
+  .ctable .warn{color:var(--onbrown)}
+
+  /* (2) blue text on light bg -> dark ink (contrast); blue stays only on dark/sky blocks */
+  .eyebrow{color:var(--ink)}
+  .hero .eyebrow{color:var(--sky)}
+  .shead .eyebrow{color:var(--sky)}
+  .preface .eyebrow,.trust .eyebrow,.cta .eyebrow,.quizcta .eyebrow{color:var(--ink)}
+  details.dd summary{color:var(--ink)}
+  .tli .tk{color:var(--ink)}
+  .trust b{color:var(--ink)}
+  .fnbox h4{color:var(--ink)}
+  .fn{color:var(--ink)}
+  .navitem .go{color:var(--ink)}
+  .tcard .go{color:var(--ink)}
+  .cback{color:var(--ink)}
+
+  /* (3) жирный всегда контрастен фону */
+  .note b{color:var(--ink)}
+  .note.dark b,.pull b,.fear b,.keybox.alt b{color:var(--paper)}
+
+  /* (4) теги-чипы: текст и бордер ОДНОГО цвета */
+  .eyebrow{border-color:currentColor}
+  .hero .eyebrow,.shead .eyebrow{border-color:var(--sky)}
+
+  /* (5) таблица: мельче, помещается в ячейки */
+  .ctable table{font-size:12px !important;line-height:1.34}
+  .ctable th{font-size:11px !important}
+  .ctable td{padding:9px 9px}
+
+  /* (6) nav-card link: no underline */
+  .navitem,.navitem b,.navitem small{text-decoration:none}
+
+  /* (7) плейсхолдер фото в предисловии — крупнее */
+  .pf-top{align-items:flex-start}
+  .pf-ava{width:92px;height:92px;border-radius:16px;font-size:11px;font-weight:700;
+    font-family:'JetBrains Mono';flex-direction:column;gap:2px;text-align:center;
+    letter-spacing:.08em;text-transform:uppercase;border:1.5px dashed var(--sky-deep)}
+  .pf-name{font-size:15px}
+
+  /* (8) соцсети/контакты — кликабельны и выделяются */
+  .pf-name a,.foot a{color:var(--ink);font-weight:700;text-decoration:none;
+    border-bottom:2px solid var(--sky-deep);padding-bottom:1px}
+  :root[data-theme="dark"] .pf-name a,:root[data-theme="dark"] .foot a{color:var(--paper);border-bottom-color:var(--sky)}
+</style>
+<style>
+  /* ===== v8 — Kris hub redesign 2026-07-14: unboxed quotes, onboarding, dark quiz, progressive market, podval ===== */
+
+  /* preface = long "about me" section, drop the heavy blue fill */
+  .preface{background:none !important;padding:0 !important;border:none !important}
+  :root[data-theme="dark"] .preface{background:none !important}
+  .preface .pf-block{margin-top:22px}
+  .pf-h{display:block;margin-top:5px;font-size:17px !important;font-weight:800;color:var(--ink);line-height:1.28}
+  :root[data-theme="dark"] .pf-h{color:#ECEFF1}
+
+  /* tag chip — dark pill: glyph + index + label (Kris ref 2026-07-14) */
+  .tag{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono';
+    font-size:12px !important;letter-spacing:.01em;text-transform:none;
+    background:var(--ink);color:var(--paper);border:none;border-radius:999px;
+    padding:5px 13px 6px;line-height:1.4}
+  .tag .g{color:var(--sky);font-size:12px}
+  .tag .n{color:var(--sky);font-weight:700}
+  :root[data-theme="dark"] .tag{background:#14181B;border:1px solid #3A5561}
+
+  /* photo placeholder x1.5 */
+  .pf-ava{width:138px !important;height:138px !important;font-size:12px !important}
+
+  /* header contacts as BUTTONS, not underlined links */
+  .pf-btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .pf-btn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+    font-size:13px !important;font-weight:700;text-decoration:none !important;
+    border:none !important;border-radius:999px;padding:8px 15px;cursor:pointer;
+    background:var(--ink);color:var(--paper) !important}
+  .pf-btn.alt{background:var(--sky);color:var(--ink) !important}
+  :root[data-theme="dark"] .pf-btn{background:var(--sky);color:#10171b !important}
+  :root[data-theme="dark"] .pf-btn.alt{background:#2c3a41;color:var(--paper) !important}
+
+  /* quotes: NO container, smaller font, droplet mark */
+  .pull{background:none !important;border:none !important;padding:0 0 0 24px !important;
+    margin:30px 0 !important;font-style:italic;font-weight:600;
+    font-size:18px !important;line-height:1.4 !important;color:var(--ink);position:relative}
+  .pull:before{display:block !important;content:"\201C";position:absolute;left:-3px;top:2px;
+    font-size:40px;line-height:1;color:var(--sky-deep);font-style:normal;font-weight:800}
+  .pull b{color:var(--ink) !important}
+  .pull u{text-decoration-color:var(--sky-deep);text-underline-offset:3px;text-decoration-thickness:2px}
+  :root[data-theme="dark"] .pull{color:#ECEFF1}
+  .pf-mission{margin:6px 0 0 !important}
+
+  /* ps / disclaimer note — italic container at the very end of the about block */
+  .note.ps{font-style:italic;margin-top:24px}
+  .note.ps b{font-style:normal}
+
+  /* onboarding intro — plain text, no box */
+  .onboard{margin-top:22px}
+  .onboard .ob-h{font-weight:800;font-size:17px !important}
+  .onboard p{margin-top:6px;color:var(--ink-soft)}
+  .onboard ul{margin-top:12px;list-style:none;display:flex;flex-direction:column;gap:8px}
+  .onboard li{position:relative;padding-left:22px;font-size:15px !important;line-height:1.42}
+  .onboard li:before{content:"\2192";position:absolute;left:0;color:var(--mark);font-weight:800}
+  .onboard li b{color:var(--ink)}
+  :root[data-theme="dark"] .onboard p{color:#9BA7AC}
+  :root[data-theme="dark"] .onboard li b{color:#ECEFF1}
+
+  /* case list — compact, not boxed */
+  .cases{margin-top:12px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .cases li{position:relative;padding-left:22px;font-size:15px !important;line-height:1.4}
+  .cases li:before{content:"\2713";position:absolute;left:0;color:var(--mark);font-weight:800}
+
+  /* quiz CTA — DARK highlighted block, button FIRST */
+  .quizcta{background:var(--ink) !important;border:none !important;border-radius:18px;
+    padding:26px 22px !important;text-align:center;margin-top:28px}
+  .quizcta .eyebrow{color:var(--sky) !important;border-color:var(--sky) !important}
+  .quizcta .btn{margin-top:14px;background:var(--sky);color:var(--ink);font-size:16px !important;
+    font-weight:800;box-shadow:0 6px 22px rgba(0,0,0,.30)}
+  .quizcta .qsub{margin-top:14px;color:var(--sky) !important;font-size:13px !important;line-height:1.45}
+  .quizcta .qsub .u{border-bottom-color:var(--sky)}
+  :root[data-theme="dark"] .quizcta{background:#10171b !important}
+
+  /* podval — "esche v gayde" card grid (Kris mockup 2026-07-14) */
+  .podval{margin-top:32px}
+  .podval .pv-h{display:block;font-style:italic;font-weight:600;font-size:18px !important;
+    color:var(--sky-deep);letter-spacing:.01em}
+  :root[data-theme="dark"] .podval .pv-h{color:var(--sky)}
+  .pv-grid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .pv-card{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;cursor:pointer;text-decoration:none;
+    box-shadow:0 2px 10px rgba(43,33,28,.05);transition:transform .15s,box-shadow .15s}
+  .pv-card:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(43,33,28,.10)}
+  .pv-card .pv-t{font-weight:800;font-size:17px !important;color:var(--ink);line-height:1.2}
+  .pv-card .pv-ar{flex:none;color:var(--mark);font-size:20px;font-weight:800;line-height:1}
+  .pv-card.hl{background:var(--sky);border-color:var(--sky-deep)}
+  .pv-card.hl .pv-t{color:var(--ink)}
+  .pv-card.hl .pv-ar{color:var(--onblue)}
+  :root[data-theme="dark"] .pv-card{background:#14181B;border-color:#3A5561;box-shadow:none}
+  :root[data-theme="dark"] .pv-card .pv-t{color:#ECEFF1}
+  :root[data-theme="dark"] .pv-card .pv-ar{color:var(--sky)}
+  :root[data-theme="dark"] .pv-card.hl{background:#1d3b47;border-color:var(--sky)}
+  :root[data-theme="dark"] .pv-card.hl .pv-t{color:#ECEFF1}
+  :root[data-theme="dark"] .pv-card.hl .pv-ar{color:var(--sky)}
+</style>
+<style>
+  /* ===== v9 — Kris 2026-07-14: container reduction, plain text (msg 3059) ===== */
+  /* flatten decorative boxes to plain text; KEEP map-schema (tower/layers/branch/slice/tree),
+     details toggles, faq, quiz result, podval cards */
+
+  .keybox,.note,.note.dark,.fears,.fear,.stats,.stat,.quizcta{
+    background:none !important;border:none !important;border-left:none !important;
+    border-radius:0 !important;box-shadow:none !important;padding:0 !important}
+
+  /* readable text on the now-transparent (paper) background */
+  .note,.note.dark{color:var(--ink-soft) !important;margin-top:16px !important}
+  .note b,.note.dark b,.keybox b,.fear b,.note .big{color:var(--ink) !important}
+  .keybox p,.note .sub{color:var(--ink-soft) !important}
+  .keybox{margin-top:18px !important}
+  .keybox .cap{color:var(--mark) !important}
+  .fear{color:var(--ink) !important}
+  .fear .x{color:var(--mark) !important}
+  .stat b{color:var(--mark) !important}
+  .stat span{color:var(--ink-soft) !important}
+  .fears{margin:16px 0 !important;gap:8px !important}
+  .stats{gap:18px !important;margin-top:16px !important}
+
+  /* disclaimer note.ps — italic, smaller than body, no box */
+  .note.ps{font-style:italic !important;font-size:13px !important;
+    color:var(--ink-soft) !important;margin-top:20px !important}
+  .note.ps b{font-style:normal !important;color:var(--ink) !important}
+
+  /* quiz CTA — no container, button stays the accent */
+  .quizcta{margin-top:24px !important}
+  .quizcta .eyebrow{color:var(--ink) !important;border-color:var(--ink) !important}
+  .quizcta .btn{box-shadow:0 4px 16px rgba(43,33,28,.14) !important}
+  .quizcta .qsub{color:var(--ink-soft) !important}
+  .quizcta .qsub .u{border-bottom-color:var(--sky-deep) !important}
+
+  /* dark theme readability after flatten */
+  :root[data-theme="dark"] .note,
+  :root[data-theme="dark"] .note.dark,
+  :root[data-theme="dark"] .keybox p,
+  :root[data-theme="dark"] .note .sub,
+  :root[data-theme="dark"] .stat span,
+  :root[data-theme="dark"] .quizcta .qsub,
+  :root[data-theme="dark"] .note.ps{color:#9BA7AC !important}
+  :root[data-theme="dark"] .note b,
+  :root[data-theme="dark"] .note.dark b,
+  :root[data-theme="dark"] .keybox b,
+  :root[data-theme="dark"] .fear b,
+  :root[data-theme="dark"] .fear,
+  :root[data-theme="dark"] .note .big,
+  :root[data-theme="dark"] .note.ps b{color:#ECEFF1 !important}
+  :root[data-theme="dark"] .stat b{color:var(--sky) !important}
+  :root[data-theme="dark"] .quizcta .eyebrow{color:var(--sky) !important;border-color:var(--sky) !important}
+</style>
+<style>
+  /* ===== v10 — Kris 2026-07-14: about page, flat heads, dashed-bold, palette, leading (msg 3065) ===== */
+
+  /* section heads — no container anywhere, flat + consistent */
+  .shead{background:none !important;border:none !important;border-radius:0 !important;padding:0 !important}
+  .shead .eyebrow{margin-bottom:10px}
+  .shead h2{margin-top:4px}
+
+  /* palette lockdown — collapse blue/brown mid-tints back to base sky/ink */
+  .l3,.l2,.f3,.f2{background:var(--sky) !important;color:var(--ink) !important}
+  .l3 .cap,.l2 .cap,.f3 .cap,.f2 .cap{color:var(--mark) !important}
+  .l2 small,.f2 small,.l3 small,.f3 small{color:var(--onblue) !important}
+
+  /* inline bold in running text -> dashed underline (consistent emphasis) */
+  .prose p b,.din p b,details.dd .din p b,.tli p b,.onboard p b,.onboard li b,
+  .cases li b,.tside b,.keybox p b,.note .sub b,.floor small b,.branch small b,
+  p b,li b{
+    text-decoration:underline !important;text-decoration-style:dashed !important;
+    text-decoration-color:var(--sky-deep) !important;text-underline-offset:3px;
+    text-decoration-thickness:1px;font-weight:800}
+
+  /* onboarding links */
+  .ob-lnk{color:var(--ink);font-weight:700;text-decoration:underline;
+    text-decoration-style:dashed;text-decoration-color:var(--sky-deep);
+    text-underline-offset:3px;cursor:pointer}
+  :root[data-theme="dark"] .ob-lnk{color:#ECEFF1;text-decoration-color:var(--sky)}
+
+  /* consistent line-height for body/running text on every page */
+  .prose p,.note,.note.dark,.note.ps,.keybox p,.onboard p,.onboard li,.cases li,
+  .din p,details.dd .din p,.tli p,.trust p,.qa .a p,.layer small,.floor small,
+  .branch small,.tside,.stat span,.lede{line-height:1.55 !important}
+</style>
+<style>
+  /* ===== v11 — Kris 2026-07-14 (msg 3071): brown flat heads, brown quiz button,
+     3-variant text system, smaller podval cards, left-bar asides, close btn, bullets ===== */
+
+  /* 1. flat section heads on light: BROWN text + BROWN-bordered tag (no blue tags on light) */
+  .shead h2{color:var(--ink) !important}
+  .shead p{color:var(--ink-soft) !important}
+  .shead .eyebrow{color:var(--ink) !important;border-color:var(--ink) !important}
+  .shead.center{text-align:center}
+  .shead.center .eyebrow{display:inline-block;margin:0 auto 10px}
+  :root[data-theme="dark"] .shead h2{color:#ECEFF1 !important}
+  :root[data-theme="dark"] .shead p{color:#9BA7AC !important}
+  :root[data-theme="dark"] .shead .eyebrow{color:var(--sky) !important;border-color:var(--sky) !important}
+
+  /* 2. "Пройти опрос" — brown button + light text (was blue) */
+  .quizcta .btn{background:var(--ink) !important;color:var(--paper) !important}
+  .quizcta .btn .go{color:var(--sky) !important}
+
+  /* 3. podval cards — smaller than the main buttons */
+  .pv-card{padding:11px 15px !important}
+  .pv-card .pv-t{font-size:14px !important;font-weight:700 !important}
+  .pv-card .pv-ar{font-size:16px !important}
+
+  /* 4. TEXT EMPHASIS — one consistent 3-variant system:
+     (1) in-text bold  = blue + italic + dashed underline in text colour
+     (2) .u term       = dashed underline in text colour, no colour/weight shift
+     (3) links         = solid blue underline
+     NO brown bold in running text. */
+
+  /* variant 1 — override v10: blue italic, dashed underline follows the (blue) text colour */
+  .prose p b,.din p b,details.dd .din p b,.tli p b,.onboard p b,.onboard li b,
+  .cases li b,.keybox p b,.note b:not(.big),.note.dark b,.trust p b,.qa .a p b,
+  .tside b,.pull b,p b,li b{
+    color:var(--mark) !important;font-style:italic !important;font-weight:700 !important;
+    text-decoration:underline !important;text-decoration-style:dashed !important;
+    text-decoration-color:currentColor !important;text-underline-offset:3px !important;
+    text-decoration-thickness:1px !important}
+  :root[data-theme="dark"] .prose p b,:root[data-theme="dark"] .din p b,
+  :root[data-theme="dark"] .tli p b,:root[data-theme="dark"] .onboard p b,
+  :root[data-theme="dark"] .onboard li b,:root[data-theme="dark"] .cases li b,
+  :root[data-theme="dark"] .note b:not(.big),:root[data-theme="dark"] .note.dark b,
+  :root[data-theme="dark"] p b,:root[data-theme="dark"] li b{color:var(--sky) !important}
+
+  /* variant 2 — .u emphasized term: dashed underline in its own text colour (not blue), not bold */
+  .u{border-bottom:none !important;text-decoration:underline !important;
+    text-decoration-style:dashed !important;text-decoration-color:currentColor !important;
+    text-underline-offset:3px !important;text-decoration-thickness:1px !important;
+    color:inherit !important;font-weight:600 !important;padding-bottom:0 !important}
+
+  /* variant 3 — links: solid blue underline */
+  .nm{border-bottom:none !important;text-decoration:underline !important;
+    text-decoration-style:solid !important;text-decoration-color:var(--sky-deep) !important;
+    text-underline-offset:3px !important;text-decoration-thickness:1.5px !important;
+    color:inherit !important;font-weight:700 !important}
+  .nm:hover{text-decoration-thickness:2.5px !important}
+  .pull .nm,.note.dark .nm,.hero .nm,.branch .nm,.fear .nm,.resbox .nm,.qa .nm,
+  .ctable td .nm,.trow.rest .nm{text-decoration-color:var(--sky) !important}
+  .ob-lnk{color:var(--ink) !important;font-weight:700 !important;text-decoration:underline !important;
+    text-decoration-style:solid !important;text-decoration-color:var(--sky-deep) !important;
+    text-underline-offset:3px !important;cursor:pointer}
+  :root[data-theme="dark"] .ob-lnk{color:#ECEFF1 !important;text-decoration-color:var(--sky) !important}
+
+  /* 5. asides / short "remember"-type lines + key statements -> vertical left bar (quote-style) */
+  .note.ps,.keybox{border-left:3px solid var(--sky-deep) !important;
+    padding:2px 0 2px 16px !important;border-radius:0 !important;background:none !important;
+    margin-top:20px !important}
+  :root[data-theme="dark"] .note.ps,:root[data-theme="dark"] .keybox{
+    border-left-color:var(--sky) !important}
+  .keybox .cap{margin-bottom:6px !important}
+
+  /* 6. ✱ as the accent bullet across guide lists */
+  .onboard ul,.prose ul,.din ul{list-style:none;padding-left:0;margin-top:12px}
+  .onboard ul li,.prose ul li,.din ul li{position:relative;padding-left:24px;margin-top:9px;line-height:1.55}
+  .onboard ul li:before,.prose ul li:before,.din ul li:before{
+    content:"\2731";position:absolute;left:0;top:0;color:var(--sky-deep);font-size:13px;line-height:1.55}
+  :root[data-theme="dark"] .onboard ul li:before,:root[data-theme="dark"] .prose ul li:before,
+  :root[data-theme="dark"] .din ul li:before{color:var(--sky)}
+  .cases li:before{content:"\2731" !important}
+
+  /* 7. burger menu close button */
+  .menu-close{position:absolute;top:18px;right:20px;width:44px;height:44px;
+    border:1px solid var(--sky-deep);border-radius:10px;background:var(--ink);color:var(--sky);
+    font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
+</style>
 </head>
 <body>
 
@@ -674,6 +988,7 @@
 </div></div>
 
 <nav class="menu" id="menu">
+  <button class="menu-close" id="menuClose" aria-label="Закрыть меню">&#10005;</button>
   <div class="lbl">Гайд для тех, кто откладывал ИИ</div>
   <a data-view="home"><span class="n">&#8962;</span>Главная</a>
   <a data-view="story"><span class="n">01</span>Моя история</a>
@@ -701,39 +1016,92 @@
 </div></div>
 
 <div class="wrap"><section>
-  <div class="preface">
-    <div class="pf-top"><span class="pf-ava">К</span><div><span class="eyebrow">предисловие</span><div class="pf-name">Кристина &middot; @kris.usti</div></div></div>
-    <p>Я собрала этот гайд как ту самую карту, которой мне так не хватало на старте. Моя цель &mdash; без воды и сложных терминов провести тебя за руку <span class="u">от нуля до первого результата</span> и увлечь так, чтобы ИИ стал естественной частью твоей рутины.</p>
+  <div class="onboard">
+    <div class="ob-h">Как читать этот гайд</div>
+    <p>Это карта, а не курс. Читать подряд не нужно &mdash; заходи в блок, который отвечает на твой вопрос. А если не знаешь, с чего начать, &mdash; пройди <a class="ob-lnk" data-view="quiz">опрос</a> ниже: он подберет маршрут под тебя.</p>
+    <ul>
+      <li><b>Не знаешь, с чего начать</b> &mdash; пройди <a class="ob-lnk" data-view="quiz">опрос</a>: он подберет связку модель + инструмент + оплата под тебя.</li>
+      <li><b>Хочешь понять рынок</b> &mdash; трек <a class="ob-lnk" data-view="market">«Как устроен рынок»</a>: весь ИИ как один цифровой сотрудник.</li>
+      <li><b>Сомневаешься, что получится</b> &mdash; <a class="ob-lnk" data-view="story">«Моя история»</a>: я сама два года откладывала.</li>
+      <li><b>Застряли на непонятном слове</b> &mdash; внизу <a class="ob-lnk" data-view="gloss">«Словарь»</a> и <a class="ob-lnk" data-view="faq">«Частые вопросы»</a>.</li>
+    </ul>
   </div>
 
-  <div class="trust">
-    <span class="eyebrow">коротко обо мне</span>
-    <p><b>5+ лет</b> я работала бизнес-ассистентом топ-менеджеров (CEO, CCO, основателей) в международных компаниях &mdash; без технического образования, с дипломом журфака МГУ.</p>
-    <p>В 2025 году ушла из найма и соосновала <a class="nm" href="https://architeq.io" target="_blank" rel="noopener">Architeq</a> &mdash; IT-консалтинг, который внедряет ИИ-агентов и автоматизацию в компании США, Канады, Австралии и России. Сайт агентства полностью сделала сама: спроектировала и написала код с нуля.</p>
-    <p>Немного о том, что делают наши ИИ-агенты у клиентов: голосовой агент отвечает на заявку за <b>7 секунд</b> вместо 2&ndash;4 часов, интеграция систем сняла с бухгалтерии <b>30 часов</b> ручного ввода в неделю, а у поставщика медоборудования цикл работы с пациентом ускорился на <b>60%</b>.</p>
-    <p>Дальше в гайде &mdash; тот самый путь, который я прошла с нуля, разложенный по шагам.</p>
-  </div>
+  <div class="note ps"><b>И помни: ИИ &mdash; это не очередной хайп, а новая реальность.</b> Начни управлять технологией, пока человек с этим навыком не заменил тебя. Это сможет каждый &mdash; на любой позиции и с любым уровнем ответственности.</div>
 
-  <div class="quizcta" style="margin-top:24px">
-    <span class="eyebrow">начни отсюда</span>
-    <p>Шесть коротких вопросов &mdash; и на выходе связка <span class="u">модель + инструмент + способ оплаты</span> под твою ситуацию.</p>
+  <div class="quizcta">
+    <span class="eyebrow">начни отсюда &middot; опрос</span>
     <button class="btn block" data-view="quiz">Пройти опрос: с чего начать именно мне <span class="go">&rarr;</span></button>
+    <p class="qsub">Шесть коротких вопросов &mdash; и на выходе связка <span class="u">модель + инструмент + способ оплаты</span> под твою ситуацию.</p>
   </div>
 
-  <div class="shead" style="margin-top:32px"><span class="eyebrow">треки гайда</span><h2>Выбери свой маршрут</h2>
-    <p>Читать все подряд не нужно. Заходи в тот блок, который отвечает на твой вопрос, &mdash; каждый живет отдельно.</p></div>
+  <div class="shead center" style="margin-top:32px"><span class="eyebrow">&#10033; треки гайда</span><h2>Выбери свой маршрут</h2></div>
 
   <div class="navlist">
-    <button class="navitem" data-view="story"><div><b>Моя история</b><small>как я два года откладывала ИИ и что меня переломило</small></div><span class="go">&rarr;</span></button>
+    <button class="navitem" data-view="story"><div><b>Моя история</b><small>как я два года откладывала ИИ и что стало стимулом перемен</small></div><span class="go">&rarr;</span></button>
     <button class="navitem" data-view="market"><div><b>Как устроен рынок</b><small>весь ИИ &mdash; один цифровой сотрудник: мозг, руки, энергия</small></div><span class="go">&rarr;</span></button>
     <button class="navitem" data-view="mindset"><div><b>Мышление AI-First</b><small>почему сборники промптов не работают и что работает</small></div><span class="go">&rarr;</span></button>
     <a class="navitem deep" href="https://ussti.github.io/kris-claude-guide/" target="_blank" rel="noopener"><div><b>Регистрация и оплата из России</b><small>пошаговая инструкция: аккаунт, VPN, подписка без зарубежной карты</small></div><span class="go">&rarr;</span></a>
-    <button class="navitem" data-view="faq"><div><b>Частые вопросы</b><small>короткие ответы: харнесы, модели, «почему не китайские»</small></div><span class="go">&rarr;</span></button>
-    <button class="navitem" data-view="gloss"><div><b>Словарь терминов</b><small>все непонятные слова &mdash; простым языком</small></div><span class="go">&rarr;</span></button>
-    <button class="navitem" data-view="about"><div><b>Обо мне</b><small>кто я и почему мне можно доверять</small></div><span class="go">&rarr;</span></button>
+  </div>
+
+  <div class="podval">
+    <span class="pv-h">Еще в гайде</span>
+    <div class="pv-grid">
+      <button class="pv-card" data-view="faq"><span class="pv-t">Частые вопросы</span><span class="pv-ar">&rarr;</span></button>
+      <button class="pv-card" data-view="gloss"><span class="pv-t">Словарь терминов</span><span class="pv-ar">&rarr;</span></button>
+      <button class="pv-card" data-view="about"><span class="pv-t">Обо мне</span><span class="pv-ar">&rarr;</span></button>
+    </div>
   </div>
 </section></div>
 </div><!-- /v-home -->
+
+<!-- ======================= VIEW: ABOUT ======================= -->
+<div class="view" id="v-about" data-title="обо мне">
+<div class="wrap"><section>
+  <div class="preface" style="margin-top:8px">
+    <div class="pf-top"><span class="pf-ava">фото<br>сюда</span>
+      <div><span class="eyebrow">обо мне</span>
+        <div class="pf-name">Кристина</div>
+        <div class="pf-btns">
+          <a class="pf-btn" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал</a>
+          <a class="pf-btn alt" href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">@kris.usti</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">0</span>кто я</span>
+      <span class="pf-h">5 лет рядом с топ-менеджментом</span>
+      <p>Бизнес-ассистент топ-менеджмента (CCO, CEO, COO) международных компаний. На этом фундаменте строю все, что делаю сейчас.</p></div>
+
+    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">1</span>разворот 2025</span>
+      <span class="pf-h">Сместила фокус на ИИ</span>
+      <p>Ушла в IT-консалтинг: внедряем ИИ-агентов и автоматизации для компаний из США, Канады, Австралии, делаем мобильные приложения. И все это &mdash; с ИИ.</p></div>
+
+    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">2</span>почему я понимаю</span>
+      <span class="pf-h">Я прошла тот же путь, что и ты</span>
+      <p>От избегания ИИ до ежедневной работы с агентами. Знаю, как убрать сопротивление и с чего начать именно тебе.</p></div>
+
+    <div class="pf-block">
+      <div class="pull pf-mission"><u>Моя миссия</u> &mdash; убедить тебя, что ты справишься. Сделаю все, чтобы ты начал и загорелся ИИ так же, как когда-то я, &mdash; и это буквально изменило мою жизнь.</div></div>
+
+    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">3</span>что тут</span>
+      <span class="pf-h">О чем этот материал</span>
+      <p>Та самая карта, которой мне не хватало на старте: разберем рынок по полочкам и определим, с чего начать именно тебе. Буду рада обратной связи.</p></div>
+
+    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">4</span>что уже сделано</span>
+      <span class="pf-h">Не теория &mdash; рабочие проекты</span>
+      <p>Сайт агентства <a class="nm" href="https://architeq.io" target="_blank" rel="noopener">Architeq</a> спроектировала и написала с нуля сама. Что уже собрали:</p>
+      <ul class="cases">
+        <li><a class="nm" href="https://architeq.io/cases/ai-crm-agent" target="_blank" rel="noopener">ИИ-агент для CRM</a> &mdash; обрабатывает заявки без ручного ввода</li>
+        <li><a class="nm" href="https://architeq.io/cases/sqla-visitor-management" target="_blank" rel="noopener">Self-service регистрация посетителей</a> &mdash; check-in без администратора</li>
+        <li><a class="nm" href="https://architeq.io/cases/monday-integration" target="_blank" rel="noopener">Интеграция систем на базе Monday</a></li>
+        <li><a class="nm" href="https://architeq.io/solutions/mobile/freeparking" target="_blank" rel="noopener">FreeParking</a> &mdash; мобильное приложение</li>
+        <li><a class="nm" href="https://architeq.io/solutions/mobile/pikup-app" target="_blank" rel="noopener">PikUp</a> &mdash; мобильное приложение</li>
+      </ul>
+      <p>В цифрах: голосовой агент отвечает за <b>7 секунд</b> вместо 2&ndash;4 часов, интеграция сняла с бухгалтерии <b>30 часов</b> ручного ввода в неделю, цикл работы с пациентом ускорился на <b>60%</b>.</p></div>
+  </div>
+</section></div>
+</div><!-- /v-about -->
 
 <!-- ======================= VIEW: STORY ======================= -->
 <div class="view" id="v-story" data-title="моя история">
@@ -744,33 +1112,33 @@
   <div class="tl">
     <div class="tli"><span class="tk">2023</span><b>Первая попытка &mdash; и разочарование</b>
       <p>IT-стартап, «пора внедрять». Две недели проб, вечные лимиты &mdash; забила еще на два года.</p>
-      <details class="dd"><summary>подробнее</summary><div class="din">
+      <details class="dd"><summary>как две недели проб отбили охоту на два года</summary><div class="din">
         <p>Признаюсь честно: я сама избегала и откладывала ИИ до последнего. Еще в 2023 году, когда я на четвертом курсе работала в IT-стартапе, мне закидывали удочки: пора внедрять. Я попробовала. Две недели проб и ошибок, <span class="u">вечные лимиты, которые не дают дойти до результата</span>, а оплачивать каждую попытку я тогда не могла. В итоге разочаровалась и забила на это еще на два года.</p>
       </div></details>
     </div>
     <div class="tli"><span class="tk">2023&ndash;2025</span><b>Бесплатный ChatGPT вместо поисковика и жуткое FOMO</b>
       <p>Плоские ответы, хаос из терминов и чужих подборок с промптами. Казалось, что со мной что-то не так.</p>
-      <details class="dd"><summary>подробнее</summary><div class="din">
+      <details class="dd"><summary>почему казалось, что со мной что-то не так</summary><div class="din">
         <p>Все это время я использовала бесплатный ChatGPT просто вместо поисковика и <span class="u">ловила жуткое FOMO</span>. Казалось, что все вокруг давно в теме, а я вообще не понимаю прикола. ИИ выдавал мне плоские ответы в каком-то заискивающем тоне. Я постоянно их переписывала и в итоге решала, что мне проще и быстрее все сделать самой.</p>
         <p>Вокруг мелькали непонятные термины и названия: <a class="nm" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity</a>, <a class="nm" href="https://www.midjourney.com" target="_blank" rel="noopener">MidJourney</a>, <a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, <a class="nm" href="https://openai.com/codex" target="_blank" rel="noopener">Codex</a>, <a class="nm" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a>, <a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>. Как сказал один мой знакомый, появилось «100500 продуктов от ChatGPT». Я сохраняла все подряд, но даже не открывала эти подборки с промптами: они казались дешевыми «волшебными таблетками». Знания копились обрывками: сегодня чей-то секретный совет, завтра новый тренд, а в голове <span class="u">хаос, который никак не складывался в систему</span>. Я каждый раз будто начинала с нуля и не могла найти примеры того, как применить это конкретно к моей рутине и моим задачам. Казалось, что со мной что-то не так.</p>
       </div></details>
     </div>
     <div class="tli"><span class="tk">перелом</span><b>Никто не придет и не научит</b>
       <p>После ухода из найма стало ясно: надо копать самой. А информации для старта на рынке просто не было.</p>
-      <details class="dd"><summary>подробнее</summary><div class="din">
+      <details class="dd"><summary>чего мне не хватало на рынке</summary><div class="din">
         <p>На рынке просто не было информации для старта. Авторы либо лили воду без результатов, либо это были разработчики, которые сыпали сложными терминами. Профи показывали крутые результаты, но сразу предупреждали: «Это не для новичков». Людей, которые реально понимают, как все устроено, и готовы делиться этим системно, единицы. Обычно они сидят за кадром и тихо пилят свои продукты. А мне нужна была <span class="u">просто структура</span>: чтобы на пальцах объяснили базу, от большего к меньшему, чтобы я научилась <span class="u">отсеивать шум</span> и брать только то, что нужно.</p>
       </div></details>
     </div>
     <div class="tli"><span class="tk">первый проект</span><b>Сделала все сама, в связке с ИИ, &mdash; хотя кода до этого в глаза не видела</b>
       <p>Было сложно, получалось с пятнадцатой попытки. Но меня затянуло.</p>
-      <details class="dd"><summary>подробнее</summary><div class="din">
-        <p>Сдвиг случился, когда мой молодой человек убедил меня взять его проект и сделать все с помощью ИИ, вообще без знаний кода. Год назад для этого еще нужно было подключать нейросети к терминалу и работать в интерфейсе, от которого у новичка дергается глаз. Он стал моим проводником.</p>
-        <p>Было сложно. Жутко бесило. Получалось с пятнадцатой попытки. Но знаете что? Меня затянуло. Свой первый проект я <span class="u">полностью написала сама, работая в связке с ИИ</span>, хотя до этого в глаза не видела кода.</p>
+      <details class="dd"><summary>как я собрала первый проект без строчки кода</summary><div class="din">
+        <p>Сдвиг случился, когда мой молодой человек убедил меня взять его проект и сделать все с помощью ИИ, вообще без знания кода. Год назад для этого еще нужно было подключать нейросети к терминалу и работать в интерфейсе, от которого у новичка дергается глаз. Молодой человек стал моим проводником.</p>
+        <p>Было сложно, жутко бесило, получалось с пятнадцатой попытки. Но знаете что? Меня затянуло. Свой первый проект я <span class="u">полностью написала сама, работая в связке с ИИ</span>, хотя до этого в глаза не видела кода.</p>
       </div></details>
     </div>
   </div>
 
-  <div class="pull">Я все надеялась, что понимание как-то само придет в мою жизнь. Но после ухода из найма стало ясно: никто не придет и не научит. Надо копать самой.</div>
+  <div class="pull">Я все надеялась, что понимание появится само собой. Но после ухода из найма стало ясно: никто не придет и не научит. Надо копать самой.</div>
 
   <div class="keybox">
     <span class="cap">и самое главное</span>
@@ -787,15 +1155,15 @@
     <div class="fear"><span class="x">&#10007;</span>«В моей сфере это точно не применить»</div>
   </div>
 
-  <div class="note"><b>Но давай начистоту: все эти страхи &mdash; навязанные стереотипы.</b> Освоить ИИ сегодня &mdash; это как в свое время освоить компьютер или интернет. Это закрывает задачи в абсолютно любой индустрии и на любой позиции.</div>
+  <div class="note"><b>Но давай начистоту: все эти страхи &mdash; навязанные стереотипы.</b> Освоить ИИ сегодня &mdash; это как в свое время освоить компьютер или интернет. ИИ закрывает задачи в абсолютно любой индустрии и на любой позиции.</div>
 
   <details class="dd"><summary>что стоит за этими страхами</summary><div class="din">
-    <p>Есть огромный пласт людей, которые даже боятся открыть чат с нейросетью. Страшно попробовать и признаться себе, что ты сильно отстала. Мы сидим и ждем, что появится время, силы или придет кто-то и сделает все за нас. Но <span class="u">этого момента не наступит никогда</span>. Чтобы начать, нужен стимул.</p>
+    <p>Есть огромный пласт людей, которые даже боятся открыть чат с нейросетью. Страшно попробовать и признаться себе в сильном отставании. Мы сидим и ждем, что появятся время и силы или придет кто-то и сделает все за нас. Но <span class="u">этого момента не наступит никогда</span>. Чтобы начать, нужен стимул.</p>
     <p>Людей останавливает бытовуха: рутина съедает весь день, вечером нет сил, и кажется, что освоение ИИ &mdash; это огромная, тяжелая задача, на которую просто нет ресурса.</p>
     <p>К этому добавляется <span class="u">перфекционизм и страх ошибки</span>. Кажется, что если начнешь и сделаешь что-то не так, разочаруешься в себе еще больше. Поэтому проще сказать «это не мое» и даже не пробовать. А информационный шум вокруг только давит: нейросетей так много, что непонятно, за что вообще хвататься.</p>
   </div></details>
 
-  <div class="pull">Моя миссия сейчас &mdash; стать тем самым проводником, которого мне так не хватало на старте.</div>
+  <div class="pull"><u>Моя миссия</u> сейчас &mdash; стать тем самым проводником, которого мне так не хватало на старте.</div>
 
   <div class="keybox">
     <span class="cap">главное, что стоит усвоить</span>
@@ -816,7 +1184,7 @@
   <div class="note"><b class="big">Весь рынок ИИ &mdash; это не хаос, а один цифровой сотрудник.</b>
     <p class="sub">Собери его из трех частей: <span class="gi">мозг</span> &mdash; это сама модель; <span class="gi">руки и рабочее место</span> &mdash; харнес вокруг нее; <span class="gi">энергия</span>, которая все это питает, &mdash; железо и вычисления. Разберем каждую часть снизу вверх.</p></div>
 
-  <div class="note"><b>Почему новинки каждую неделю.</b> Модели вышли на уровень, когда могут генерировать синтетические данные и <span class="u">учить сами себя</span>: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. <span class="u">Гнаться за каждым релизом не нужно</span>.</div>
+  <div class="note"><b>Почему новинки выходят каждую неделю:</b> модели вышли на уровень, когда могут генерировать синтетические данные и <span class="u">учить сами себя</span>: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. <span class="u">Гнаться за каждым релизом не нужно</span>.</div>
 
   <!-- ГЕРОЙ: башня-воронка -->
   <div class="tower">
@@ -843,9 +1211,11 @@
     <div class="stat"><b>$2,5 трлн</b><span>мир потратит на ИИ-инфраструктуру за год<a class="fn" id="r3" href="#f3">3</a></span></div>
   </div>
 
-  <!-- часть 1: энергия -->
-  <div class="shead" style="margin-top:32px"><span class="eyebrow">часть 1 &middot; энергия</span><h2>Железо и вычисления</h2>
-    <p>На этом держится вообще все: физические серверы, чипы и дата-центры, на которых нейросети обучаются и работают.</p></div>
+  <p class="prose" style="margin-top:8px">Дальше &mdash; три слоя этой системы: энергия, мозг и руки. Разбирать все подряд не нужно &mdash; открывай тот слой, который интересен.</p>
+
+  <!-- слой 1: энергия -->
+  <details class="dd" style="margin-top:16px"><summary>слой 1 &middot; энергия &mdash; железо и вычисления</summary><div class="din">
+    <p>На этом держится вообще все: физические серверы, чипы и дата-центры, на которых нейросети обучаются и работают.</p>
 
   <div class="ckl">
     <div class="ck"><span class="m">1</span><span>Здесь правит <a class="nm" href="https://www.nvidia.com" target="_blank" rel="noopener">Nvidia</a> &mdash; <span class="u">самая дорогая компания в мире</span>; весь рынок железа оценивается в $5 трлн<a class="fn" href="#f1">1</a></span></div>
@@ -853,14 +1223,15 @@
     <div class="ck"><span class="m">3</span><span>Поэтому <span class="u">самые умные модели не бесплатны</span> &mdash; но для тебя все уже упаковано в подписку</span></div>
   </div>
 
-  <details class="dd"><summary>подробнее: цифры и игроки</summary><div class="din">
+  <details class="dd"><summary>сколько это стоит на самом деле</summary><div class="din">
     <p>Чипы стоят безумных денег: серверные связки B200 обходятся в сотни тысяч долларов. Инференс &mdash; это когда модель физически «думает» над твоей задачей. Относись к нему как к электричеству: спрос на этот «ток» настолько огромный, что рынок инференса в 2026 пробил $100+ млрд,<a class="fn" href="#f2">2</a> и появляются отдельные компании (вроде стартапа <a class="nm" href="https://www.etched.com" target="_blank" rel="noopener">Etched</a> с оценкой $5 млрд), которые делают железо исключительно под «думанье» ИИ.</p>
     <p>Только в этом году мир потратит на ИИ-инфраструктуру около 2,5 триллиона долларов.<a class="fn" href="#f3">3</a> За размышления умных моделей кто-то должен платить электричеством &mdash; но лезть в это железо тебе не нужно.</p>
   </div></details>
+  </div></details>
 
-  <!-- часть 2: мозг -->
-  <div class="shead" style="margin-top:32px"><span class="eyebrow">часть 2 &middot; мозг</span><h2>Сами модели</h2>
-    <p>Модель &mdash; это <em>чистый интеллект</em>. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p></div>
+  <!-- слой 2: мозг -->
+  <details class="dd" style="margin-top:12px"><summary>слой 2 &middot; мозг &mdash; сами модели</summary><div class="din">
+    <p>Модель &mdash; это <em>чистый интеллект</em>. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p>
   <div class="prose">
     <p>Здесь идет жесточайшая война корпораций. Обучение передовой модели с нуля стоит <span class="u">от 50 до 500 миллионов долларов</span>, а с учетом исследований затраты доходят до миллиардов.<a class="fn" id="r4" href="#f4">4</a> Игроков немного, и их легко расставить <span class="u">по трем полкам</span>.</p>
   </div>
@@ -894,10 +1265,11 @@
     </tr>
   </table></div>
   <div class="note dark"><b>Про «бесплатные» китайские модели.</b> Сама модель может быть бесплатной (open-source), но чтобы она заработала на тебя, нужно <span class="u">купить сервер за десятки тысяч долларов</span>. Поэтому для обычного пользователя это не вариант для старта. Твой старт &mdash; фронтир: у него самые умные модели и все уже упаковано в подписку.</div>
+  </div></details>
 
-  <!-- часть 3: руки и рабочее место -->
-  <div class="shead" style="margin-top:32px"><span class="eyebrow">часть 3 &middot; руки и рабочее место</span><h2>Харнесы и оболочки</h2>
-    <p>Мозг у нас уже есть &mdash; гениальный, но голый и без инструментов. Чтобы он начал приносить пользу, ему нужна оболочка &mdash; харнес (harness).</p></div>
+  <!-- слой 3: руки и рабочее место -->
+  <details class="dd" style="margin-top:12px"><summary>слой 3 &middot; руки &mdash; харнесы и оболочки</summary><div class="din">
+    <p>Мозг у нас уже есть &mdash; гениальный, но голый и без инструментов. Чтобы он начал приносить пользу, ему нужна оболочка &mdash; харнес (harness).</p>
   <div class="keybox">
     <span class="cap">твой рабочий сетап</span>
     <b>Сильный подрядчик плюс хороший офис</b>
@@ -911,17 +1283,19 @@
     <div class="branch"><span class="cap">контекст и ограничения</span><b>Правила</b><small>форматы и должностные инструкции (промпты)</small></div>
     <div class="branch"><span class="cap">навыки</span><b>Скрипты</b><small>готовый код и сценарии, чтобы модель запускала процессы сама</small></div>
   </div>
+  </div></details>
 
   <!-- FOOTNOTES -->
-  <div class="fnbox">
-    <h4>Сноски &middot; о числах</h4>
-    <ol>
-      <li id="f1">Рынок ИИ-железа и капитализация Nvidia &mdash; порядок величины по рыночным оценкам 2026 года. Цифры показывают масштаб, а не точную сумму. <a href="#r1" class="fn">&#8617;</a></li>
-      <li id="f2">Объем рынка инференса в 2026 &mdash; оценка отрасли, порядок $100+ млрд. <a href="#r2" class="fn">&#8617;</a></li>
-      <li id="f3">Совокупные траты мира на ИИ-инфраструктуру за год &mdash; рыночная оценка 2026, порядок $2,5 трлн. <a href="#r3" class="fn">&#8617;</a></li>
-      <li id="f4">Стоимость обучения передовой модели &mdash; диапазон отраслевых оценок ($50&ndash;500 млн без учета исследований). <a href="#r4" class="fn">&#8617;</a></li>
-    </ol>
-  </div>
+  <details class="dd" id="fndd"><summary>откуда взяты эти цифры</summary><div class="din">
+    <div class="fnbox">
+      <ol>
+        <li id="f1">Рынок ИИ-железа и капитализация Nvidia &mdash; порядок величины по рыночным оценкам 2026 года. Цифры показывают масштаб, а не точную сумму. <a href="#r1" class="fn">&#8617;</a></li>
+        <li id="f2">Объем рынка инференса в 2026 &mdash; оценка отрасли, порядок $100+ млрд. <a href="#r2" class="fn">&#8617;</a></li>
+        <li id="f3">Совокупные траты мира на ИИ-инфраструктуру за год &mdash; рыночная оценка 2026, порядок $2,5 трлн. <a href="#r3" class="fn">&#8617;</a></li>
+        <li id="f4">Стоимость обучения передовой модели &mdash; диапазон отраслевых оценок ($50&ndash;500 млн без учета исследований). <a href="#r4" class="fn">&#8617;</a></li>
+      </ol>
+    </div>
+  </div></details>
 
   <div style="margin-top:16px"><button class="btn block sky" data-view="mindset">Дальше: мышление AI-First <span class="go">&rarr;</span></button></div>
 </section></div>
@@ -953,16 +1327,16 @@
     <div class="ck"><span class="m">&#10003;</span><span>Дофамин приходит не от чужой ленты, а <span class="u">от созидания</span> &mdash; ты собираешь свое</span></div>
   </div>
 
-  <details class="dd"><summary>подробнее: человек-мультифункционал</summary><div class="din">
+  <details class="dd"><summary>почему узких специалистов больше нет</summary><div class="din">
     <p>Раньше мы сами загоняли себя в рамки и ставили себе границы, но теперь этот ограничивающий ярлык «я всего лишь узкий специалист в чем-то одном» пропадает. ИИ радикально снижает барьеры и сокращает циклы работы: сегодня можно участвовать в нескольких проектах одновременно.</p>
-    <p>Я хочу показать тебе, какой это увлекательный путь &mdash; быть энтузиастом. Не категоризировать себя, а быть <span class="u">человеком-мультифункционалом</span>. Быть вовлеченным в жизнь, в инновации, в проектирование. В этот момент происходит магия: привычка залипать в чужую ленту сменяется азартом собирать что-то свое.</p>
+    <p>Я хочу показать тебе, какой это увлекательный путь &mdash; быть энтузиастом, не категоризировать себя, а быть <span class="u">человеком-мультифункционалом</span>, вовлеченным в жизнь, в инновации, в проектирование. В этот момент происходит магия: привычка залипать в чужую ленту сменяется азартом собирать что-то свое.</p>
     <p>Дискурс вокруг ИИ сильно поляризован: одни кричат, что он лишит нас самостоятельности, другие мечтают о безусловном базовом доходе. Обе крайности вредны. ИИ &mdash; это все еще инструмент, ориентированный на человека, и <span class="u">управляешь им ты</span>. Усилив одного человека, мы потенциально увеличиваем число новых проектов и расширяем возможности целых бизнесов.</p>
   </div></details>
 
   <div class="keybox" style="margin-top:16px">
     <span class="cap">зачем это тебе</span>
     <b>Овладение ИИ &mdash; это не просто строчка в резюме, а всеобъемлющий навык, который делает жизнь свободнее</b>
-    <p>У тебя <span class="u">схлопывается рутина, освобождается время</span> и растет уверенность в своем будущем на рынке. И самое главное &mdash; появляется ресурс, финансовый и временной, на то, чтобы осуществлять те мечты и достигать тех целей, которые ты так давно откладывала. Главное &mdash; проявить любопытство и начать.</p>
+    <p>У тебя <span class="u">схлопывается рутина, освобождается время</span> и растет уверенность в своем будущем на рынке. И самое главное &mdash; появляется ресурс, финансовый и временной, на то, чтобы осуществлять те мечты и достигать тех целей, которые ты так давно откладываешь. Главное &mdash; проявить любопытство и начать.</p>
   </div>
 
   <div style="margin-top:16px"><button class="btn block sky" data-view="quiz">Подобрать мой трек <span class="go">&rarr;</span></button></div>
@@ -996,7 +1370,7 @@
 <div class="wrap"><section>
   <div class="shead"><span class="eyebrow">справка</span><h2>Частые вопросы</h2></div>
   <div class="faq">
-    <div class="qa"><div class="q">Почему каждую неделю новый «лучший ИИ»?<span class="pm">+</span></div><div class="a"><p>Модели научились готовить себе синтетические данные и учиться на них сами, поэтому циклы развития сжались с лет до месяцев. Гнаться за каждым релизом не нужно: пойми структуру рынка один раз &mdash; и любая новость встанет на свою полку.</p></div></div>
+    <div class="qa"><div class="q">Почему каждую неделю новый «лучший ИИ»?<span class="pm">+</span></div><div class="a"><p>Модели научились готовить себе синтетические данные и учиться на них сами, поэтому циклы развития сжались с нескольких лет до месяцев. Гнаться за каждым релизом не нужно: пойми структуру рынка один раз &mdash; и любая новость встанет на свою полку.</p></div></div>
     <div class="qa"><div class="q">Компания, приложение, модель &mdash; в чем разница?<span class="pm">+</span></div><div class="a"><p>Как с телефоном: компания &mdash; Apple, продукт в руках &mdash; iPhone, система внутри &mdash; iOS. В ИИ так же: OpenAI (компания) выпускает ChatGPT (приложение), а внутри крутится модель GPT. Название чата и название «мозга» &mdash; разные вещи.</p></div></div>
     <div class="qa"><div class="q">Что такое харнес и зачем он мне?<span class="pm">+</span></div><div class="a"><p>Это рабочее место для модели: инструменты (интернет, почта, календарь), правила и готовые скрипты. Модель думает, харнес действует. Именно связка «модель + харнес» дает ту производительность, о которой все говорят.</p></div></div>
     <div class="qa"><div class="q">С какой модели начать новичку?<span class="pm">+</span></div><div class="a"><p>С фронтира: OpenAI, Anthropic или Google. У них самые умные модели и самые удобные приложения &mdash; ничего настраивать не нужно. Опрос выше подберет конкретную связку под твою задачу.</p></div></div>
@@ -1006,24 +1380,6 @@
   </div>
 </section></div>
 </div><!-- /v-faq -->
-
-<!-- ======================= VIEW: ABOUT ======================= -->
-<div class="view" id="v-about" data-title="обо мне">
-<div class="wrap"><section>
-  <div class="cta">
-    <span class="eyebrow">обо мне</span>
-    <div class="mecard" style="margin-top:8px">
-      <img class="mephoto" id="mephoto" src="kris.jpg" alt="Кристина">
-
-      <h3 style="align-self:center">Кристина<br>@kris.usti</h3>
-    </div>
-    <p style="margin-top:16px">За плечами &mdash; журфак МГУ, годы ассистентом у руководителей международных компаний и собственный IT-консалтинг <a class="nm" href="https://architeq.io" target="_blank" rel="noopener">Architeq</a>, где я внедряю ИИ-агентов в реальные бизнес-процессы. Работе с ИИ училась у первоисточника &mdash; на курсах Anthropic Academy (Claude, агенты, промптинг).</p>
-    <p style="margin-top:8px">Этот тернистый путь я прошла сама, учась на ошибках и синтезируя тонны информации с рынка, чтобы понять, что реально работает. Теперь моя миссия &mdash; быть тем проводником, которого мне не хватало, и помогать обычным людям встроить ИИ в работу и жизнь.</p>
-    <a class="btn block" href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">Instagram &mdash; @kris.usti <span class="go">&rarr;</span></a>
-    <div style="margin-top:8px"><a class="btn ghost block" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал <span class="go">&rarr;</span></a></div>
-  </div>
-</section></div>
-</div><!-- /v-about -->
 
 <!-- ======================= VIEW: GLOSSARY ======================= -->
 <div class="view" id="v-gloss" data-title="словарь">
@@ -1057,13 +1413,14 @@
 </section></div>
 </div><!-- /v-gloss -->
 
-<div class="wrap"><div class="foot">AI-First &middot; гайд для тех, кто откладывал ИИ &middot; @kris.usti</div></div>
+<div class="wrap"><div class="foot">AI-First &middot; гайд для тех, кто откладывал ИИ &middot; <a href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">@kris.usti</a></div></div>
 
 <script>
   /* burger */
   var menu=document.getElementById('menu'), burger=document.getElementById('burger');
   function closeMenu(){menu.classList.remove('open');burger.classList.remove('x')}
   burger.addEventListener('click',function(){menu.classList.toggle('open');burger.classList.toggle('x')});
+  document.getElementById('menuClose').addEventListener('click',closeMenu);
 
   /* ---- view router: hub-first navigation ---- */
   var crumb=document.getElementById('crumb'), ccur=document.getElementById('ccur');
@@ -1094,7 +1451,11 @@
       var qa=q.parentElement; qa.classList.toggle('open');
       var a=qa.querySelector('.a');
       a.style.maxHeight = qa.classList.contains('open') ? a.scrollHeight+'px' : 0;
+      return;
     }
+    /* footnote ref -> auto-open the collapsed footnotes toggle before jumping */
+    var fnref=e.target.closest('a.fn[href^="#f"]');
+    if(fnref){ var fndd=document.getElementById('fndd'); if(fndd) fndd.open=true; }
   });
 
   /* ---- QUIZ: diagnostic -> track + tool + mode + access path ---- */
@@ -1103,16 +1464,16 @@
      opts:[{t:'Да',v:'ru'},{t:'Нет / за рубежом',v:'other'}]},
     {key:'card', q:'Есть карта или способ платить за рубежом?',
      opts:[{t:'Да, есть',v:'yes'},{t:'Нет',v:'no'},{t:'Пока не знаю',v:'unknown'}]},
-    {key:'exp', q:'Что уже пробовала в ИИ?',
+    {key:'exp', q:'Какой у тебя опыт с ИИ?',
      opts:[
        {t:'Только ChatGPT или ничего',s:'совсем новичок',v:'chat'},
        {t:'Пробовала разные нейросети',s:'но неглубоко',v:'some'},
        {t:'Уже кодила или ставила агентов',s:'есть опыт',v:'dev'}]},
-    {key:'term', q:'Готова разобраться с терминалом?',
+    {key:'term', q:'Хочешь разобраться с терминалом?',
      opts:[
        {t:'Нет, хочу по-простому',s:'готовое приложение',v:'no'},
-       {t:'Да, готова зайти глубже',s:'терминал не пугает',v:'yes'}]},
-    {key:'setup', q:'Готова повозиться с настройкой аккаунта ради лучшего инструмента?',
+       {t:'Да, хочу глубже',s:'терминал не пугает',v:'yes'}]},
+    {key:'setup', q:'Возьмешься за настройку аккаунта ради инструмента посильнее?',
      opts:[
        {t:'Да, доведу до конца',s:'сложные шаги не пугают',v:'yes'},
        {t:'Хочу минимум шагов',s:'самый простой путь',v:'min'}]},
@@ -1140,7 +1501,7 @@
     else if(a.card==='yes') access='Зарубежная / криптокарта + VPN';
     else access='Через агрегатор за рубли + VPN';
     var why = 'Под твою задачу и опыт беру '+track+'. '
-      + (deep?'Ты готова в терминал — даю инструмент помощнее. ':'Даю простой вход без терминала. ')
+      + (deep?'Ты хочешь глубже — даю инструмент помощнее. ':'Даю простой вход без терминала. ')
       + (a.geo==='ru'?'Путь оплаты подобран под Россию.':'Ты за рубежом — оплата напрямую, без обходных путей.');
     var step;
     if(track==='Anthropic' && a.geo==='ru')
