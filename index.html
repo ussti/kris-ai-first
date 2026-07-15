@@ -15,16 +15,17 @@
    ========================================================================== */
 
   :root{
-    /* surfaces */
-    --paper:#EDEBE4; --paper-2:#F5F3EC; --card:#FBFAF6;
-    /* ink + text */
-    --ink:#2B211C; --ink-soft:#6B5D52; --line:#DBD6C9;
+    /* surfaces — neutral, no brown */
+    --paper:#ECECEA; --paper-2:#F4F4F2; --card:#FAFAF9;
+    /* ink + text — neutral charcoal / grey (de-browned) */
+    --ink:#242424; --ink-soft:#6E6E6E; --line:#DCDCD9;
     /* accent (the one bold colour) */
     --sky:#A6DCEC; --sky-deep:#6FB9D6; --mark:#3E88A6;
-    --hi:rgba(111,185,214,.42);      /* highlighter wash for key terms */
     /* text-on-container */
-    --on-dark:#E7E1D7; --on-dark-soft:#B9B0A4;
+    --on-dark:#E6E6E4; --on-dark-soft:#B6B6B4;
     --r:16px;
+    /* six-ray star (Kris's reference): thin asterisk, inherits colour via mask */
+    --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg stroke='%23000' stroke-width='2.3' stroke-linecap='round'%3E%3Cline x1='12' y1='3' x2='12' y2='21'/%3E%3Cline x1='4.21' y1='7.5' x2='19.79' y2='16.5'/%3E%3Cline x1='4.21' y1='16.5' x2='19.79' y2='7.5'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -43,20 +44,23 @@
   h2{font-size:24px}
   h3{font-size:17px}
 
-  /* ---- accent language: one highlight, quiet everywhere else ----
+  /* ---- accent language: underline only, quiet everywhere else ----
      · running-text <b>  = weight only, full-ink (strong, no noise)
-     · .u key term       = sky highlighter wash — the ONE loud accent
+     · .u key term       = solid sky underline — the accent device
      · .nm link          = solid sky underline
      · .ph               = plain neutral text                        */
   b,strong{font-weight:700;color:inherit}
-  .u{background:linear-gradient(transparent 58%,var(--hi) 58%);
-     padding:0 2px;font-weight:600;color:inherit}
+  .u{text-decoration:none;border-bottom:2px solid var(--sky-deep);padding-bottom:1px;
+     font-weight:600;color:inherit}
   .nm{color:inherit;font-weight:600;text-decoration:none;
      border-bottom:2px solid var(--sky-deep);padding-bottom:1px}
   .nm:hover{border-bottom-width:3px}
   .ph{color:inherit;font-style:normal}
   .mk,.mkw{color:var(--mark);font-weight:700}
   em,i{font-style:italic}
+  /* inline six-ray star, inherits text colour */
+  .star{display:inline-block;width:.82em;height:.82em;vertical-align:-1px;background:currentColor;
+    -webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
 
   /* eyebrow chip — small mono-caps pill, dashed, ink on light */
   .eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;
@@ -64,7 +68,7 @@
     border-radius:30px;padding:4px 12px;line-height:1}
 
   /* ========================= TOP BAR + MENU ========================= */
-  .topbar{position:sticky;top:0;z-index:50;background:rgba(237,235,228,.92);
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(236,236,234,.92);
     backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .topbar .in{max-width:600px;margin:0 auto;padding:12px 24px;
     display:flex;align-items:center;justify-content:space-between}
@@ -95,7 +99,7 @@
 
   /* breadcrumbs */
   .crumbbar{position:sticky;top:63px;z-index:45;display:none;align-items:center;gap:10px;
-    max-width:600px;margin:0 auto;padding:9px 24px;background:rgba(237,235,228,.92);
+    max-width:600px;margin:0 auto;padding:9px 24px;background:rgba(236,236,234,.92);
     backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .crumbbar.on{display:flex}
   .cback{border:none;background:none;font-size:24px;color:var(--mark);cursor:pointer;
@@ -143,8 +147,8 @@
   .onboard .ob-h{font-weight:800;font-size:17px;line-height:1.28}
   .onboard ul{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:14px}
   .onboard li{position:relative;padding-left:26px;font-size:15px;line-height:1.5}
-  .onboard li:before{content:"\2731";position:absolute;left:0;top:1px;
-    color:var(--sky-deep);font-size:14px}
+  .onboard li:before{content:"";position:absolute;left:0;top:3px;width:14px;height:14px;
+    background:var(--sky-deep);-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
   .onboard li .ob-t{display:block;font-weight:800;color:var(--ink)}
   .onboard li .ob-d{display:block;margin-top:2px;color:var(--ink-soft)}
   .ob-lnk{color:var(--ink);font-weight:700;cursor:pointer;
@@ -166,7 +170,7 @@
     font-weight:800;box-shadow:0 6px 22px rgba(0,0,0,.28)}
   .quizcta .btn .go{color:var(--mark)}
   .quizcta .qsub{margin-top:14px;color:var(--on-dark);font-size:13px;line-height:1.5}
-  .quizcta .qsub .u{background:linear-gradient(transparent 58%,rgba(111,185,214,.55) 58%)}
+  .quizcta .qsub .u{border-bottom-color:var(--sky)}
 
   /* track nav cards */
   .navlist{margin-top:18px;display:flex;flex-direction:column;gap:10px}
@@ -215,7 +219,9 @@
   /* tag pill — glyph · index · label */
   .tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.01em;
     background:var(--ink);color:var(--paper);border-radius:999px;padding:5px 13px 6px;line-height:1.4}
-  .tag .g,.tag .n{color:var(--sky);font-weight:700}
+  .tag .n{color:var(--sky);font-weight:700}
+  .tag .g{display:inline-block;width:12px;height:12px;background:var(--sky);
+    -webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
 
   /* mission pull-quote inside about + story */
   .pull{position:relative;margin:28px 0;padding:0 0 0 26px;font-style:italic;font-weight:600;
@@ -223,13 +229,14 @@
   .pull:before{content:"\201C";position:absolute;left:-3px;top:4px;font-size:42px;line-height:1;
     color:var(--sky-deep);font-style:normal;font-weight:800}
   .pull b{color:var(--ink)}
-  .pull u,.pull .u{text-decoration:none;background:linear-gradient(transparent 58%,var(--hi) 58%);padding:0 2px}
+  .pull u,.pull .u{text-decoration:none;border-bottom:2px solid var(--sky-deep);padding-bottom:1px}
   .pf-mission{margin:6px 0 0}
 
   /* case list */
   .cases{margin-top:12px;list-style:none;display:flex;flex-direction:column;gap:10px}
   .cases li{position:relative;padding-left:26px;font-size:15px;line-height:1.45}
-  .cases li:before{content:"\2731";position:absolute;left:0;top:1px;color:var(--sky-deep);font-size:14px}
+  .cases li:before{content:"";position:absolute;left:0;top:3px;width:14px;height:14px;
+    background:var(--sky-deep);-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
 
   /* ========================= STORY: timeline ========================= */
   .tl{margin-top:18px;display:flex;flex-direction:column}
@@ -278,7 +285,8 @@
   .prose p:first-child{margin-top:0}
   .prose ul{list-style:none;padding-left:0;margin-top:12px}
   .prose ul li{position:relative;padding-left:24px;margin-top:9px;line-height:1.55}
-  .prose ul li:before{content:"\2731";position:absolute;left:0;top:0;color:var(--sky-deep);font-size:13px}
+  .prose ul li:before{content:"";position:absolute;left:0;top:4px;width:13px;height:13px;
+    background:var(--sky-deep);-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
 
   /* tower (funnel): floors narrow to the top — you at the tip */
   .tower{margin-top:16px;display:flex;flex-direction:column;align-items:center}
@@ -343,10 +351,10 @@
   .ctable table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.4}
   .ctable th{background:var(--sky);color:var(--ink);font-weight:800;text-align:left;
     padding:10px;font-size:11px;letter-spacing:.01em}
-  .ctable td{padding:9px 10px;border-top:1.5px solid #3E332C;vertical-align:top;
+  .ctable td{padding:9px 10px;border-top:1.5px solid #333331;vertical-align:top;
     background:var(--ink);color:var(--paper)}
   .ctable td:first-child{font-weight:700}
-  .ctable tr:nth-child(even) td{background:#241B16}
+  .ctable tr:nth-child(even) td{background:#1E1E1D}
   .ctable .good{color:var(--sky);font-weight:800}
   .ctable td .nm{border-bottom-color:var(--sky)}
   .ctable .ph{color:var(--on-dark-soft)}
@@ -413,8 +421,9 @@
     padding:12px 14px;margin:6px 0}
   :root[data-theme="dark"] .gterm.hl{background:#14181B;border-color:#3A5561}
   .gterm dt{font-weight:800;font-size:15.5px;color:var(--ink)}
-  .gterm dt .badge{display:inline-block;background:var(--hi);color:var(--ink);font-size:11px;
-    font-weight:700;padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:1px;letter-spacing:.02em}
+  .gterm dt .badge{display:inline-block;background:transparent;color:var(--mark);
+    border:1.5px solid var(--sky-deep);font-size:11px;
+    font-weight:700;padding:0 7px;border-radius:20px;margin-left:6px;vertical-align:1px;letter-spacing:.02em}
   .gterm dd{color:var(--ink-soft);font-size:14px;margin-top:4px;line-height:1.55}
   .gempty{margin-top:20px;color:var(--ink-soft);font-size:14px;font-style:italic}
 
@@ -430,7 +439,6 @@
   :root[data-theme="dark"]{
     --paper:#0E1113; --paper-2:#16191C; --card:#14181B; --line:#28323A;
     --ink:#ECEFF1; --ink-soft:#9BA7AC; --mark:#7FC4DE;
-    --hi:rgba(127,196,222,.30);
     --on-dark:#C4D6DC; --on-dark-soft:#9BA7AC;
   }
   :root[data-theme="dark"] body{background:#0E1113;color:#ECEFF1}
@@ -540,7 +548,7 @@
     <p class="qsub">Шесть коротких вопросов &mdash; и на выходе связка <span class="u">модель + инструмент + способ оплаты</span> под твою ситуацию.</p>
   </div>
 
-  <div class="shead center" style="margin-top:32px"><span class="eyebrow">&#10033; треки гайда</span><h2>Выбери свой маршрут</h2></div>
+  <div class="shead center" style="margin-top:32px"><span class="eyebrow"><span class="star"></span> треки гайда</span><h2>Выбери свой маршрут</h2></div>
 
   <div class="navlist">
     <button class="navitem" data-view="story"><div><b>Моя история</b><small>как я два года откладывала ИИ и что стало стимулом перемен</small></div><span class="go">&rarr;</span></button>
@@ -574,22 +582,22 @@
       </div>
     </div>
 
-    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">0</span>кто я</span>
+    <div class="pf-block"><span class="tag"><span class="g"></span><span class="n">0</span>кто я</span>
       <span class="pf-h">5 лет рядом с топ-менеджментом</span>
       <p>Бизнес-ассистент топ-менеджмента (CCO, CEO, COO) международных компаний. На этом фундаменте строю все, что делаю сейчас.</p></div>
 
-    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">1</span>разворот 2025</span>
+    <div class="pf-block"><span class="tag"><span class="g"></span><span class="n">1</span>разворот 2025</span>
       <span class="pf-h">Сместила фокус на ИИ</span>
       <p>Ушла в IT-консалтинг: внедряем ИИ-агентов и автоматизации для компаний из США, Канады, Австралии, делаем мобильные приложения. И все это &mdash; с ИИ.</p></div>
 
-    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">2</span>почему я понимаю</span>
+    <div class="pf-block"><span class="tag"><span class="g"></span><span class="n">2</span>почему я понимаю</span>
       <span class="pf-h">Я прошла тот же путь, что и ты</span>
       <p>От избегания ИИ до ежедневной работы с агентами. Знаю, как убрать сопротивление и с чего начать именно тебе.</p></div>
 
     <div class="pf-block">
       <div class="pull pf-mission"><u>Моя миссия</u> &mdash; убедить тебя, что ты справишься. Сделаю все, чтобы ты начал и загорелся ИИ так же, как когда-то я, &mdash; и это буквально изменило мою жизнь.</div></div>
 
-    <div class="pf-block"><span class="tag"><span class="g">&#10033;</span><span class="n">3</span>что уже сделано</span>
+    <div class="pf-block"><span class="tag"><span class="g"></span><span class="n">3</span>что уже сделано</span>
       <span class="pf-h">Не теория &mdash; рабочие проекты</span>
       <p>Сайт агентства <a class="nm" href="https://architeq.io" target="_blank" rel="noopener">Architeq</a> спроектировала и написала с нуля сама. Что уже собрали:</p>
       <ul class="cases">
