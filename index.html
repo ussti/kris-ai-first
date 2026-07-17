@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Этап зиро — твой план с 0 в AI</title>
+<title>Точка входа — гайд для тех, кто откладывал ИИ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
 /* ==========================================================================
-   AI-First hub — consolidated design system (single source of truth)
+   «Точка входа» hub — consolidated design system (single source of truth)
    Replaces the v2–v11 override stack. Mobile-first, one font (Inter),
    3-size type scale, one disciplined accent language (sky highlight).
    ========================================================================== */
@@ -24,8 +24,8 @@
     /* text-on-container */
     --on-dark:#E6E6E4; --on-dark-soft:#B6B6B4;
     --r:16px;
-    /* six-ray star (Kris's reference): thin asterisk, inherits colour via mask */
-    --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg stroke='%23000' stroke-width='2.3' stroke-linecap='round'%3E%3Cline x1='12' y1='3' x2='12' y2='21'/%3E%3Cline x1='4.21' y1='7.5' x2='19.79' y2='16.5'/%3E%3Cline x1='4.21' y1='16.5' x2='19.79' y2='7.5'/%3E%3C/g%3E%3C/svg%3E");
+    /* the star is the literal glyph U+2731, never a drawn shape */
+    --glyph:"\2731";
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -58,9 +58,16 @@
   .ph{color:inherit;font-style:normal}
   .mk,.mkw{color:var(--mark);font-weight:700}
   em,i{font-style:italic}
-  /* inline six-ray star, inherits text colour */
-  .star{display:inline-block;width:.82em;height:.82em;vertical-align:-1px;background:currentColor;
-    -webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+  /* inline star — the ✱ character itself, inherits text colour */
+  .star{display:inline-block;line-height:1;font-style:normal}
+  .star:before{content:var(--glyph)}
+
+  /* ---- display accent face: Playfair Display italic ----
+     used for the decorative italic moments (hero word, brand, section
+     labels, pull-quotes) — never for running body text */
+  .hero h1 .fancy,.brand i,.podval .pv-h,.pull,.menu .lbl,
+  .note .gi,.keybox .cap i,.resbox .lead,.shead .fancy{
+    font-family:'Playfair Display','Inter',Georgia,serif;font-style:italic}
 
   /* eyebrow chip — small mono-caps pill, dashed, ink on light */
   .eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;
@@ -147,8 +154,8 @@
   .onboard .ob-h{font-weight:800;font-size:17px;line-height:1.28}
   .onboard ul{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:14px}
   .onboard li{position:relative;padding-left:26px;font-size:15px;line-height:1.5}
-  .onboard li:before{content:"";position:absolute;left:0;top:3px;width:14px;height:14px;
-    background:var(--sky-deep);-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+  .onboard li:before{content:var(--glyph);position:absolute;left:0;top:0;
+    color:var(--sky-deep);font-size:13px;line-height:1.7}
   .onboard li .ob-t{display:block;font-weight:800;color:var(--ink)}
   .onboard li .ob-d{display:block;margin-top:2px;color:var(--ink-soft)}
   .ob-lnk{color:var(--ink);font-weight:700;cursor:pointer;
@@ -174,13 +181,17 @@
 
   /* track nav cards */
   .navlist{margin-top:18px;display:flex;flex-direction:column;gap:10px}
-  .navitem{display:flex;align-items:center;gap:12px;background:var(--sky);color:var(--ink);
-    border:none;border-radius:12px;padding:16px 18px;width:100%;text-align:left;
+  /* text is centred inside the button; the arrow is pulled out of the flow so
+     it cannot pull the centre off-axis */
+  .navitem{position:relative;display:flex;align-items:center;justify-content:center;
+    background:var(--sky);color:var(--ink);
+    border:none;border-radius:12px;padding:16px 44px;width:100%;text-align:center;
     font-family:inherit;cursor:pointer;transition:.15s;text-decoration:none}
   .navitem:active{transform:scale(.99)}
   .navitem b{font-size:17px;font-weight:800;display:block}
   .navitem small{display:block;font-size:12px;color:#33525c;margin-top:3px;line-height:1.35}
-  .navitem .go{margin-left:auto;font-size:19px;color:var(--mark);flex:none}
+  .navitem .go{position:absolute;right:16px;top:50%;transform:translateY(-50%);
+    font-size:19px;color:var(--mark);flex:none}
   .navitem.deep{background:var(--ink);color:var(--paper)}
   .navitem.deep small{color:var(--on-dark-soft)}
   .navitem.deep .go{color:var(--sky)}
@@ -191,12 +202,14 @@
     color:var(--mark);letter-spacing:.01em}
   .pv-grid{margin-top:14px;display:grid;grid-template-columns:1fr;gap:10px}
   @media(min-width:460px){.pv-grid{grid-template-columns:repeat(3,1fr)}}
-  .pv-card{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  .pv-card{position:relative;display:flex;align-items:center;justify-content:center;
     background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:14px 16px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s}
+    padding:14px 34px;text-align:center;cursor:pointer;text-decoration:none;
+    transition:transform .15s,box-shadow .15s;font-family:inherit}
   .pv-card:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(43,33,28,.10)}
   .pv-card .pv-t{font-weight:700;font-size:14px;color:var(--ink);line-height:1.2}
-  .pv-card .pv-ar{flex:none;color:var(--mark);font-size:17px;font-weight:800;line-height:1}
+  .pv-card .pv-ar{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    flex:none;color:var(--mark);font-size:17px;font-weight:800;line-height:1}
 
   /* ========================= ABOUT ========================= */
   .preface{margin-top:8px}
@@ -220,8 +233,8 @@
   .tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.01em;
     background:var(--ink);color:var(--paper);border-radius:999px;padding:5px 13px 6px;line-height:1.4}
   .tag .n{color:var(--sky);font-weight:700}
-  .tag .g{display:inline-block;width:12px;height:12px;background:var(--sky);
-    -webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+  .tag .g{display:inline-block;color:var(--sky);font-size:11px;line-height:1}
+  .tag .g:before{content:var(--glyph)}
 
   /* mission pull-quote inside about + story */
   .pull{position:relative;margin:28px 0;padding:0 0 0 26px;font-style:italic;font-weight:600;
@@ -235,8 +248,8 @@
   /* case list */
   .cases{margin-top:12px;list-style:none;display:flex;flex-direction:column;gap:10px}
   .cases li{position:relative;padding-left:26px;font-size:15px;line-height:1.45}
-  .cases li:before{content:"";position:absolute;left:0;top:3px;width:14px;height:14px;
-    background:var(--sky-deep);-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+  .cases li:before{content:var(--glyph);position:absolute;left:0;top:0;
+    color:var(--sky-deep);font-size:13px;line-height:1.65}
 
   /* ========================= STORY: timeline ========================= */
   .tl{margin-top:18px;display:flex;flex-direction:column}
@@ -285,8 +298,8 @@
   .prose p:first-child{margin-top:0}
   .prose ul{list-style:none;padding-left:0;margin-top:12px}
   .prose ul li{position:relative;padding-left:24px;margin-top:9px;line-height:1.55}
-  .prose ul li:before{content:"";position:absolute;left:0;top:4px;width:13px;height:13px;
-    background:var(--sky-deep);-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+  .prose ul li:before{content:var(--glyph);position:absolute;left:0;top:0;
+    color:var(--sky-deep);font-size:12px;line-height:1.9}
 
   /* tower (funnel): floors narrow to the top — you at the tip */
   .tower{margin-top:16px;display:flex;flex-direction:column;align-items:center}
@@ -297,10 +310,12 @@
     font-weight:700;margin-bottom:3px}
   .floor b{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em}
   .floor small{display:block;margin-top:4px;font-size:13px;line-height:1.5}
-  .f3{width:70%;background:var(--sky);color:var(--ink)}
-  .f2{width:85%;background:#88c9e0;color:var(--ink)}
+  /* four floors, narrowing upward: f1 energy (base) → f2 models → f3 harness → f4 interface (you) */
+  .f4{width:66%;background:var(--sky);color:var(--ink)}
+  .f3{width:78%;background:#8fcde2;color:var(--ink)}
+  .f2{width:89%;background:#78bfd8;color:var(--ink)}
   .f1{width:100%;background:var(--ink);color:var(--paper)}
-  .f3 .cap,.f2 .cap{color:var(--mark)} .f1 .cap{color:var(--sky)}
+  .f4 .cap,.f3 .cap,.f2 .cap{color:var(--mark)} .f1 .cap{color:var(--sky)}
   .f1 small{color:var(--on-dark-soft)}
   .floor .you{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
     background:var(--mark);color:#fff;font-size:10px;font-weight:700;
@@ -457,13 +472,15 @@
   :root[data-theme="dark"] .branch,:root[data-theme="dark"] .navitem.deep{border:1px solid rgba(140,200,224,.28)}
   /* sky blocks -> deep teal + light text */
   :root[data-theme="dark"] .navitem,:root[data-theme="dark"] .opt,:root[data-theme="dark"] .pf-btn.alt,
-  :root[data-theme="dark"] .f3,:root[data-theme="dark"] .f2,:root[data-theme="dark"] .ck .m,
+  :root[data-theme="dark"] .f4,:root[data-theme="dark"] .f3,:root[data-theme="dark"] .f2,
+  :root[data-theme="dark"] .ck .m,
   :root[data-theme="dark"] .btn.sky{background:#1d3b47;color:#ECEFF1}
   :root[data-theme="dark"] .btn.sky .go{color:var(--sky)}
   :root[data-theme="dark"] .navitem{border:1px solid rgba(140,200,224,.28)}
   :root[data-theme="dark"] .navitem small,:root[data-theme="dark"] .opt small{color:#9FC3CE}
   :root[data-theme="dark"] .navitem .go,:root[data-theme="dark"] .floor .f3 .cap{color:var(--sky)}
-  :root[data-theme="dark"] .f3 .cap,:root[data-theme="dark"] .f2 .cap,:root[data-theme="dark"] .stat b,
+  :root[data-theme="dark"] .f4 .cap,:root[data-theme="dark"] .f3 .cap,
+  :root[data-theme="dark"] .f2 .cap,:root[data-theme="dark"] .stat b,
   :root[data-theme="dark"] .pv-card .pv-ar,:root[data-theme="dark"] .navitem .go,
   :root[data-theme="dark"] .podval .pv-h,:root[data-theme="dark"] .fear .x{color:var(--sky)}
   :root[data-theme="dark"] .quizcta .btn{background:var(--sky);color:#10171b}
@@ -477,6 +494,7 @@
   :root[data-theme="dark"] .ctable th{background:#1d3b47;color:#ECEFF1}
   :root[data-theme="dark"] .ctable tr:nth-child(even) td{background:#151B1F}
   :root[data-theme="dark"] .ctable td{border-top-color:#28323A}
+  :root[data-theme="dark"] .f3{background:#1a3540}
   :root[data-theme="dark"] .f2{background:#163039}
   :root[data-theme="dark"] .burger,:root[data-theme="dark"] .menu-close{background:#14181B;border-color:#3A5561}
   :root[data-theme="dark"] .foot{border-top-color:#28323A}
@@ -489,13 +507,305 @@
   :root[data-theme="dark"] .tli:before,:root[data-theme="dark"] .tarrow{background:var(--sky-deep)}
   :root[data-theme="dark"] .tarrow{background:none}
   :root[data-theme="dark"] .gterm dt .badge{color:#ECEFF1}
+
+  /* ============================================================
+     NEW FORMAT (v12) — chapter reading layer.
+     Landing logic untouched. Palette untouched.
+     Adds: reading progress, chapter rail, sticky employee schema,
+     tab switcher, weights, two-screen compare, nested rings, stitch.
+     ============================================================ */
+
+  /* --- reading progress: hairline under the topbar --- */
+  .rprog{position:fixed;top:0;left:0;height:2px;width:0;z-index:60;
+    background:var(--sky-deep);transition:width .12s linear;opacity:0}
+  .rprog.on{opacity:1}
+
+  /* --- chapter rail: in-chapter progress, desktop only --- */
+  .rail{position:fixed;left:calc(50% - 300px - 92px);top:50%;transform:translateY(-50%);
+    z-index:40;display:none;flex-direction:column;gap:2px}
+  .rail.on{display:none}
+  @media(min-width:1040px){ .rail.on{display:flex} }
+  .rail button{display:flex;align-items:center;gap:9px;background:none;border:0;cursor:pointer;
+    padding:5px 0;font:inherit;font-size:12px;color:var(--ink-soft);text-align:left;
+    letter-spacing:.01em;opacity:.5;transition:opacity .2s,color .2s}
+  .rail button .rd{width:16px;height:1px;background:currentColor;flex:none;transition:width .2s}
+  .rail button:hover{opacity:.85}
+  .rail button.cur{opacity:1;color:var(--mark);font-weight:600}
+  .rail button.cur .rd{width:26px;height:2px;background:var(--sky-deep)}
+
+  /* --- sticky employee schema: the spine of chapter 02 --- */
+  .emp{position:sticky;top:56px;z-index:30;margin:18px -8px 22px;padding:10px 8px 12px;
+    background:linear-gradient(var(--paper) 78%,rgba(236,236,234,0));
+    -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+  .emp .ehead{display:block;font-size:12px;color:var(--ink-soft);margin-bottom:8px;letter-spacing:.01em}
+  .erow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .elay{position:relative;border:1px solid var(--line);border-radius:10px;background:var(--card);
+    padding:9px 8px 10px;text-align:left;cursor:pointer;font:inherit;
+    transition:background .25s,border-color .25s,transform .2s}
+  .elay .en{display:block;font-size:11px;color:var(--ink-soft);letter-spacing:.02em;margin-bottom:2px}
+  .elay .et{display:block;font-size:13px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+  .elay:after{content:"";position:absolute;left:8px;right:8px;bottom:5px;height:2px;
+    background:var(--line);border-radius:2px;transition:background .25s}
+  .elay.lit{background:var(--sky);border-color:var(--sky-deep)}
+  .elay.lit:after{background:var(--mark)}
+  .elay.cur{transform:translateY(-2px)}
+  .elay.cur:after{background:var(--ink)}
+  @media(max-width:520px){
+    .emp{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px;top:52px}
+    .erow{gap:4px}
+    .elay{padding:7px 6px 9px;border-radius:8px}
+    .elay .en{font-size:10px}
+    .elay .et{font-size:11px}
+  }
+
+  /* --- section anchors inside a chapter --- */
+  .chunk{scroll-margin-top:120px}
+
+  /* --- tab switcher: компания / продукт / модель --- */
+  .sw{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden}
+  .sw-tabs{display:flex;border-bottom:1px solid var(--line)}
+  .sw-tabs button{flex:1;background:none;border:0;cursor:pointer;font:inherit;font-size:12px;
+    font-weight:600;color:var(--ink-soft);padding:11px 6px;letter-spacing:.01em;
+    border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+  .sw-tabs button.cur{color:var(--ink);border-bottom-color:var(--sky-deep)}
+  .sw-body{padding:14px 16px 16px}
+  .sw-pane{display:none}
+  .sw-pane.on{display:block;animation:fade .28s ease}
+  .sw-pane .sw-lede{font-size:13px;color:var(--ink-soft);margin:0 0 12px}
+  .sw-row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:baseline;
+    padding:9px 0;border-top:1px solid var(--line)}
+  .sw-row:first-of-type{border-top:0}
+  .sw-row .sk{font-size:12px;color:var(--ink-soft)}
+  .sw-row .sk b{display:block;font-size:13px;color:var(--ink);font-weight:700}
+  .sw-row .sv{font-size:13px;line-height:1.5}
+
+  /* --- weights: model families --- */
+  .wts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+  .wt{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 10px;text-align:center}
+  .wt .wb{display:block;margin:0 auto 9px;background:var(--ink);border-radius:3px}
+  .wt.w1 .wb{width:22px;height:22px}
+  .wt.w2 .wb{width:32px;height:32px}
+  .wt.w3 .wb{width:44px;height:44px;background:var(--mark)}
+  .wt .wn{display:block;font-size:13px;font-weight:700;letter-spacing:-.01em}
+  .wt .wd{display:block;font-size:11px;color:var(--ink-soft);margin-top:3px;line-height:1.35}
+
+  /* --- two screens: чат-бот vs исполняющая среда --- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .vsc{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+  .vsc.deep{background:#1B2226;border-color:#1B2226;color:var(--on-dark)}
+  .vs-bar{display:flex;align-items:center;gap:4px;padding:8px 10px;border-bottom:1px solid var(--line)}
+  .vsc.deep .vs-bar{border-bottom-color:#2C373D}
+  .vs-bar i{width:7px;height:7px;border-radius:50%;background:var(--line);display:block}
+  .vsc.deep .vs-bar i{background:#3A4A52}
+  .vs-bar span{margin-left:6px;font-size:11px;font-weight:600;letter-spacing:.01em;color:var(--ink-soft)}
+  .vsc.deep .vs-bar span{color:var(--sky)}
+  .vs-in{padding:12px 12px 14px}
+  .vs-msg{font-size:12px;line-height:1.45;border-radius:9px;padding:7px 9px;margin-bottom:7px;
+    background:var(--paper-2);border:1px solid var(--line)}
+  .vsc.deep .vs-msg{background:#232D33;border-color:#2C373D}
+  .vs-msg.me{background:var(--sky);border-color:var(--sky);color:var(--ink)}
+  .vs-do{display:flex;align-items:center;gap:6px;font-size:11px;padding:5px 0;color:var(--mark);font-weight:600}
+  .vsc.deep .vs-do{color:var(--sky)}
+  .vs-foot{font-size:11px;line-height:1.4;color:var(--ink-soft);padding:10px 12px;border-top:1px solid var(--line)}
+  .vsc.deep .vs-foot{color:var(--on-dark-soft);border-top-color:#2C373D}
+  @media(max-width:520px){ .vs{grid-template-columns:1fr} }
+
+  /* --- nested rings: ИИ ⊃ ML ⊃ нейросети ⊃ LLM --- */
+  .rings{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:18px 16px 16px}
+  .rg{position:relative;width:100%;max-width:300px;margin:0 auto;aspect-ratio:1}
+  .rg b{position:absolute;border-radius:50%;border:1px solid var(--sky-deep);
+    display:flex;align-items:flex-start;justify-content:center;padding-top:7px;
+    font-size:11px;font-weight:700;letter-spacing:.01em;cursor:pointer;
+    transition:background .2s,border-color .2s}
+  .rg .g1{inset:0;background:rgba(166,220,236,.16)}
+  .rg .g2{inset:14%;background:rgba(166,220,236,.26)}
+  .rg .g3{inset:30%;background:rgba(166,220,236,.4)}
+  .rg .g4{inset:46%;background:var(--sky);border-color:var(--mark);
+    align-items:center;padding-top:0;font-size:12px}
+  .rg b.cur{border-color:var(--ink);border-width:2px}
+  .rg-note{margin-top:12px;font-size:12px;line-height:1.5;color:var(--ink-soft);min-height:34px;text-align:center}
+  .rg-note b{color:var(--ink)}
+
+  /* --- stitch: chapter -> chapter --- */
+  .stitch{margin-top:30px;border-top:1px solid var(--line);padding-top:18px}
+  .stitch .sq{font-family:'Playfair Display',Georgia,serif;font-style:italic;
+    font-size:17px;line-height:1.4;color:var(--ink);margin:0 0 12px}
+  .stitch .sn{font-size:12px;color:var(--ink-soft);margin:0 0 10px}
+
+  /* --- new-format dark overrides --- */
+  :root[data-theme="dark"] .emp{background:linear-gradient(#0E1113 78%,rgba(14,17,19,0))}
+  :root[data-theme="dark"] .elay,:root[data-theme="dark"] .sw,:root[data-theme="dark"] .wt,
+  :root[data-theme="dark"] .vsc,:root[data-theme="dark"] .rings{background:#14181B;border-color:#28323A}
+  :root[data-theme="dark"] .elay.lit{background:#1d3b47;border-color:var(--sky-deep)}
+  :root[data-theme="dark"] .elay:after{background:#28323A}
+  :root[data-theme="dark"] .elay.cur:after{background:var(--sky)}
+  :root[data-theme="dark"] .sw-tabs{border-bottom-color:#28323A}
+  :root[data-theme="dark"] .sw-tabs button.cur{color:#ECEFF1}
+  :root[data-theme="dark"] .sw-row{border-top-color:#28323A}
+  :root[data-theme="dark"] .sw-row .sk b{color:#ECEFF1}
+  :root[data-theme="dark"] .wt .wb{background:#ECEFF1}
+  :root[data-theme="dark"] .wt.w3 .wb{background:var(--mark)}
+  :root[data-theme="dark"] .vs-bar{border-bottom-color:#28323A}
+  :root[data-theme="dark"] .vs-msg{background:#1B2226;border-color:#28323A}
+  :root[data-theme="dark"] .vs-msg.me{background:#1d3b47;border-color:#3A5561;color:#ECEFF1}
+  :root[data-theme="dark"] .vs-foot{border-top-color:#28323A}
+  :root[data-theme="dark"] .rg .g4{background:#1d3b47}
+  :root[data-theme="dark"] .rg b.cur{border-color:var(--sky)}
+  :root[data-theme="dark"] .rg-note b{color:#ECEFF1}
+  :root[data-theme="dark"] .stitch{border-top-color:#28323A}
+  :root[data-theme="dark"] .stitch .sq{color:#ECEFF1}
+  :root[data-theme="dark"] .rail button.cur{color:var(--sky)}
+  /* ============================================================
+     MOBILE UI (v13) — thumb-first reading.
+     Rules: nav in the thumb zone, 44px targets, no hover-only state,
+     16px inputs (no iOS zoom), safe-area insets, one sticky layer.
+     Palette + landing logic untouched.
+     ============================================================ */
+
+  /* --- chapter bar: the rail, moved into the thumb zone --- */
+  .cbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+    background:rgba(236,236,234,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom);
+    transform:translateY(0);transition:transform .28s ease}
+  .cbar.on{display:block}
+  .cbar.hide{transform:translateY(110%)}
+  @media(min-width:1040px){ .cbar.on{display:none} }
+  .cbar .cb-line{height:2px;background:var(--line)}
+  .cbar .cb-line i{display:block;height:2px;width:0;background:var(--sky-deep);transition:width .12s linear}
+  .cb-main{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;
+    padding:8px 20px;background:none;border:0;font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+  .cb-main:active{background:var(--paper-2)}
+  .cb-num{flex:none;font-size:11px;font-weight:700;color:var(--mark);letter-spacing:.02em;
+    border:1px solid var(--sky-deep);border-radius:7px;padding:4px 7px;background:var(--card)}
+  .cb-txt{flex:1;min-width:0}
+  .cb-txt b{display:block;font-size:14px;font-weight:700;letter-spacing:-.01em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cb-txt span{display:block;font-size:11px;color:var(--ink-soft);margin-top:1px}
+  .cb-chev{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+    color:var(--ink-soft);font-size:10px;transition:transform .22s}
+  .cbar.up .cb-chev{transform:rotate(180deg)}
+
+  /* --- section sheet: pulls up from the bar --- */
+  .csheet{position:fixed;inset:0;z-index:56;display:none;background:rgba(20,20,20,.34);
+    -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;transition:opacity .22s}
+  .csheet.open{display:block;opacity:1}
+  .cs-in{position:absolute;left:0;right:0;bottom:0;background:var(--paper);
+    border-top-left-radius:20px;border-top-right-radius:20px;border-top:1px solid var(--line);
+    padding:10px 20px calc(18px + env(safe-area-inset-bottom));
+    transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.8,.25,1);
+    max-height:82vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .csheet.open .cs-in{transform:translateY(0)}
+  .cs-grab{width:38px;height:4px;border-radius:4px;background:var(--line);margin:2px auto 12px}
+  .cs-h{font-size:12px;color:var(--ink-soft);margin-bottom:6px;letter-spacing:.01em}
+  .cs-list{display:flex;flex-direction:column}
+  .cs-list button{display:flex;align-items:center;gap:12px;min-height:48px;width:100%;
+    background:none;border:0;border-top:1px solid var(--line);font:inherit;font-size:15px;
+    color:var(--ink);text-align:left;cursor:pointer;padding:6px 2px}
+  .cs-list button:first-child{border-top:0}
+  .cs-list button:active{background:var(--paper-2)}
+  .cs-list button .cn{flex:none;width:20px;font-size:11px;color:var(--ink-soft);font-weight:700}
+  .cs-list button.cur{font-weight:700;color:var(--mark)}
+  .cs-list button.cur .cn{color:var(--mark)}
+  .cs-list button.done .cn:before{content:"\2713";font-size:11px}
+  .cs-list button.done .cn{font-size:0}
+  .cs-next{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+    min-height:50px;margin-top:14px;padding:12px 16px;cursor:pointer;
+    background:var(--ink);color:var(--paper);border:0;border-radius:12px;
+    font:inherit;font-size:14px;font-weight:700;letter-spacing:-.01em}
+  .cs-next:active{opacity:.85}
+  .cs-next .cx{font-size:12px;color:var(--sky)}
+
+  /* --- chapters get room for the bar --- */
+  @media(max-width:1039px){
+    .view.chap{padding-bottom:78px}
+  }
+
+  /* --- employee schema on mobile: a stepper, not four cramped tiles --- */
+  @media(max-width:720px){
+    .emp{top:53px;margin:16px -24px 20px;padding:8px 24px 10px}
+    .emp .ehead{display:none}
+    .erow{display:flex;gap:5px}
+    .elay{flex:1;padding:13px 0 12px;border:0;border-radius:0;background:none;min-height:44px}
+    .elay .en,.elay .et{display:none}
+    .elay:after{left:0;right:0;bottom:14px;height:4px;border-radius:4px;background:var(--line)}
+    .elay.lit{background:none}
+    .elay.lit:after{background:var(--sky-deep)}
+    .elay.cur{transform:none}
+    .elay.cur:after{background:var(--mark)}
+    .emp-now{display:flex;align-items:baseline;gap:8px;margin-top:-4px}
+    .emp-now .k{font-size:11px;color:var(--ink-soft);letter-spacing:.02em;flex:none}
+    .emp-now .v{font-size:13px;font-weight:700;letter-spacing:-.01em}
+    .emp-now .v i{font-style:normal;color:var(--ink-soft);font-weight:500}
+  }
+  .emp-now{display:none}
+
+  /* --- touch-target + no-zoom floor --- */
+  @media(max-width:720px){
+    body{font-size:16px}
+    .prose p,.onboard li,.cases li,details.dd .din p{font-size:16px;line-height:1.62}
+    .sw-tabs button{min-height:46px;font-size:13px}
+    .sw-row{grid-template-columns:1fr;gap:2px}
+    .sw-row .sv,.sw-row .sk b{font-size:14px}
+    .wts{grid-template-columns:1fr;gap:6px}
+    .wt{display:flex;align-items:center;gap:14px;text-align:left;padding:12px 14px;min-height:56px}
+    .wt .wb{margin:0;flex:none}
+    .qa .q{min-height:52px;font-size:15px;align-items:center}
+    .gsearch input{font-size:16px}
+    .navitem{min-height:56px}
+    .crumbbar{display:none!important}
+    .rg b{font-size:10px}
+  }
+
+  /* --- respect the system setting --- */
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
+
+  /* --- keyboard focus stays visible --- */
+  a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{
+    outline:2px solid var(--mark);outline-offset:2px;border-radius:4px}
+
+  :root[data-theme="dark"] .cbar{background:rgba(14,17,19,.94);border-top-color:#28323A}
+  :root[data-theme="dark"] .cb-main{color:var(--on-dark)}
+  :root[data-theme="dark"] .cb-main:active{background:#181D21}
+  :root[data-theme="dark"] .cb-num{background:#14181B;border-color:#3A5561;color:var(--sky)}
+  :root[data-theme="dark"] .cs-in{background:#0E1113;border-top-color:#28323A}
+  :root[data-theme="dark"] .cs-grab{background:#3A4A52}
+  :root[data-theme="dark"] .cs-list button{color:var(--on-dark);border-top-color:#28323A}
+  :root[data-theme="dark"] .cs-list button:active{background:#181D21}
+  :root[data-theme="dark"] .cs-list button.cur{color:var(--sky)}
+  :root[data-theme="dark"] .cs-next{background:var(--sky);color:#0E1113}
+  :root[data-theme="dark"] .cs-next .cx{color:#0E1113}
 </style>
 <script>try{var _t=localStorage.getItem('etap_theme');if(_t)document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
 </head>
 <body>
 
+<div class="rprog" id="rprog"></div>
+<nav class="rail" id="rail"></nav>
+
+<!-- chapter bar + section sheet: mobile navigation, thumb zone -->
+<nav class="cbar" id="cbar" aria-label="навигация по главе">
+  <div class="cb-line"><i id="cbFill"></i></div>
+  <button class="cb-main" id="cbMain" aria-expanded="false" aria-controls="csheet">
+    <span class="cb-num" id="cbNum">1/5</span>
+    <span class="cb-txt"><b id="cbTitle">начало</b><span id="cbSub">моя история</span></span>
+    <span class="cb-chev">&#9650;</span>
+  </button>
+</nav>
+<div class="csheet" id="csheet" role="dialog" aria-modal="true" aria-label="разделы главы">
+  <div class="cs-in">
+    <div class="cs-grab"></div>
+    <div class="cs-h" id="csHead">разделы главы</div>
+    <div class="cs-list" id="csList"></div>
+    <button class="cs-next" id="csNext" hidden><span id="csNextT"></span><span class="cx">&rarr;</span></button>
+  </div>
+</div>
+
 <div class="topbar"><div class="in">
-  <div class="brand" data-view="home">AI-<i>First</i></div>
+  <div class="brand" data-view="home">Точка <i>входа</i></div>
   <div class="actions">
     <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
   </div>
@@ -525,36 +835,24 @@
 
 <div class="hero"><div class="wrap">
   <span class="eyebrow">гайд · для тех, кто откладывал ИИ</span>
-  <h1>AI-<span class="fancy">First</span></h1>
+  <h1>Точка <span class="fancy">входа</span></h1>
   <p class="lede">Карта рынка и готовый сценарий, с чего начать.</p>
 </div></div>
 
 <div class="wrap"><section>
-  <div class="onboard">
-    <div class="ob-h">Как читать этот гайд</div>
-    <ul>
-      <li><b>Не знаешь, с чего начать</b> &mdash; пройди <a class="ob-lnk" data-view="quiz">опрос</a>: он подберет связку модель + инструмент + оплата под тебя.</li>
-      <li><b>Хочешь понять рынок</b> &mdash; трек <a class="ob-lnk" data-view="market">«Как устроен рынок»</a>: весь ИИ как один цифровой сотрудник.</li>
-      <li><b>Сомневаешься, что получится</b> &mdash; <a class="ob-lnk" data-view="story">«Моя история»</a>: я сама два года откладывала.</li>
-      <li><b>Застряли на непонятном слове</b> &mdash; внизу <a class="ob-lnk" data-view="gloss">«Словарь»</a> и <a class="ob-lnk" data-view="faq">«Частые вопросы»</a>.</li>
-    </ul>
-  </div>
+  <div class="shead center" style="margin-top:6px"><span class="eyebrow"><span class="star"></span> треки гайда</span><h2>Выбери свой маршрут</h2></div>
 
-  <div class="note ps"><b>И помни: ИИ &mdash; это не очередной хайп, а новая реальность.</b> Начни управлять технологией, пока человек с этим навыком не заменил тебя. Это сможет каждый &mdash; на любой позиции и с любым уровнем ответственности.</div>
+  <div class="navlist">
+    <button class="navitem" data-view="story"><div><b>Моя история</b><small>как я два года откладывала ИИ и что стало стимулом перемен</small></div><span class="go">&rarr;</span></button>
+    <button class="navitem" data-view="market"><div><b>Как устроен рынок</b><small>весь ИИ &mdash; один цифровой сотрудник: энергия, мозг, руки, рабочая среда</small></div><span class="go">&rarr;</span></button>
+    <button class="navitem" data-view="mindset"><div><b>Мышление AI-First</b><small>почему сборники промптов не работают и что работает</small></div><span class="go">&rarr;</span></button>
+    <a class="navitem deep" href="https://ussti.github.io/kris-claude-guide/" target="_blank" rel="noopener"><div><b>Регистрация и оплата из России</b><small>пошаговая инструкция: аккаунт, VPN, подписка без зарубежной карты</small></div><span class="go">&rarr;</span></a>
+  </div>
 
   <div class="quizcta">
     <span class="eyebrow">начни отсюда &middot; опрос</span>
     <button class="btn block" data-view="quiz">С чего начать именно мне? <span class="go">&rarr;</span></button>
     <p class="qsub">Шесть коротких вопросов &mdash; и на выходе связка <span class="u">модель + инструмент + способ оплаты</span> под твою ситуацию.</p>
-  </div>
-
-  <div class="shead center" style="margin-top:32px"><span class="eyebrow"><span class="star"></span> треки гайда</span><h2>Выбери свой маршрут</h2></div>
-
-  <div class="navlist">
-    <button class="navitem" data-view="story"><div><b>Моя история</b><small>как я два года откладывала ИИ и что стало стимулом перемен</small></div><span class="go">&rarr;</span></button>
-    <button class="navitem" data-view="market"><div><b>Как устроен рынок</b><small>весь ИИ &mdash; один цифровой сотрудник: мозг, руки, энергия</small></div><span class="go">&rarr;</span></button>
-    <button class="navitem" data-view="mindset"><div><b>Мышление AI-First</b><small>почему сборники промптов не работают и что работает</small></div><span class="go">&rarr;</span></button>
-    <a class="navitem deep" href="https://ussti.github.io/kris-claude-guide/" target="_blank" rel="noopener"><div><b>Регистрация и оплата из России</b><small>пошаговая инструкция: аккаунт, VPN, подписка без зарубежной карты</small></div><span class="go">&rarr;</span></a>
   </div>
 
   <div class="podval">
@@ -613,50 +911,43 @@
 </div><!-- /v-about -->
 
 <!-- ======================= VIEW: STORY ======================= -->
-<div class="view" id="v-story" data-title="моя история">
+<div class="view chap" id="v-story" data-title="моя история">
 <div class="wrap"><section>
-  <div class="shead"><span class="eyebrow">01 &middot; честно о себе</span><h2>Я сама начинала отсюда</h2>
-    <p>Коротко: два года откладывала, ловила FOMO, злилась &mdash; и все-таки въехала. Вот как это было.</p></div>
+  <div class="shead chunk" id="s-0"><span class="eyebrow">01 &middot; честно о себе</span><h2>Я сама начинала отсюда</h2>
+    <p>Два года откладывала, ловила FOMO, злилась &mdash; и все-таки въехала. Вот как это было.</p></div>
 
   <div class="tl">
     <div class="tli"><span class="tk">2023</span><b>Первая попытка &mdash; и разочарование</b>
       <p>IT-стартап, «пора внедрять». Две недели проб, вечные лимиты &mdash; забила еще на два года.</p>
       <details class="dd"><summary>как две недели проб отбили охоту на два года</summary><div class="din">
-        <p>Признаюсь честно: я сама избегала и откладывала ИИ до последнего. Еще в 2023 году, когда я на четвертом курсе работала в IT-стартапе, мне закидывали удочки: пора внедрять. Я попробовала. Две недели проб и ошибок, <span class="u">вечные лимиты, которые не дают дойти до результата</span>, а оплачивать каждую попытку я тогда не могла. В итоге разочаровалась и забила на это еще на два года.</p>
+        <p>Признаюсь честно: я сама избегала и откладывала ИИ до последнего. Еще в 2023 году, когда я на четвертом курсе работала в IT-стартапе, мне закидывали удочки: пора изучать и внедрять в работу. Я попробовала. Две недели проб и ошибок, <span class="u">вечные лимиты, которые не дают дойти до результата</span>, а оплачивать каждую попытку я тогда не могла. В итоге <span class="u">разочаровалась и забила</span> на это еще на два года.</p>
       </div></details>
     </div>
     <div class="tli"><span class="tk">2023&ndash;2025</span><b>Бесплатный ChatGPT вместо поисковика и жуткое FOMO</b>
       <p>Плоские ответы, хаос из терминов и чужих подборок с промптами. Казалось, что со мной что-то не так.</p>
       <details class="dd"><summary>почему казалось, что со мной что-то не так</summary><div class="din">
-        <p>Все это время я использовала бесплатный ChatGPT просто вместо поисковика и <span class="u">ловила жуткое FOMO</span>. Казалось, что все вокруг давно в теме, а я вообще не понимаю прикола. ИИ выдавал мне плоские ответы в каком-то заискивающем тоне. Я постоянно их переписывала и в итоге решала, что мне проще и быстрее все сделать самой.</p>
-        <p>Вокруг мелькали непонятные термины и названия: <a class="nm" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity</a>, <a class="nm" href="https://www.midjourney.com" target="_blank" rel="noopener">MidJourney</a>, <a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, <a class="nm" href="https://openai.com/codex" target="_blank" rel="noopener">Codex</a>, <a class="nm" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a>, <a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>. Как сказал один мой знакомый, появилось «100500 продуктов от ChatGPT». Я сохраняла все подряд, но даже не открывала эти подборки с промптами: они казались дешевыми «волшебными таблетками». Знания копились обрывками: сегодня чей-то секретный совет, завтра новый тренд, а в голове <span class="u">хаос, который никак не складывался в систему</span>. Я каждый раз будто начинала с нуля и не могла найти примеры того, как применить это конкретно к моей рутине и моим задачам. Казалось, что со мной что-то не так.</p>
+        <p>Все это время я использовала бесплатный <span class="u">ChatGPT вместо поисковика</span> и ловила жуткое FOMO. Казалось, что все вокруг давно в теме, а я вообще не понимаю прикола. ИИ выдавал мне плоские ответы с каким-то заискивающим тоном. Я постоянно их переписывала и в итоге решала, что мне <span class="u">проще и быстрее все сделать самой</span>.</p>
+        <p><span class="u">Терялась в названиях</span>: <a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>, <a class="nm" href="https://openai.com/codex" target="_blank" rel="noopener">Codex</a>, <a class="nm" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity</a>, <a class="nm" href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a>, <a class="nm" href="https://www.klingai.com" target="_blank" rel="noopener">Kling</a>, <a class="nm" href="https://www.midjourney.com" target="_blank" rel="noopener">Midjourney</a>, <a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, Nano Banana, <a class="nm" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a>, <a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>&hellip; Как сказал один мой знакомый, появилось «100500 продуктов от ChatGPT».</p>
+        <p>Я <span class="u">сохраняла все подряд</span>, но даже не открывала эти подборки с промптами &mdash; они ощущались как дешевые «волшебные таблетки».</p>
+        <p>Знания копились обрывками: сегодня чей-то секретный совет, завтра новый тренд, а в голове &mdash; <span class="u">хаос, который никак не складывался в систему</span>. Я каждый раз будто начинала с нуля и не могла найти примеры того, <span class="u">как применить это конкретно к моей рутине и моим задачам</span>. Казалось, что со мной что-то не так.</p>
       </div></details>
     </div>
     <div class="tli"><span class="tk">перелом</span><b>Никто не придет и не научит</b>
-      <p>После ухода из найма стало ясно: надо копать самой. А информации для старта на рынке просто не было.</p>
-      <details class="dd"><summary>чего мне не хватало на рынке</summary><div class="din">
-        <p>На рынке просто не было информации для старта. Авторы либо лили воду без результатов, либо это были разработчики, которые сыпали сложными терминами. Профи показывали крутые результаты, но сразу предупреждали: «Это не для новичков». Людей, которые реально понимают, как все устроено, и готовы делиться этим системно, единицы. Обычно они сидят за кадром и тихо пилят свои продукты. А мне нужна была <span class="u">просто структура</span>: чтобы на пальцах объяснили базу, от большего к меньшему, чтобы я научилась <span class="u">отсеивать шум</span> и брать только то, что нужно.</p>
-      </div></details>
-    </div>
-    <div class="tli"><span class="tk">первый проект</span><b>Сделала все сама, в связке с ИИ, &mdash; хотя кода до этого в глаза не видела</b>
-      <p>Было сложно, получалось с пятнадцатой попытки. Но меня затянуло.</p>
-      <details class="dd"><summary>как я собрала первый проект без строчки кода</summary><div class="din">
-        <p>Сдвиг случился, когда мой молодой человек убедил меня взять его проект и сделать все с помощью ИИ, вообще без знания кода. Год назад для этого еще нужно было подключать нейросети к терминалу и работать в интерфейсе, от которого у новичка дергается глаз. Молодой человек стал моим проводником.</p>
-        <p>Было сложно, жутко бесило, получалось с пятнадцатой попытки. Но знаете что? Меня затянуло. Свой первый проект я <span class="u">полностью написала сама, работая в связке с ИИ</span>, хотя до этого в глаза не видела кода.</p>
-      </div></details>
+      <p>После ухода из найма стало ясно: надо копать самой. Только копать было негде.</p>
     </div>
   </div>
 
-  <div class="pull">Я все надеялась, что понимание появится само собой. Но после ухода из найма стало ясно: никто не придет и не научит. Надо копать самой.</div>
+  <div class="pull">Я все надеялась, что <u>оно само придет в мою жизнь</u>, когда понадобится. А после ухода с найма поняла: никто не придет и не научит. Надо самой, и надо копать.</div>
 
-  <div class="keybox">
-    <span class="cap">и самое главное</span>
-    <b>Все это было год назад, а сегодня технических преград уже нет</b>
-    <p>Точка входа стала доступной: сейчас человек с любым опытом может с нуля спроектировать проект и автоматизировать свою рутину <span class="u">без единой строчки кода</span>.</p>
+  <div class="shead chunk" id="s-1" style="margin-top:32px"><span class="eyebrow">почему буксует не только у тебя</span><h2>Нет системы &rarr; есть сопротивление начинать</h2>
+    <p>Копать было негде. <span class="u">Начального уровня на рынке не было</span> &mdash; и это, как оказалось, ломает старт почти всем.</p></div>
+
+  <div class="prose">
+    <p>Одни болтали и не показывали результат. Другие &mdash; разработчики &mdash; объясняли «просто», а выходило не очень. Третьи &mdash; профи с реальными результатами, но они прямо предупреждали: «это не для новичков».</p>
+    <p>Людей, которые реально понимают, как все устроено, и готовы делиться этим системно, &mdash; единицы. Обычно они сидят за кадром и тихо пилят свои продукты. А <span class="u">мне нужна была просто структура</span>: чтобы на пальцах объяснили базу, от большего к меньшему, чтобы я научилась отсеивать шум и брать только то, что мне нужно.</p>
   </div>
 
-  <div class="shead" style="margin-top:32px"><span class="eyebrow">страхи</span><h2>Почему мы тормозим на самом деле</h2>
-    <p>Изучая рынок, я увидела четкий паттерн. Многие застряли ровно в той же точке, где была я, &mdash; и держит нас <span class="u">выученная беспомощность</span>:</p></div>
+  <div class="note" style="margin-top:24px"><b>Когда системы нет, включается защита.</b> Изучая рынок, я увидела четкий паттерн: многие застряли ровно в той же точке, где была я, &mdash; и держит нас <span class="u">выученная беспомощность</span>.</div>
 
   <div class="fears">
     <div class="fear"><span class="x">&#10007;</span>«Это слишком сложно»</div>
@@ -672,163 +963,426 @@
     <p>К этому добавляется <span class="u">перфекционизм и страх ошибки</span>. Кажется, что если начнешь и сделаешь что-то не так, разочаруешься в себе еще больше. Поэтому проще сказать «это не мое» и даже не пробовать. А информационный шум вокруг только давит: нейросетей так много, что непонятно, за что вообще хвататься.</p>
   </div></details>
 
-  <div class="pull"><u>Моя миссия</u> сейчас &mdash; стать тем самым проводником, которого мне так не хватало на старте.</div>
+  <div class="shead chunk" id="s-2" style="margin-top:32px"><span class="eyebrow">переломный момент</span><h2>Мой проводник</h2>
+    <p>Сдвиг случился, когда мой молодой человек убедил меня взять его IT-проект и сделать все с помощью ИИ, вообще без знаний кода.</p></div>
 
   <div class="keybox">
-    <span class="cap">главное, что стоит усвоить</span>
-    <b>ИИ &mdash; это не замена тебе, а твой мощный усилитель</b>
-    <p>Он адаптируется именно под твой контекст, под твои ограничения и задачи. С ним ты можешь реализовать <span class="u">буквально любую идею</span>, которая придет в голову. Это не просто модное слово, а твое конкурентное преимущество: компании уже ищут тех, кто умеет работать с нейросетями, потому что такие люди делают процессы быстрее и дешевле. Это тот навык, который сделает тебя свободнее в деньгах и времени.</p>
+    <span class="cap">справка</span>
+    <b><i>Год назад для этого еще нужно было подключать ИИ к терминалу</i></b>
+    <p>И работать в интерфейсе, знакомом только разработчикам. Сегодня этого шага нет.</p>
   </div>
 
-  <div style="margin-top:16px"><button class="btn block sky" data-view="market">Дальше: как устроен рынок <span class="go">&rarr;</span></button></div>
+  <div class="prose">
+    <p>Было сложно и жутко бесило. Получалось с пятнадцатой попытки.</p>
+    <p>Но знаете что? <span class="u">Меня затянуло.</span></p>
+  </div>
+
+  <div class="pull">При каких еще обстоятельствах обычная девчонка без технического бэкграунда могла бы разработать приложение с нуля или полностью написать сайт?</div>
+
+  <div class="prose">
+    <p>Свой первый проект я <span class="u">полностью написала сама</span>, работая в связке с ИИ, хотя до этого даже не думала, что когда-то буду работать с кодом.</p>
+  </div>
+
+  <div class="keybox">
+    <span class="cap">и самое главное</span>
+    <b>Сегодня технических преград уже нет</b>
+    <p>Порог входа стал минимальным: сейчас человек с любым опытом может с нуля спроектировать проект и автоматизировать свою рутину <span class="u">без единой строчки кода</span>.</p>
+  </div>
+
+  <div class="shead chunk" id="s-3" style="margin-top:32px"><span class="eyebrow">зачем я это делаю</span><h2>Твоим проводником могу стать я</h2>
+    <p>Я прошла этот тернистый путь, учась на собственных ошибках и синтезируя тонны информации с рынка, чтобы понять, что реально работает.</p></div>
+
+  <div class="prose">
+    <p>И сегодня я пришла к идее, что хочу стать тем самым человеком, <span class="u">кто в теме и кто хочет делиться знаниями</span> &mdash; системно, шаг за шагом, с реальными результатами.</p>
+  </div>
+
+  <div class="pull">Моя цель &mdash; <u>увлечь тебя настолько, что тебя будет не оторвать.</u></div>
+
+  <div class="prose">
+    <p>Чтобы ИИ стал полноценной частью твоей рутины. Чтобы ты увидел: он не заменяет тебя, а усиливает. Причем именно твою рутину, именно твои задачи &mdash; и адаптируется именно под твой контекст. Ты можешь реализовать <span class="u">буквально все, что приходит тебе в голову</span>.</p>
+    <p>Главное &mdash; критическое мышление, любопытство и стимул начать.</p>
+  </div>
+
+  <div class="shead chunk" id="s-4" style="margin-top:32px"><span class="eyebrow">про время</span><h2>Почему стоит разобраться сейчас, а не «когда-нибудь»</h2>
+    <p>Есть показательная история на этот счет.</p></div>
+
+  <div class="prose">
+    <p>Когда в офисы пришли компьютеры, часть людей решила, что это не для них, и осталась на калькуляторе и бумаге. Экономисты потом посчитали, что с ними стало. Исследование по данным американского рынка труда за 1984&ndash;2017 годы измерило <span class="u">разрыв в знаниях</span> &mdash; насколько человек отстал от компьютеризации собственной профессии.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>&minus;2,5%</b><span>к зарплате давало отставание всего на 10% от своей профессии<a class="fn" id="r0" href="#f0">1</a></span></div>
+    <div class="stat"><b>+1,4 п. п.</b><span>к годовому шансу вообще выпасть с рынка труда &mdash; при среднем по выборке 8%<a class="fn" href="#f0">1</a></span></div>
+  </div>
+
+  <div class="note"><b>Их не «отставание от моды» догнало.</b> Они раньше уходили с рынка и с меньшими деньгами &mdash; просто потому, что отказались освоить инструмент, который осваивали все вокруг.</div>
+
+  <div class="prose">
+    <p>С ИИ сейчас происходит то же самое, только намного быстрее. Порог входа рухнул: процессы, под которые раньше был нужен целый штат &mdash; дизайнер, аналитик, редактор, &mdash; теперь тянет один человек.</p>
+  </div>
+
+  <div class="pull">Разобраться в ИИ сегодня &mdash; это <u>конкурентное преимущество</u>, но через полгода это станет просто базовым требованием ко всем.</div>
+
+  <div class="note"><b>Пара вечеров, потраченных на фундамент, гарантируют, что ты не окажешься с калькулятором среди тех, у кого уже есть Excel.</b> Время перемен, и мы вынуждены адаптироваться &mdash; иначе нас заменит тот, кто освоил ИИ и <span class="u">обходится компании дешевле</span> того, кто его избегал.</div>
+
+  <div class="note" style="margin-top:26px"><b class="big">Этот гайд &mdash; ровно та карта, которой мне тогда не хватило.</b>
+    <p class="sub">Мы разберем рынок по полочкам, снизу доверху, и к концу у тебя не останется вопроса «что вообще происходит и с чего мне начать».</p></div>
+
+  <details class="dd" style="margin-top:20px"><summary>откуда взяты эти цифры</summary><div class="din">
+    <div class="fnbox">
+      <ol>
+        <li id="f0">Hudomiet P., Willis R. J. Computerization, obsolescence and the length of working life // <i>Labour Economics</i>, 2022, vol. 77, art. 102005, DOI: 10.1016/j.labeco.2021.102005. Данные CPS 1984&ndash;2017 и Health and Retirement Study. Отставание на 0,1 по шкале «разрыва в знаниях» снижало зарплату примерно на 2,5% и повышало годовую вероятность ухода из рабочей силы на 1&ndash;1,4 процентных пункта при среднем по выборке 8 п. п. <a class="nm" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10079279/" target="_blank" rel="noopener">Полный текст</a> <a href="#r0" class="fn">&#8617;</a></li>
+      </ol>
+    </div>
+  </div></details>
+
+  <div class="quizcta">
+    <span class="eyebrow">стимул начать &middot; опрос</span>
+    <button class="btn block" data-view="quiz">С чего начать именно мне? <span class="go">&rarr;</span></button>
+    <p class="qsub">Шесть коротких вопросов &mdash; и на выходе связка <span class="u">модель + инструмент + способ оплаты</span> под твою ситуацию.</p>
+  </div>
+
+  <div class="stitch">
+    <p class="sn">с чего начинается карта</p>
+    <p class="sq">Мне не хватало одного: чтобы кто-то объяснил базу от большего к меньшему.</p>
+    <p class="prose">Начнем ровно с этого. Весь рынок ИИ &mdash; не хаос из ста названий, а один цифровой сотрудник: энергия, мозг, руки и рабочая среда. Разберем его по слоям, снизу вверх.</p>
+    <div style="margin-top:16px"><button class="btn block sky" data-view="market">Дальше: как устроен рынок <span class="go">&rarr;</span></button></div>
+  </div>
 </section></div>
 </div><!-- /v-story -->
 
 <!-- ======================= VIEW: MARKET ======================= -->
-<div class="view" id="v-market" data-title="как устроен рынок">
+<div class="view chap" id="v-market" data-title="как устроен рынок">
 <div class="wrap"><section>
-  <div class="shead"><span class="eyebrow">02 &middot; карта рынка</span><h2>Архитектура рынка: один цифровой сотрудник</h2>
+  <div class="shead chunk" id="m-hd"><span class="eyebrow">02 &middot; карта рынка</span><h2>Архитектура рынка: один цифровой сотрудник</h2>
     <p>Кажется, что рынок несется как сумасшедший: каждую неделю новости про «новый лучший ИИ». Но чтобы не теряться в шуме, достаточно понять одну вещь.</p></div>
 
   <div class="note"><b class="big">Весь рынок ИИ &mdash; это не хаос, а один цифровой сотрудник.</b>
-    <p class="sub">Собери его из трех частей: <span class="gi">мозг</span> &mdash; это сама модель; <span class="gi">руки и рабочее место</span> &mdash; харнес вокруг нее; <span class="gi">энергия</span>, которая все это питает, &mdash; железо и вычисления. Разберем каждую часть снизу вверх.</p></div>
+    <p class="sub"><span class="gi">Энергия</span>, которая все питает, &mdash; железо и вычисления. <span class="gi">Мозг</span> &mdash; сама модель. <span class="gi">Рабочее тело</span> &mdash; харнес, который ею управляет. <span class="gi">Рабочая среда</span> &mdash; место, где он для тебя работает. Разберем снизу вверх.</p></div>
 
-  <div class="note"><b>Почему новинки выходят каждую неделю:</b> модели вышли на уровень, когда могут генерировать синтетические данные и <span class="u">учить сами себя</span>: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. <span class="u">Гнаться за каждым релизом не нужно</span>.</div>
-
-  <!-- ГЕРОЙ: башня-воронка -->
-  <div class="tower">
-    <span class="thead">сверху &mdash; то, чем ты пользуешься &middot; снизу &mdash; то, на чем все держится</span>
-
-    <div class="floor f3"><span class="you">ты здесь</span>
-      <span class="cap">руки и рабочее место</span><b>Харнесы и оболочки</b>
-      <small>Интерфейс, в котором ты работаешь. Именно тут живем мы с тобой: даем модели инструменты, контекст и навыки.</small></div>
-    <div class="tside"><span class="plus">+</span>надстройка &mdash; <b>харнес.</b> Дает голой модели руки: доступ в интернет, к почте, календарю, готовые скрипты. Это Claude Code, Codex и подобные оболочки.</div>
-    <div class="tarrow">работает на &darr;</div>
-
-    <div class="floor f2"><span class="cap">мозг</span><b>Сами модели</b>
-      <small>GPT от OpenAI, Claude от Anthropic, Gemini от Google, китайские DeepSeek и Qwen. Это чистый интеллект, который думает. Но сам по себе он как гениальный спец в пустой комнате: без стола и компьютера ничего не сделает.</small></div>
-    <div class="tarrow">питается от &darr;</div>
-
-    <div class="floor f1"><span class="cap">энергия</span><b>Железо и вычисления</b>
-      <small>Nvidia, чипы, дата-центры. Инференс здесь как электричество: без него «мозг» просто не включится.</small></div>
+  <!-- СКВОЗНАЯ СХЕМА: липнет к верху и догорается по мере чтения -->
+  <div class="emp" id="emp">
+    <span class="ehead">цифровой сотрудник &middot; собираем снизу вверх</span>
+    <div class="erow">
+      <button class="elay" data-lay="m-1"><span class="en">энергия</span><span class="et">Железо</span></button>
+      <button class="elay" data-lay="m-2"><span class="en">мозг</span><span class="et">Модель</span></button>
+      <button class="elay" data-lay="m-3"><span class="en">руки</span><span class="et">Харнес</span></button>
+      <button class="elay" data-lay="m-4"><span class="en">среда</span><span class="et">Интерфейс</span></button>
+    </div>
+    <div class="emp-now"><span class="k">слой</span><span class="v" id="empNow">энергия <i>&mdash; Железо</i></span></div>
   </div>
+
+  <p class="prose">Схема сверху будет собираться сама, пока ты читаешь: каждый следующий блок зажигает свой слой. Внизу &mdash; то, на чем все держится, наверху &mdash; то, чем пользуешься ты.</p>
+
+  <!-- переключатель: компания / продукт / модель -->
+  <div class="shead chunk" id="m-0" style="margin-top:32px"><span class="eyebrow">аналогия, с которой все становится на места</span><h2>Компания &ne; продукт &ne; модель</h2>
+    <p>В этой развилке заблуждаются чаще всего. Возьми телефон: компания &mdash; Apple, продукт в руках &mdash; iPhone, система внутри &mdash; iOS. С ИИ ровно так же &mdash; переключай и смотри.</p></div>
+
+  <div class="sw" id="sw">
+    <div class="sw-tabs">
+      <button data-sw="apple" class="cur">Apple</button>
+      <button data-sw="openai">OpenAI</button>
+      <button data-sw="anthropic">Anthropic</button>
+      <button data-sw="ru">Россия</button>
+    </div>
+    <div class="sw-body">
+      <div class="sw-pane on" data-pane="apple">
+        <p class="sw-lede">Та самая аналогия, с которой все понятно без ИИ.</p>
+        <div class="sw-row"><span class="sk"><b>Компания</b>кто делает</span><span class="sv">Apple</span></div>
+        <div class="sw-row"><span class="sk"><b>Продукт</b>что в руках</span><span class="sv">iPhone</span></div>
+        <div class="sw-row"><span class="sk"><b>Система</b>что внутри</span><span class="sv">iOS</span></div>
+      </div>
+      <div class="sw-pane" data-pane="openai">
+        <p class="sw-lede">США &middot; фронтир. Название чата и название «мозга» &mdash; разные вещи.</p>
+        <div class="sw-row"><span class="sk"><b>Компания</b>кто делает</span><span class="sv"><a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a></span></div>
+        <div class="sw-row"><span class="sk"><b>Продукты</b>что в руках</span><span class="sv"><a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>, ChatGPT Work, <a class="nm" href="https://openai.com/codex" target="_blank" rel="noopener">Codex</a>, API Platform</span></div>
+        <div class="sw-row"><span class="sk"><b>Модели</b>что внутри</span><span class="sv">GPT и его семейства, GPT Image, Sora, Whisper</span></div>
+      </div>
+      <div class="sw-pane" data-pane="anthropic">
+        <p class="sw-lede">США &middot; фронтир. Тот же принцип: продукт снаружи, модель внутри.</p>
+        <div class="sw-row"><span class="sk"><b>Компания</b>кто делает</span><span class="sv"><a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a></span></div>
+        <div class="sw-row"><span class="sk"><b>Продукты</b>что в руках</span><span class="sv"><a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, <a class="nm" href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a>, Claude Cowork, Claude API</span></div>
+        <div class="sw-row"><span class="sk"><b>Модели</b>что внутри</span><span class="sv">Claude Opus / Sonnet / Haiku и другие</span></div>
+      </div>
+      <div class="sw-pane" data-pane="ru">
+        <p class="sw-lede">Россия. Устроено точно так же &mdash; только мощностей меньше.</p>
+        <div class="sw-row"><span class="sk"><b>Яндекс</b>компания</span><span class="sv">Алиса, Yandex AI Studio, Yandex Cloud &mdash; внутри YandexGPT, Alice AI</span></div>
+        <div class="sw-row"><span class="sk"><b>Сбер</b>компания</span><span class="sv"><a class="nm" href="https://giga.chat" target="_blank" rel="noopener">GigaChat</a>, GigaChat API, Салют &mdash; внутри GigaChat, Kandinsky, GigaAM</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:16px"><b>Почему новинки выходят каждую неделю:</b> модели вышли на уровень, когда могут генерировать синтетические данные и <span class="u">учить сами себя</span>: готовят себе задания и растут на них. То, на что раньше уходили годы ручного труда, теперь происходит за месяцы. <span class="u">Гнаться за каждым релизом не нужно</span>.</div>
 
   <!-- цифры для масштаба -->
   <div class="stats">
-    <div class="stat"><b>$5 трлн</b><span>рынок железа &mdash; основа всего<a class="fn" id="r1" href="#f1">1</a></span></div>
-    <div class="stat"><b>$100+ млрд</b><span>рынок инференса в 2026<a class="fn" id="r2" href="#f2">2</a></span></div>
-    <div class="stat"><b>$2,5 трлн</b><span>мир потратит на ИИ-инфраструктуру за год<a class="fn" id="r3" href="#f3">3</a></span></div>
+    <div class="stat"><b>$650 млрд</b><span>вложат в ИИ крупнейшие облачные компании за один 2026 год<a class="fn" id="r1" href="#f1">1</a></span></div>
+    <div class="stat"><b>$2,59 трлн</b><span>мир потратит на ИИ за год &mdash; на железо, софт и сервисы<a class="fn" id="r2" href="#f2">2</a></span></div>
+    <div class="stat"><b>$5,5 трлн</b><span>суммарные вложения в ИИ-инфраструктуру до 2030 года<a class="fn" id="r3" href="#f3">3</a></span></div>
   </div>
-
-  <p class="prose" style="margin-top:8px">Дальше &mdash; три слоя этой системы: энергия, мозг и руки. Разбирать все подряд не нужно &mdash; открывай тот слой, который интересен.</p>
+  <p class="prose" style="margin-top:6px"><small class="ph">Данные актуальны на июль 2026 &mdash; проверяй, если читаешь позже.</small></p>
 
   <!-- слой 1: энергия -->
-  <details class="dd" style="margin-top:16px"><summary>слой 1 &middot; энергия &mdash; железо и вычисления</summary><div class="din">
-    <p>На этом держится вообще все: физические серверы, чипы и дата-центры, на которых нейросети обучаются и работают.</p>
+  <div class="shead chunk" id="m-1" style="margin-top:32px"><span class="eyebrow"><span class="star"></span> слой 1 &middot; энергия</span><h2>Железо и вычисления</h2>
+    <p>Фундамент, на котором все строится: физические серверы, чипы и дата-центры, где нейросети обучаются и работают.</p></div>
 
   <div class="ckl">
-    <div class="ck"><span class="m">1</span><span>Здесь правит <a class="nm" href="https://www.nvidia.com" target="_blank" rel="noopener">Nvidia</a> &mdash; <span class="u">самая дорогая компания в мире</span>; весь рынок железа оценивается в $5 трлн<a class="fn" href="#f1">1</a></span></div>
-    <div class="ck"><span class="m">2</span><span><b>Инференс</b> &mdash; «электричество мысли»: каждый твой промпт расходует вычисления на серверах</span></div>
+    <div class="ck"><span class="m">1</span><span>Здесь правит <a class="nm" href="https://www.nvidia.com" target="_blank" rel="noopener">Nvidia</a> &mdash; <span class="u">самая дорогая компания в мире</span></span></div>
+    <div class="ck"><span class="m">2</span><span><b>Инференс</b> &mdash; это когда модель физически «думает» над твоей задачей. Каждый твой промпт сжигает вычисления на серверах</span></div>
     <div class="ck"><span class="m">3</span><span>Поэтому <span class="u">самые умные модели не бесплатны</span> &mdash; но для тебя все уже упаковано в подписку</span></div>
   </div>
 
-  <details class="dd"><summary>сколько это стоит на самом деле</summary><div class="din">
-    <p>Чипы стоят безумных денег: серверные связки B200 обходятся в сотни тысяч долларов. Инференс &mdash; это когда модель физически «думает» над твоей задачей. Относись к нему как к электричеству: спрос на этот «ток» настолько огромный, что рынок инференса в 2026 пробил $100+ млрд,<a class="fn" href="#f2">2</a> и появляются отдельные компании (вроде стартапа <a class="nm" href="https://www.etched.com" target="_blank" rel="noopener">Etched</a> с оценкой $5 млрд), которые делают железо исключительно под «думанье» ИИ.</p>
-    <p>Только в этом году мир потратит на ИИ-инфраструктуру около 2,5 триллиона долларов.<a class="fn" href="#f3">3</a> За размышления умных моделей кто-то должен платить электричеством &mdash; но лезть в это железо тебе не нужно.</p>
-  </div></details>
-  </div></details>
+  <div class="note"><b>Относись к инференсу как к электричеству.</b> За размышления умных моделей кто-то должен платить током &mdash; но лезть в это железо тебе не нужно. Энергия есть &mdash; включаем мозг.</div>
 
   <!-- слой 2: мозг -->
-  <details class="dd" style="margin-top:12px"><summary>слой 2 &middot; мозг &mdash; сами модели</summary><div class="din">
-    <p>Модель &mdash; это <em>чистый интеллект</em>. Гениальный специалист, которого посадили в пустую комнату: он шикарно думает, но без стола и компьютера ничего не может сделать сам.</p>
+  <div class="shead chunk" id="m-2" style="margin-top:36px"><span class="eyebrow"><span class="star"></span> слой 2 &middot; мозг</span><h2>Сами модели</h2>
+    <p>Модель &mdash; обученная математическая система, чистый интеллект. Она отлично рассуждает, но сама по себе не имеет доступа ни к твоим файлам, ни к сервисам. Гениальный специалист в пустой комнате.</p></div>
+
   <div class="prose">
-    <p>Здесь идет жесточайшая война корпораций. Обучение передовой модели с нуля стоит <span class="u">от 50 до 500 миллионов долларов</span>, а с учетом исследований затраты доходят до миллиардов.<a class="fn" id="r4" href="#f4">4</a> Игроков немного, и их легко расставить <span class="u">по трем полкам</span>.</p>
+    <p>Здесь идет жесточайшая война корпораций: разработка одной такой модели стоит <span class="u">сотни миллионов долларов</span>.<a class="fn" id="r4" href="#f4">4</a> Игроков немного, и их легко расставить по полкам.</p>
   </div>
 
+  <!-- гири: семейства моделей -->
+  <div class="wts">
+    <div class="wt w1"><span class="wb"></span><span class="wn">Легкая</span><span class="wd">быстрая и дешевая &mdash; простые задачи пачками</span></div>
+    <div class="wt w2"><span class="wb"></span><span class="wn">Средняя</span><span class="wd">баланс на каждый день &mdash; твой рабочий режим</span></div>
+    <div class="wt w3"><span class="wb"></span><span class="wn">Тяжеловес</span><span class="wd">комплексные задачи &mdash; дороже и медленнее, но умнее</span></div>
+  </div>
+  <p class="prose" style="margin-top:8px"><small class="ph">У каждого фронтира линейка устроена одинаково: Haiku / Sonnet / Opus у Anthropic, Luna / Terra / Sol у OpenAI. Начинай со средней &mdash; тяжеловеса берешь, когда задача реально уперлась.</small></p>
+
+  <details class="dd" style="margin-top:16px"><summary>кто есть кто на рынке моделей</summary><div class="din">
   <div class="ctable"><table>
-    <tr><th>Компания</th><th>Приложение</th><th>Модели внутри</th></tr>
+    <tr><th>Кто</th><th>Модель</th><th>Чем известна</th></tr>
     <tr>
       <td>&#9733; <a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a><br><span class="ph">США &middot; фронтир</span></td>
-      <td><a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> и рабочая среда ChatGPT Work</td>
-      <td>линейка GPT-5.6: Sol &mdash; для сложных задач, Terra &mdash; сбалансированная, Luna &mdash; легкая и быстрая</td>
+      <td>GPT</td>
+      <td>семейство GPT-5.6: Sol &mdash; для сложных задач, Terra &mdash; сбалансированная, Luna &mdash; легкая и быстрая</td>
     </tr>
     <tr>
       <td>&#9733; <a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a><br><span class="ph">США &middot; фронтир</span></td>
-      <td><a class="nm" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, а также среда <a class="nm" href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a></td>
-      <td>Haiku &mdash; быстрая и дешевая, Sonnet &mdash; стандарт на каждый день, Opus &mdash; аналитика и код, Fable &mdash; вершина линейки</td>
+      <td>Claude</td>
+      <td>Haiku &mdash; быстрая и дешевая, Sonnet &mdash; баланс на каждый день, Opus &mdash; комплексные задачи, Fable &mdash; вершина линейки</td>
     </tr>
     <tr>
       <td>&#9733; <a class="nm" href="https://deepmind.google" target="_blank" rel="noopener">Google</a><br><span class="ph">США &middot; фронтир</span></td>
       <td><a class="nm" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a></td>
-      <td>Gemini &mdash; сильна мультимодальностью: текст, видео, аудио и графика разом</td>
+      <td>мультимодальность &mdash; текст, видео, аудио и графика разом; интеграция с сервисами Google</td>
     </tr>
     <tr>
-      <td>Китай<br><span class="ph">догоняет, в 20&ndash;30 раз дешевле</span></td>
-      <td>свои чаты и открытые сборки</td>
-      <td><a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>, <a class="nm" href="https://chat.qwen.ai" target="_blank" rel="noopener">Qwen</a>, <a class="nm" href="https://www.kimi.com" target="_blank" rel="noopener">Kimi</a>, <a class="nm" href="https://www.minimax.io" target="_blank" rel="noopener">Minimax</a> &mdash; часто open-source</td>
+      <td>Китай<br><span class="ph">догоняет, часто open-source</span></td>
+      <td><a class="nm" href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>, <a class="nm" href="https://chat.qwen.ai" target="_blank" rel="noopener">Qwen</a>, <a class="nm" href="https://www.minimax.io" target="_blank" rel="noopener">Minimax</a>, <a class="nm" href="https://www.kimi.com" target="_blank" rel="noopener">Kimi</a></td>
+      <td>заметно дешевле фронтира, открытые веса</td>
+    </tr>
+    <tr>
+      <td>Другие<br><span class="ph">США</span></td>
+      <td>Grok, Sonar, Llama</td>
+      <td>от xAI, <a class="nm" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity</a> и Meta соответственно</td>
     </tr>
     <tr>
       <td>Россия<br><span class="ph">ограничена в мощностях</span></td>
-      <td>Алиса, GigaChat</td>
       <td><a class="nm" href="https://ya.ru/ai/gpt" target="_blank" rel="noopener">YandexGPT</a>, <a class="nm" href="https://giga.chat" target="_blank" rel="noopener">GigaChat</a></td>
+      <td>внутри Алисы и GigaChat</td>
     </tr>
   </table></div>
-  <div class="note dark"><b>Про «бесплатные» китайские модели.</b> Сама модель может быть бесплатной (open-source), но чтобы она заработала на тебя, нужно <span class="u">купить сервер за десятки тысяч долларов</span>. Поэтому для обычного пользователя это не вариант для старта. Твой старт &mdash; фронтир: у него самые умные модели и все уже упаковано в подписку.</div>
+  <p class="prose"><small class="ph">Отдельная категория &mdash; модели для других типов контента: изображения, видео, речь. Актуально на июль 2026.</small></p>
   </div></details>
 
-  <!-- слой 3: руки и рабочее место -->
-  <details class="dd" style="margin-top:12px"><summary>слой 3 &middot; руки &mdash; харнесы и оболочки</summary><div class="din">
-    <p>Мозг у нас уже есть &mdash; гениальный, но голый и без инструментов. Чтобы он начал приносить пользу, ему нужна оболочка &mdash; харнес (harness).</p>
+  <div class="note dark"><b>Про «бесплатные» китайские модели.</b> Сама модель может быть бесплатной (open-source), но чтобы она заработала на тебя, нужно <span class="u">купить сервер за десятки тысяч долларов</span>. Для старта это не вариант. Твой старт &mdash; фронтир: самые умные модели, и все уже упаковано в подписку.</div>
+
   <div class="keybox">
-    <span class="cap">твой рабочий сетап</span>
-    <b>Сильный подрядчик плюс хороший офис</b>
-    <p>Когда ты покупаешь доступ к продвинутым кодинг-агентам вроде <a class="nm" href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a> или <a class="nm" href="https://openai.com/codex" target="_blank" rel="noopener">Codex</a>, либо используешь открытые <a class="nm" href="https://nousresearch.com" target="_blank" rel="noopener">Hermes</a> и <a class="nm" href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a>, ты арендуешь не просто модель, а сразу мощную оболочку вокруг нее. <span class="u">Модель плюс харнес</span> &mdash; это и есть тот сетап, который дает прорывную производительность и освобождает твое время.</p>
+    <span class="cap">и главная мысль про модели</span>
+    <b>ИИ &mdash; это инструмент, которым управляет человек</b>
+    <p>Он снижает затраты и барьеры, но не заменяет тебя, а расширяет твои возможности. Отвечать за результат в конечном итоге будет человек &mdash; наша задача сегодня в том, чтобы освоить ИИ и управлять им. <a href="#" data-view="mindset">Подробнее &mdash; в главе про мышление &rarr;</a></p>
+  </div>
+
+  <!-- слой 3: харнесы и агенты -->
+  <div class="shead chunk" id="m-3" style="margin-top:36px"><span class="eyebrow"><span class="star"></span> слой 3 &middot; руки</span><h2>Харнесы и агенты</h2>
+    <p>Мозг у нас уже есть &mdash; гениальный, но голый. Чтобы он начал приносить пользу, ему нужна оболочка: харнес (harness) &mdash; нервная система и управляющая инфраструктура.</p></div>
+
+  <div class="keybox">
+    <span class="cap">запомни это уравнение</span>
+    <b>Модель + харнес = агент</b>
+    <p>Тот самый сетап, который дает прорывную производительность и освобождает твое время. Когда ты покупаешь подписку, ты <span class="u">одновременно получаешь доступ к харнесам</span> &mdash; отдельно ничего собирать не надо.</p>
   </div>
   <div class="prose">
-    <p>Харнес &mdash; это современное, <span class="u">полностью укомплектованное рабочее место для модели</span>. И это та часть, где живем и работаем мы с тобой. Слоем между тобой и голой моделью выступает интерфейс, внутри которого мы даем ИИ-сотруднику все необходимое:</p>
+    <p>Харнес &mdash; это полностью укомплектованное рабочее тело для модели. Внутри него ИИ-сотрудник получает:</p>
   </div>
   <div class="mviz">
     <div class="branch"><span class="cap">инструменты</span><b>Руки</b><small>доступ к интернету, почте, CRM-системе, календарю</small></div>
     <div class="branch"><span class="cap">контекст и ограничения</span><b>Правила</b><small>форматы и должностные инструкции (промпты)</small></div>
     <div class="branch"><span class="cap">навыки</span><b>Скрипты</b><small>готовый код и сценарии, чтобы модель запускала процессы сама</small></div>
   </div>
+  <div class="prose">
+    <p>Агенты бывают <span class="u">специализированные для разработки</span> и <span class="u">универсальные рабочие</span>. Доступ к ним идет либо через API &mdash; программный способ вызывать модель, &mdash; либо через подписку, если ты конечный пользователь.</p>
+  </div>
+
+  <div class="ctable"><table>
+    <tr><th>Компания</th><th>Агент</th><th>Для чего</th></tr>
+    <tr><td>OpenAI</td><td>ChatGPT Work</td><td>универсальный рабочий</td></tr>
+    <tr><td>OpenAI</td><td>Codex</td><td>разработка</td></tr>
+    <tr><td>OpenAI</td><td>ChatGPT Agent</td><td>работа в браузере</td></tr>
+    <tr><td>Anthropic</td><td>Claude Cowork</td><td>универсальный рабочий</td></tr>
+    <tr><td>Anthropic</td><td>Claude Code</td><td>разработка</td></tr>
+    <tr><td>Anthropic</td><td>Claude Design</td><td>визуальный дизайн</td></tr>
+  </table></div>
+
+  <details class="dd"><summary>агенты от других компаний</summary><div class="din">
+    <div class="ckl">
+      <div class="ck"><span class="m">&#9733;</span><span><b>Gemini CLI</b> &mdash; кодинг-агент от Google</span></div>
+      <div class="ck"><span class="m">&#9733;</span><span><b><a class="nm" href="https://cursor.com" target="_blank" rel="noopener">Cursor</a> Agent</b> &mdash; кодинг-агент</span></div>
+      <div class="ck"><span class="m">&#9733;</span><span><b>GitHub Copilot Coding Agent</b> &mdash; кодинг-агент</span></div>
+      <div class="ck"><span class="m">&#9733;</span><span><b><a class="nm" href="https://manus.im" target="_blank" rel="noopener">Manus</a></b> &mdash; универсальный агент</span></div>
+      <div class="ck"><span class="m">&#9733;</span><span><b><a class="nm" href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a></b> &mdash; персональный, open-source харнес</span></div>
+      <div class="ck"><span class="m">&#9733;</span><span><b><a class="nm" href="https://nousresearch.com" target="_blank" rel="noopener">Hermes Agent</a></b> &mdash; персональный, open-source харнес</span></div>
+    </div>
+  </div></details>
+
+  <!-- слой 4: интерфейс -->
+  <div class="shead chunk" id="m-4" style="margin-top:36px"><span class="eyebrow"><span class="star"></span> слой 4 &middot; рабочая среда</span><h2>Интерфейс, где работаешь ты</h2>
+    <p>Взаимодействие с ИИ всегда идет через чат &mdash; это наш единый язык общения. Но глубина интеграции отличается радикально, и разница ровно в одном: есть ли у модели рабочее тело. Вот два экрана рядом.</p></div>
+
+  <div class="vs">
+    <div class="vsc">
+      <div class="vs-bar"><i></i><i></i><i></i><span>чат-бот</span></div>
+      <div class="vs-in">
+        <div class="vs-msg me">Собери отчет по заявкам за июнь</div>
+        <div class="vs-msg">Конечно! Вот структура отчета и формулы &mdash; скопируй в свою таблицу и подставь данные&hellip;</div>
+        <div class="vs-msg">Если пришлешь цифры, помогу с выводами.</div>
+      </div>
+      <div class="vs-foot">Внутри &mdash; голая модель. Подумает, подскажет, напишет текст. Дальше делаешь ты сам.</div>
+    </div>
+    <div class="vsc deep">
+      <div class="vs-bar"><i></i><i></i><i></i><span>исполняющая среда</span></div>
+      <div class="vs-in">
+        <div class="vs-msg me">Собери отчет по заявкам за июнь</div>
+        <div class="vs-do"><span class="star"></span> открыл CRM &middot; 412 заявок</div>
+        <div class="vs-do"><span class="star"></span> посчитал, собрал таблицу</div>
+        <div class="vs-do"><span class="star"></span> положил в диск, дал ссылку</div>
+        <div class="vs-msg">Готово. Конверсия упала на 8% во вторую неделю &mdash; показать причину?</div>
+      </div>
+      <div class="vs-foot">Внутри &mdash; агент: модель + харнес. Базы, навыки, таск-трекеры, CRM, Miro, Canva. Подключается через коннекторы, MCP или API.</div>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:16px">
+    <p>Сами исполняющие среды тоже разные:</p>
+  </div>
+  <div class="mviz">
+    <div class="branch"><span class="cap">готовые продукты</span><b>Визуальный интерфейс</b><small>ChatGPT Work, Claude Cowork &mdash; без программирования и командной строки, интеграции настроены заранее</small></div>
+    <div class="branch"><span class="cap">для разработки</span><b>IDE и AI-IDE</b><small>VS Code, Xcode, Cursor, Windsurf &mdash; глубокий доступ к локальным файлам и коду</small></div>
+    <div class="branch"><span class="cap">для разработки</span><b>Терминал</b><small>Terminal на macOS, Warp &mdash; здесь запускают Claude Code, Codex CLI, Gemini CLI</small></div>
+  </div>
+
+  <div class="note"><b>Принцип везде одинаковый:</b> агент получает задачу, использует доступные инструменты, выполняет действия и возвращает результат. Визуальные продукты проще, терминальные дают больше глубины &mdash; знать все среды на старте не нужно.</div>
+
+  <div class="note ps" style="margin-top:16px"><b class="big">Сотрудник собран.</b>
+    <p class="sub">Энергия питает мозг, мозг получает руки, руки работают в твоей среде. Дальше рынок можно читать как новости про знакомого человека: это ему новый мозг завезли, а это &mdash; руки прокачали.</p></div>
+
+  <!-- терминология -->
+  <div class="shead chunk" id="m-5" style="margin-top:36px"><span class="eyebrow">справочник</span><h2>Разберемся с важной иерархией</h2>
+    <p>Тут путаются почти все. Это не синонимы, а вложенные круги &mdash; тапни любой.</p></div>
+
+  <div class="rings">
+    <div class="rg" id="rg">
+      <b class="g1" data-rg="ai">ИИ</b>
+      <b class="g2" data-rg="ml">Machine Learning</b>
+      <b class="g3" data-rg="nn">Нейросети</b>
+      <b class="g4" data-rg="llm">LLM</b>
+    </div>
+    <p class="rg-note" id="rgNote"><b>ИИ</b> &mdash; вся область целиком. Внутри нее лежит все остальное.</p>
+  </div>
+
+  <div class="ckl" style="margin-top:16px">
+    <div class="ck"><span class="m">&#10007;</span><span>Не любой ИИ является нейросетью</span></div>
+    <div class="ck"><span class="m">&#10007;</span><span>Все нейросети относятся к машинному обучению, но <span class="u">не все машинное обучение основано на нейросетях</span></span></div>
+    <div class="ck"><span class="m">&#10007;</span><span>Любая современная LLM &mdash; нейросеть, но <span class="u">далеко не каждая нейросеть &mdash; LLM</span></span></div>
+  </div>
+
+  <details class="dd" style="margin-top:16px"><summary>двенадцать терминов, в которых все путаются</summary><div class="din">
+    <div class="gloss">
+      <dl class="gterm"><dt>ИИ</dt><dd>вся область целиком</dd></dl>
+      <dl class="gterm"><dt>Machine Learning</dt><dd>ИИ, который учится на данных</dd></dl>
+      <dl class="gterm"><dt>Нейросеть</dt><dd>один из типов ML-моделей</dd></dl>
+      <dl class="gterm"><dt>Deep Learning</dt><dd>обучение многослойных нейросетей</dd></dl>
+      <dl class="gterm"><dt>Модель</dt><dd>обученная математическая система</dd></dl>
+      <dl class="gterm"><dt>LLM</dt><dd>большая языковая модель</dd></dl>
+      <dl class="gterm"><dt>Generative AI</dt><dd>ИИ, создающий контент</dd></dl>
+      <dl class="gterm"><dt>Мультимодальная модель</dt><dd>работает с несколькими форматами сразу</dd></dl>
+      <dl class="gterm"><dt>Чат-бот</dt><dd>диалоговый продукт или интерфейс</dd></dl>
+      <dl class="gterm"><dt>Агент</dt><dd>система, выполняющая последовательность действий</dd></dl>
+      <dl class="gterm"><dt>Харнес</dt><dd>оболочка, управляющая моделью и инструментами</dd></dl>
+      <dl class="gterm"><dt>API и MCP</dt><dd>способы подключения систем и инструментов</dd></dl>
+    </div>
   </div></details>
 
   <!-- FOOTNOTES -->
-  <details class="dd" id="fndd"><summary>откуда взяты эти цифры</summary><div class="din">
+  <details class="dd" id="fndd" style="margin-top:20px"><summary>откуда взяты эти цифры</summary><div class="din">
     <div class="fnbox">
       <ol>
-        <li id="f1">Рынок ИИ-железа и капитализация Nvidia &mdash; порядок величины по рыночным оценкам 2026 года. Цифры показывают масштаб, а не точную сумму. <a href="#r1" class="fn">&#8617;</a></li>
-        <li id="f2">Объем рынка инференса в 2026 &mdash; оценка отрасли, порядок $100+ млрд. <a href="#r2" class="fn">&#8617;</a></li>
-        <li id="f3">Совокупные траты мира на ИИ-инфраструктуру за год &mdash; рыночная оценка 2026, порядок $2,5 трлн. <a href="#r3" class="fn">&#8617;</a></li>
+        <li id="f1">JPMorgan Global Research, midyear outlook от 24 июня 2026: капитальные затраты на ИИ у крупнейших облачных компаний (Amazon, Microsoft, Google, Meta) на 2026 год &mdash; около $650 млрд. <a href="#r1" class="fn">&#8617;</a></li>
+        <li id="f2">Gartner, «Gartner Forecasts Worldwide AI Spending to Grow 47% in 2026» от 19 мая 2026: совокупные мировые траты на ИИ в 2026 году &mdash; $2,59 трлн. Это все траты на ИИ целиком: железо, софт и сервисы; на инфраструктуру приходится больше 45% суммы. <a href="#r2" class="fn">&#8617;</a></li>
+        <li id="f3">JPMorgan Global Research, 24 июня 2026: суммарные вложения в ИИ-инфраструктуру до 2030 года &mdash; $5,5 трлн (оценка повышена с прежних $5,1 трлн). Это накопленным итогом за все годы, а не за один год. <a href="#r3" class="fn">&#8617;</a></li>
         <li id="f4">Стоимость обучения передовой модели &mdash; диапазон отраслевых оценок ($50&ndash;500 млн без учета исследований). <a href="#r4" class="fn">&#8617;</a></li>
       </ol>
     </div>
   </div></details>
 
-  <div style="margin-top:16px"><button class="btn block sky" data-view="mindset">Дальше: мышление AI-First <span class="go">&rarr;</span></button></div>
+  <div class="quizcta">
+    <span class="eyebrow">теперь примерь на себя &middot; опрос</span>
+    <button class="btn block" data-view="quiz">С чего начать именно мне? <span class="go">&rarr;</span></button>
+    <p class="qsub">Шесть коротких вопросов &mdash; и на выходе связка <span class="u">модель + инструмент + способ оплаты</span> под твою ситуацию.</p>
+  </div>
+
+  <div class="stitch">
+    <p class="sn">карта у тебя есть</p>
+    <p class="sq">Знать, как устроен рынок, и получать от него результат &mdash; две разные вещи.</p>
+    <p class="prose">Сотрудник собран, инструменты названы. Остался вопрос, на котором спотыкаются почти все: почему у одних ИИ работает, а у других остается игрушкой на один вечер. Дело не в инструменте.</p>
+    <div style="margin-top:16px"><button class="btn block sky" data-view="mindset">Дальше: мышление AI-First <span class="go">&rarr;</span></button></div>
+  </div>
 </section></div>
 </div><!-- /v-market -->
 
 <!-- ======================= VIEW: MINDSET ======================= -->
-<div class="view" id="v-mindset" data-title="мышление ai-first">
+<div class="view chap" id="v-mindset" data-title="мышление ai-first">
 <div class="wrap"><section>
-  <div class="shead"><span class="eyebrow">03 &middot; мышление</span><h2>Переход к мышлению AI-First</h2>
-    <p>У нас есть мощный мозг (модель) и правильный офис (харнес). Что дальше? Идти качать сборники «1000 лучших промптов»? Нет.</p></div>
+  <div class="shead chunk" id="d-0"><span class="eyebrow">03 &middot; мышление</span><h2>Почему у многих не получается подружиться с ИИ</h2>
+    <p>Разбираем страхи и ошибки, которые тормозят прогресс. У нас есть мощный мозг (модель) и правильный офис (харнес). Что дальше? Идти качать сборники «1000 лучших промптов»? Нет.</p></div>
+
+  <div class="note dark"><b>Сгенерировать красивую картинку &mdash; игрушка на один раз, мы же все это понимаем.</b> Восторг вызывает, пользы не приносит. Настоящая ценность начинается там, где ты <span class="u">привязываешь к этим мозгам свои реальные данные</span>, инструменты и сервисы &mdash; всю свою инфраструктуру работы. Продумываешь бизнес-сценарий и превращаешь его в рабочий инструмент под свои ежедневные задачи.</div>
+
+  <div class="shead chunk" id="d-1" style="margin-top:32px"><span class="eyebrow"><span class="star"></span> ошибка номер один</span><h2>От слепого копирования к реальным результатам</h2>
+    <p>Главная ошибка новичка &mdash; повторять чужой путь через готовые промпты.</p></div>
 
   <div class="prose">
-    <p>Главная ошибка новичков &mdash; пытаться повторить чужой путь. <span class="u">Слепое копирование готовых шаблонов почти не работает</span>: то, что дало результат одному человеку, может выдать полнейший бред у тебя. Вариантов достижения цели бесконечно много, и под твои задачи путь все равно будет своим.</p>
+    <p>Это почти никогда не срабатывает, и дело не в самом запросе, а в контексте, ограничениях и доступах: <span class="u">они у каждого свои</span>. Универсального промпта не существует. Идеального сценария действий, единственно верной комбинации инструментов &mdash; тоже. Путей к твоей цели бесконечно много.</p>
+    <p>Поэтому бессмысленно начинать с изучения инструментов и сервисов, с попыток разобраться, как все это устроено внутри. Ты же не знаешь, как работает интернет, &mdash; ты просто пользуешься им, чтобы дойти до цели.</p>
   </div>
+
+  <div class="shead chunk" id="d-2" style="margin-top:32px"><span class="eyebrow"><span class="star"></span> что осваивать вместо этого</span><h2>Навык вместо связки</h2>
+    <p>Задача &mdash; не собрать одну рабочую связку.</p></div>
 
   <div class="keybox">
     <span class="cap">что такое AI-First на практике</span>
     <b>Ты подходишь к задаче прагматично и стратегически</b>
-    <p>Критически анализируешь информацию, умеешь выстраивать причинно-следственные связи и раскладываешь сложный процесс на простые шаги.</p>
+    <p>Критически анализируешь информацию, выстраиваешь причинно-следственные связи и раскладываешь сложный процесс на простые шаги. Больше не нужно искать готовые решения, ждать четкого ТЗ и теряться при нестандартных вводных. Нужно научиться <span class="u">делегировать рутину агентам</span> &mdash; это наше будущее, и к нему стоит быть готовым.</p>
   </div>
 
-  <div class="note dark"><b>Главная ловушка &mdash; залипнуть на эффекте «вау».</b> Сгенерировать красивую картинку &mdash; это игрушка на один раз, которая вызывает восторг, но не приносит денег. Настоящая ценность начинается там, где ты <span class="u">привязываешь к генерациям свои реальные данные</span>, продумываешь бизнес-сценарий и превращаешь все это в рабочий инструмент под свою задачу.</div>
+  <div class="prose">
+    <p>Я искренне убеждена: предприимчивым может быть человек на любой позиции и с любым уровнем ответственности. Оптимизировать и масштабировать можно любую деятельность. Мне хочется показать тебе, какой это увлекательный путь &mdash; не запирать себя в одной профессии, а быть открытым энтузиастом, вовлеченным в жизнь и в инновации.</p>
+  </div>
 
-  <div class="shead" style="margin-top:32px"><span class="eyebrow">конец эпохи</span><h2>Узких специалистов больше нет</h2></div>
+  <div class="pull">Здесь и появляется предпринимательская смелость. Ты почувствуешь, как привычка бездумно залипать в чужую ленту <u>сменяется азартом созидания</u>, когда создаешь что-то по-настоящему ценное вместе со своими ИИ-агентами.</div>
+
+  <div class="shead chunk" id="d-3" style="margin-top:32px"><span class="eyebrow">исторический аргумент</span><h2>Как станки во время промышленной революции</h2>
+    <p>Это главная идея, вокруг которой держится все остальное: ИИ &mdash; инструмент, которым управляет человек.</p></div>
+
+  <div class="prose">
+    <p>Как технология, ИИ снижает затраты и барьеры. Но он не заменяет человека, а расширяет его возможности &mdash; ровно как станки в промышленную революцию. <span class="u">Революция не заменила физический труд</span>, а позволила грамотнее распределить человеческие ресурсы: масштабировать и оптимизировать процессы.</p>
+  </div>
+
+  <div class="pull">Нести ответственность за результат в конечном итоге будет человек. В этом и есть наша задача сегодня &mdash; <u>освоить ИИ и управлять им.</u></div>
+
+  <div class="shead chunk" id="d-4" style="margin-top:32px"><span class="eyebrow">конец эпохи</span><h2>Узких специалистов больше нет</h2></div>
 
   <div class="ckl">
     <div class="ck"><span class="m">&#10003;</span><span>ИИ <span class="u">навсегда снимает потолок</span>: барьеры ниже, циклы работы короче</span></div>
@@ -842,13 +1396,20 @@
     <p>Дискурс вокруг ИИ сильно поляризован: одни кричат, что он лишит нас самостоятельности, другие мечтают о безусловном базовом доходе. Обе крайности вредны. ИИ &mdash; это все еще инструмент, ориентированный на человека, и <span class="u">управляешь им ты</span>. Усилив одного человека, мы потенциально увеличиваем число новых проектов и расширяем возможности целых бизнесов.</p>
   </div></details>
 
-  <div class="keybox" style="margin-top:16px">
+  <div class="shead chunk" id="d-5" style="margin-top:32px"><span class="eyebrow">и ради чего все это</span><h2>Что ты получаешь</h2></div>
+
+  <div class="keybox">
     <span class="cap">зачем это тебе</span>
-    <b>Овладение ИИ &mdash; это не просто строчка в резюме, а всеобъемлющий навык, который делает жизнь свободнее</b>
-    <p>У тебя <span class="u">схлопывается рутина, освобождается время</span> и растет уверенность в своем будущем на рынке. И самое главное &mdash; появляется ресурс, финансовый и временной, на то, чтобы осуществлять те мечты и достигать тех целей, которые ты так давно откладываешь. Главное &mdash; проявить любопытство и начать.</p>
+    <b>Овладение ИИ &mdash; всеобъемлющий навык, который делает жизнь свободнее и увлекательнее</b>
+    <p>Рутина <span class="u">схлопывается</span>, уверенность в своем будущем растет. И самое главное &mdash; появляется ресурс, финансовый и временной, на те мечты и цели, которые ты так давно откладываешь.</p>
   </div>
 
-  <div style="margin-top:16px"><button class="btn block sky" data-view="quiz">Подобрать мой трек <span class="go">&rarr;</span></button></div>
+  <div class="stitch">
+    <p class="sn">остался один шаг</p>
+    <p class="sq">Главное &mdash; проявить любопытство и начать.</p>
+    <p class="prose">Начать проще, чем кажется: не нужно выбирать из ста инструментов. Ответь на шесть вопросов &mdash; и получишь свою связку: модель, инструмент и способ оплаты под твою ситуацию.</p>
+    <div style="margin-top:16px"><button class="btn block sky" data-view="quiz">Подобрать мой трек <span class="go">&rarr;</span></button></div>
+  </div>
 </section></div>
 </div><!-- /v-mindset -->
 
@@ -877,7 +1438,34 @@
 <!-- ======================= VIEW: FAQ ======================= -->
 <div class="view" id="v-faq" data-title="частые вопросы">
 <div class="wrap"><section>
-  <div class="shead"><span class="eyebrow">справка</span><h2>Частые вопросы</h2></div>
+  <div class="shead"><span class="eyebrow">справка</span><h2>Частые вопросы</h2>
+    <p>Сначала шесть страхов, которые тормозят почти всех. Дальше &mdash; практика: деньги, оплата из России, безопасность, лимиты.</p></div>
+
+  <div class="shead" style="margin-top:24px"><span class="eyebrow"><span class="star"></span> страхи</span><h3 style="margin-top:8px">Что мешает начать</h3></div>
+  <div class="faq">
+    <div class="qa"><div class="q">«У меня нет технического образования, я не программист»<span class="pm">+</span></div><div class="a"><p>Чтобы работать с современным ИИ, <span class="u">программировать не нужно</span>. Ты говоришь с ним на обычном человеческом языке, а код, если он вообще потребуется, ИИ пишет сам. Твоя роль тут не кодер, а архитектор: ты ставишь задачу и принимаешь работу.</p></div></div>
+    <div class="qa"><div class="q">«Это слишком дорого и сложно для личного использования»<span class="pm">+</span></div><div class="a"><p>Вход бесплатный: у ChatGPT, Claude и Gemini есть бесплатные версии, чтобы просто попробовать. Дальше подписка около <b>$20 в месяц</b> открывает и самые умные модели, и агентские среды. Она окупается в первую же неделю &mdash; часами рутины, которые ИИ забирает на себя.</p></div></div>
+    <div class="qa"><div class="q">«Я попробовал, но ИИ выдал какую-то ерунду»<span class="pm">+</span></div><div class="a"><p>Обычно за этим стоит поиск волшебной кнопки: идеального промпта, который сработает у всех. Такого нет &mdash; контекст у каждого свой. Учись не копипастить чужие команды, а <span class="u">формулировать задачу от своей цели</span>. Этот навык остается с тобой навсегда, в отличие от чужого промпта.</p></div></div>
+    <div class="qa"><div class="q">«Боюсь доверять свои файлы и данные нейросети»<span class="pm">+</span></div><div class="a"><p>Опасение нормальное, и оно решается настройками. Агент работает строго внутри той рабочей папки, которую ты ему выделил, а в режиме согласований (plan mode) сначала показывает план: «хочу отредактировать этот файл, разрешаешь?» &mdash; и без твоего «да» ничего не делает. Чувствительные приложения вроде банков просто заносятся в черный список.</p></div></div>
+    <div class="qa"><div class="q">«Я застрял на этапе вау-эффекта»<span class="pm">+</span></div><div class="a"><p>Картинки и ответы на то, что легко гуглится, &mdash; игрушки. Сила начинается там, где ИИ встроен в твои реальные задачи и рутинные процессы: тогда он экономит часы, а не развлекает.</p></div></div>
+    <div class="qa"><div class="q">«Информации столько, что я теряюсь, с чего начать»<span class="pm">+</span></div><div class="a"><p>Информационный шум &mdash; главный враг, а главная ошибка &mdash; учить все сразу: токены, API, параметры моделей. Тебе не нужно знать устройство двигателя, чтобы водить машину. <span class="u">Начни с одной конкретной задачи</span> &mdash; остальное прояснится по ходу.</p></div></div>
+  </div>
+
+  <div class="shead" style="margin-top:28px"><span class="eyebrow"><span class="star"></span> практика</span><h3 style="margin-top:8px">Деньги, доступ, безопасность</h3></div>
+  <div class="faq">
+    <div class="qa"><div class="q">Я из России, зарубежной карты нет. Смогу пользоваться?<span class="pm">+</span></div><div class="a"><p>Да, и это решается за один вечер: VPN плюс сервис-агрегатор или виртуальная криптокарта, с которой оплачивается любая подписка. Пошаговая инструкция &mdash; в моем гайде: <a class="nm" href="https://ussti.github.io/kris-claude-guide/" target="_blank" rel="noopener">регистрация и оплата из России</a>.</p></div></div>
+    <div class="qa"><div class="q">А если мой аккаунт заблокируют &mdash; я потеряю все настройки?<span class="pm">+</span></div><div class="a"><p>Нет, и в этом прелесть агентских сред. Агент работает прямо в локальных папках на твоем компьютере или на личном сервере: файлы, базы знаний и настроенные скиллы лежат <span class="u">у тебя на диске</span>. Аккаунт &mdash; это просто временно подключенный мозг. Заблокируют &mdash; берешь новый и подкладываешь ему ту же папку с контекстом.</p></div></div>
+    <div class="qa"><div class="q">Я гуманитарий, кода не знаю. Мне точно нужны агенты и терминал?<span class="pm">+</span></div><div class="a"><p>Именно поэтому и нужен AI-First подход: писать код руками сегодня не надо. Агент сам пишет скрипты, сам настраивает и сам выполняет команды, а ты общаешься с ним словами &mdash; через чат или визуальный интерфейс вроде Claude Cowork. Терминал остается как следующий уровень, если захочешь глубже.</p></div></div>
+    <div class="qa"><div class="q">У меня слабый ноутбук. Нужен мощный компьютер?<span class="pm">+</span></div><div class="a"><p>Нет. Вся тяжелая работа &mdash; инференс &mdash; идет на серверах OpenAI или Anthropic. Твой ноутбук просто окно связи с этим мозгом.</p></div></div>
+    <div class="qa"><div class="q">Если дать агенту доступ к файлам, он не сотрет мне полдиска?<span class="pm">+</span></div><div class="a"><p>За безопасность отвечаешь ты, и рычаги у тебя есть. Агент не выходит за пределы выделенной рабочей папки, а plan mode заставляет его сперва согласовать план действий. Пароли и банки &mdash; в черный список.</p></div></div>
+    <div class="qa"><div class="q">Зачем уходить из обычного окна ChatGPT, если он и так отвечает?<span class="pm">+</span></div><div class="a"><p>Обычный чат &mdash; это переписка: совет, текст, идея. Работу за тебя он не делает &mdash; ты сам копируешь текст в документ, отправляешь письма, верстаешь таблицы. Агентская среда дает модели руки: она берет твои файлы, правит документы, ищет в сети, запускает сценарии и отдает результат. Ты перестаешь быть человеком, который переписывается с нейросетью, и становишься <span class="u">руководителем, который принимает работу</span>.</p></div></div>
+    <div class="qa"><div class="q">Почему ИИ с уверенным видом выдумывает чушь?<span class="pm">+</span></div><div class="a"><p>Он галлюцинирует, когда точных данных нет и приходится угадывать на общей эрудиции. Лечится переключением из режима «угадай» в режим «работай по моему контексту»: дай ему конкретный документ или базу знаний и попроси &mdash; <i>отвечай строго по этому файлу, если ответа нет, так и скажи</i>. Ошибок станет в разы меньше.</p></div></div>
+    <div class="qa"><div class="q">Почему пишет «лимит исчерпан», хотя подписка оплачена?<span class="pm">+</span></div><div class="a"><p>У подписки есть предел контекста &mdash; объема, который модель удерживает за сессию. Если неделю решать в одном чате разные задачи, он забивается мусорным контекстом: модель перечитывает всю историю на каждое сообщение и сжигает лимиты. Правило простое &mdash; <span class="u">одна задача = одна сессия</span>. Мелочь отдавай легким моделям (Haiku, Luna), тяжелые мозги включай только под сложную аналитику.</p></div></div>
+    <div class="qa"><div class="q">Актуально ли учить гигантские промпты «представь, что ты копирайтер со стажем 10 лет»?<span class="pm">+</span></div><div class="a"><p>Это устаревший подход, и заучивание чужих магических промптов не работает. Решают четыре вещи: цель, контекст (твои данные), ограничения и структура задачи. Вместо ролевых игр дай четкую вводную, покажи пример хорошего результата и обозначь, чего делать нельзя.</p></div></div>
+    <div class="qa"><div class="q">Что такое скиллы и зачем они, если есть промпт?<span class="pm">+</span></div><div class="a"><p>Промпт ты пишешь каждый раз заново и тратишь токены. Скилл &mdash; один раз сохраненный сценарий: говоришь «сделай утренний брифинг», и агент сам идет в почту, календарь и таблицы по заранее заданному правилу. Экономит и время, и лимиты.</p></div></div>
+  </div>
+
+  <div class="shead" style="margin-top:28px"><span class="eyebrow"><span class="star"></span> рынок и инструменты</span><h3 style="margin-top:8px">Что за чем стоит</h3></div>
   <div class="faq">
     <div class="qa"><div class="q">Почему каждую неделю новый «лучший ИИ»?<span class="pm">+</span></div><div class="a"><p>Модели научились готовить себе синтетические данные и учиться на них сами, поэтому циклы развития сжались с нескольких лет до месяцев. Гнаться за каждым релизом не нужно: пойми структуру рынка один раз &mdash; и любая новость встанет на свою полку.</p></div></div>
     <div class="qa"><div class="q">Компания, приложение, модель &mdash; в чем разница?<span class="pm">+</span></div><div class="a"><p>Как с телефоном: компания &mdash; Apple, продукт в руках &mdash; iPhone, система внутри &mdash; iOS. В ИИ так же: OpenAI (компания) выпускает ChatGPT (приложение), а внутри крутится модель GPT. Название чата и название «мозга» &mdash; разные вещи.</p></div></div>
@@ -922,7 +1510,7 @@
 </section></div>
 </div><!-- /v-gloss -->
 
-<div class="wrap"><div class="foot">AI-First &middot; гайд для тех, кто откладывал ИИ &middot; <a href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">@kris.usti</a></div></div>
+<div class="wrap"><div class="foot">Точка входа &middot; гайд для тех, кто откладывал ИИ &middot; <a href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">@kris.usti</a></div></div>
 
 <script>
   /* burger */
@@ -954,7 +1542,7 @@
   /* clicks: views, FAQ accordion */
   document.addEventListener('click',function(e){
     var v=e.target.closest('[data-view]');
-    if(v){ show(v.getAttribute('data-view')); return; }
+    if(v){ if(v.tagName==='A') e.preventDefault(); show(v.getAttribute('data-view')); return; }
     var q=e.target.closest('.qa .q');
     if(q){
       var qa=q.parentElement; qa.classList.toggle('open');
@@ -1058,6 +1646,203 @@
     window.scrollTo({top:0,behavior:'smooth'});
   });
   renderQ();
+
+  /* ============================================================
+     NEW FORMAT (v12) — chapter reading layer
+     ============================================================ */
+
+  /* --- chapter map: which anchors make up the rail per view --- */
+  var CHAPTERS={
+    story:[['s-0','начало'],['s-1','нет системы'],['s-2','перелом'],['s-3','проводник'],['s-4','почему сейчас']],
+    market:[['m-hd','карта'],['m-0','компания ≠ модель'],['m-1','энергия'],['m-2','мозг'],['m-3','руки'],['m-4','среда'],['m-5','иерархия']],
+    mindset:[['d-0','ловушка'],['d-1','копирование'],['d-2','навык'],['d-3','станки'],['d-4','мультифункционал'],['d-5','что получаешь']]
+  };
+  var rail=document.getElementById('rail'), rprog=document.getElementById('rprog');
+  var curChapter=null, railBtns=[];
+
+  function buildRail(view){
+    curChapter=CHAPTERS[view]||null;
+    rail.innerHTML=''; railBtns=[];
+    if(!curChapter){ rail.classList.remove('on'); rprog.classList.remove('on'); rprog.style.width=0; return; }
+    curChapter.forEach(function(c){
+      var b=document.createElement('button');
+      b.innerHTML='<span class="rd"></span>'+c[1];
+      b.addEventListener('click',function(){
+        var t=document.getElementById(c[0]);
+        if(t) window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-100,behavior:'smooth'});
+      });
+      rail.appendChild(b); railBtns.push(b);
+    });
+    rail.classList.add('on'); rprog.classList.add('on');
+    syncScroll();
+  }
+
+  /* --- employee schema: light layers up as their section is reached --- */
+  var LAYER_ORDER=['m-1','m-2','m-3','m-4'];
+  function litUpTo(idx){
+    document.querySelectorAll('.elay').forEach(function(el,i){
+      el.classList.toggle('lit', i<=idx);
+      el.classList.toggle('cur', i===idx);
+    });
+    if(empNow){
+      var nm=LAYER_NAME[LAYER_ORDER[idx<0?0:idx]];
+      empNow.innerHTML=nm[0]+' <i>&mdash; '+nm[1]+'</i>';
+    }
+  }
+  document.querySelectorAll('.elay').forEach(function(el){
+    el.addEventListener('click',function(){
+      var t=document.getElementById(el.getAttribute('data-lay'));
+      if(t) window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-140,behavior:'smooth'});
+    });
+  });
+
+  function syncScroll(){
+    /* reading progress across the active view */
+    var view=document.querySelector('.view.on');
+    if(!view||!curChapter){ return; }
+    var vh=window.innerHeight;
+    var top=view.offsetTop, h=view.offsetHeight-vh;
+    var p=h>0?Math.min(1,Math.max(0,(window.pageYOffset-top)/h)):0;
+    rprog.style.width=(p*100)+'%';
+
+    /* rail: current section = last anchor above the fold line */
+    var line=vh*0.42, cur=0;
+    curChapter.forEach(function(c,i){
+      var el=document.getElementById(c[0]);
+      if(el && el.getBoundingClientRect().top<line) cur=i;
+    });
+    railBtns.forEach(function(b,i){ b.classList.toggle('cur', i===cur) });
+    syncBar(cur,p);
+
+    /* employee schema: how many layers are unlocked */
+    if(document.getElementById('emp')){
+      var lit=-1;
+      LAYER_ORDER.forEach(function(id,i){
+        var el=document.getElementById(id);
+        if(el && el.getBoundingClientRect().top<line) lit=i;
+      });
+      litUpTo(lit);
+    }
+  }
+  var ticking=false;
+  window.addEventListener('scroll',function(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){ syncScroll(); ticking=false });
+  },{passive:true});
+  window.addEventListener('resize',syncScroll);
+
+  /* --- hook the rail into the existing view router --- */
+  /* ============================================================
+     MOBILE UI (v13) — chapter bar + section sheet.
+     Same CHAPTERS data as the desktop rail; nav lives in the thumb zone.
+     ============================================================ */
+  var CH_TITLE={story:'моя история',market:'как устроен рынок',mindset:'мышление ai-first'};
+  var CH_NEXT={story:['market','дальше: как устроен рынок'],
+               market:['mindset','дальше: мышление AI-First'],
+               mindset:['quiz','пройти тест и получить маршрут']};
+  var LAYER_NAME={'m-1':['энергия','Железо'],'m-2':['мозг','Модель'],
+                  'm-3':['руки','Харнес'],'m-4':['среда','Интерфейс']};
+
+  var cbar=document.getElementById('cbar'), csheet=document.getElementById('csheet');
+  var cbFill=document.getElementById('cbFill'), cbNum=document.getElementById('cbNum');
+  var cbTitle=document.getElementById('cbTitle'), cbSub=document.getElementById('cbSub');
+  var csList=document.getElementById('csList'), csHead=document.getElementById('csHead');
+  var csNext=document.getElementById('csNext'), csNextT=document.getElementById('csNextT');
+  var cbMain=document.getElementById('cbMain'), empNow=document.getElementById('empNow');
+  var csBtns=[], curCur=-1;
+
+  function sheet(open){
+    csheet.classList.toggle('open',open);
+    cbar.classList.toggle('up',open);
+    cbMain.setAttribute('aria-expanded',open?'true':'false');
+    document.body.style.overflow=open?'hidden':'';
+  }
+  cbMain.addEventListener('click',function(){ sheet(!csheet.classList.contains('open')) });
+  csheet.addEventListener('click',function(e){ if(e.target===csheet) sheet(false) });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') sheet(false) });
+
+  function goTo(id,off){
+    var t=document.getElementById(id);
+    if(t) window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-(off||90),behavior:'smooth'});
+  }
+
+  function buildBar(view){
+    var ch=CHAPTERS[view];
+    csList.innerHTML=''; csBtns=[]; curCur=-1;
+    if(!ch){ cbar.classList.remove('on'); sheet(false); return; }
+    csHead.textContent=CH_TITLE[view]||'разделы главы';
+    ch.forEach(function(c,i){
+      var b=document.createElement('button');
+      b.innerHTML='<span class="cn">'+(i+1)+'</span>'+c[1];
+      b.addEventListener('click',function(){ sheet(false); setTimeout(function(){goTo(c[0],90)},180) });
+      csList.appendChild(b); csBtns.push(b);
+    });
+    var nx=CH_NEXT[view];
+    if(nx){ csNext.hidden=false; csNextT.textContent=nx[1];
+      csNext.onclick=function(){ sheet(false); show(nx[0]) }; }
+    else csNext.hidden=true;
+    cbar.classList.add('on'); cbar.classList.remove('hide');
+    sheet(false);
+  }
+
+  function syncBar(cur,p){
+    if(!curChapter) return;
+    cbFill.style.width=(p*100)+'%';
+    if(cur===curCur) return;
+    curCur=cur;
+    cbNum.textContent=(cur+1)+'/'+curChapter.length;
+    cbTitle.textContent=curChapter[cur][1];
+    var v=document.querySelector('.view.on');
+    cbSub.textContent=(v&&v.getAttribute('data-title'))||'';
+    csBtns.forEach(function(b,i){
+      b.classList.toggle('cur',i===cur);
+      b.classList.toggle('done',i<cur);
+    });
+  }
+
+  /* auto-hide the bar while reading down, bring it back on the way up */
+  var lastY=window.pageYOffset;
+  window.addEventListener('scroll',function(){
+    var y=window.pageYOffset;
+    if(!csheet.classList.contains('open') && cbar.classList.contains('on')){
+      if(y>lastY+8 && y>160) cbar.classList.add('hide');
+      else if(y<lastY-8) cbar.classList.remove('hide');
+    }
+    lastY=y;
+  },{passive:true});
+
+  var _show=show;
+  show=function(id,push){ _show(id,push); buildRail(id); buildBar(id); };
+  var _boot=(location.hash||'#').replace('#','')||'home';
+  buildRail(_boot); buildBar(_boot);
+
+  /* --- switcher: компания / продукт / модель --- */
+  var sw=document.getElementById('sw');
+  if(sw){
+    sw.addEventListener('click',function(e){
+      var b=e.target.closest('[data-sw]'); if(!b) return;
+      var k=b.getAttribute('data-sw');
+      sw.querySelectorAll('.sw-tabs button').forEach(function(x){x.classList.toggle('cur',x===b)});
+      sw.querySelectorAll('.sw-pane').forEach(function(p){p.classList.toggle('on',p.getAttribute('data-pane')===k)});
+    });
+  }
+
+  /* --- nested rings --- */
+  var RG={
+    ai:'<b>ИИ</b> — вся область целиком. Внутри нее лежит все остальное.',
+    ml:'<b>Machine Learning</b> — ИИ, который учится на данных. Не любой ИИ является нейросетью: часть ML работает вообще без них.',
+    nn:'<b>Нейросети</b> — один из типов ML-моделей. Все нейросети относятся к машинному обучению, но не все машинное обучение основано на нейросетях.',
+    llm:'<b>LLM</b> — большая языковая модель. Любая современная LLM — нейросеть, но далеко не каждая нейросеть — LLM.'
+  };
+  var rg=document.getElementById('rg'), rgNote=document.getElementById('rgNote');
+  if(rg){
+    rg.addEventListener('click',function(e){
+      var b=e.target.closest('[data-rg]'); if(!b) return;
+      e.stopPropagation();
+      rg.querySelectorAll('b').forEach(function(x){x.classList.toggle('cur',x===b)});
+      rgNote.innerHTML=RG[b.getAttribute('data-rg')];
+    });
+  }
 </script>
 </body>
 </html>
