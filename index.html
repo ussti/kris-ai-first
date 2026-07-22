@@ -598,6 +598,20 @@
   .cons-h{display:block;margin-top:10px;font-size:23px;line-height:1.2;
     letter-spacing:-.018em;font-weight:800;color:var(--ink)}
   .cons-s{margin-top:8px;font-size:14.5px;line-height:1.45;color:var(--ink-soft)}
+  /* vertical stepper — process, not cards */
+  .steps{list-style:none;margin:18px 0 0;padding:0}
+  .step{position:relative;padding:0 0 22px 40px}
+  .step:last-child{padding-bottom:0}
+  .step::before{content:"";position:absolute;left:13px;top:26px;bottom:0;width:1px;background:var(--line)}
+  .step:last-child::before{display:none}
+  .step .sdot{position:absolute;left:0;top:0;width:27px;height:27px;border-radius:999px;
+    background:var(--sky);color:#141719;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:800;letter-spacing:0}
+  .step .sh{display:block;font-size:16px;font-weight:700;letter-spacing:-.012em;
+    line-height:1.28;margin:2px 0 5px;color:var(--ink)}
+  .step p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+  :root[data-theme="dark"] .step::before{background:rgba(140,200,224,.24)}
+  :root[data-theme="dark"] .step .sdot{background:var(--sky-deep);color:#10171b}
   /* CTA: what happens after the click */
   .cons-steps{list-style:none;margin:16px auto 0;max-width:340px;text-align:left;
     display:flex;flex-direction:column;gap:8px}
@@ -1724,12 +1738,12 @@
   <div class="pull">Мы чиним твой обрыв, а не проходим программу.</div>
 
   <div class="shead chunk" style="margin-top:34px"><h2>Что мы делаем</h2></div>
-  <div class="hcards">
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Шаг первый</span><b class="hstm">Разбираем твои процессы.</b><p>Смотрим на реальную неделю: что ты делаешь руками, что повторяется, где утекает время. Отсюда видно, какие задачи имеет смысл отдавать ИИ, а какие нет.</p></div>
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Шаг второй</span><b class="hstm">Ставим рабочую среду и доводим до первого результата.</b><p>Настраиваем аккаунт и агентскую среду, привязываем твои данные, инструменты и сервисы. Выходим с задачей, которая уже решена, а не с планом когда-нибудь ее решить.</p></div>
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Шаг третий</span><b class="hstm">Учимся искать и внедрять инструменты самостоятельно.</b><p>Как выбрать, как установить, как подключить к своему контуру и как понять, что инструмент тебе не подходит. Чтобы следующая связка собиралась уже без меня.</p></div>
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Шаг четвертый</span><b class="hstm">Передаем агенту твою экспертизу.</b><p>То, что ты знаешь и делаешь лучше всех, перестает быть заперто в твоей голове: описывается, отдается агенту и работает без твоего участия.</p></div>
-  </div>
+  <ol class="steps">
+    <li class="step"><span class="sdot">1</span><b class="sh">Разбираем твои процессы</b><p>Смотрим на реальную неделю: что ты делаешь руками, что повторяется, где утекает время. Отсюда видно, какие задачи имеет смысл отдавать ИИ, а какие нет.</p></li>
+    <li class="step"><span class="sdot">2</span><b class="sh">Ставим рабочую среду и доводим до первого результата</b><p>Настраиваем аккаунт и агентскую среду, привязываем твои данные, инструменты и сервисы. Выходим с задачей, которая уже решена, а не с планом когда-нибудь ее решить.</p></li>
+    <li class="step"><span class="sdot">3</span><b class="sh">Учимся искать и внедрять инструменты самостоятельно</b><p>Как выбрать, как установить, как подключить к своему контуру и как понять, что инструмент тебе не подходит. Чтобы следующая связка собиралась уже без меня.</p></li>
+    <li class="step"><span class="sdot">4</span><b class="sh">Передаем агенту твою экспертизу</b><p>То, что ты знаешь и делаешь лучше всех, перестает быть заперто в твоей голове: описывается, отдается агенту и работает без твоего участия.</p></li>
+  </ol>
 
   <div class="shead chunk" style="margin-top:34px"><h2>Что обычно останавливает</h2></div>
   <div class="faq">
