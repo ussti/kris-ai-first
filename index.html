@@ -598,6 +598,156 @@
   .cons-h{display:block;margin-top:10px;font-size:23px;line-height:1.2;
     letter-spacing:-.018em;font-weight:800;color:var(--ink)}
   .cons-s{margin-top:8px;font-size:14.5px;line-height:1.45;color:var(--ink-soft)}
+  /* --- self-check (диагностика входа) --- */
+  .selfq{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:18px 16px;margin:18px 0 0}
+  .selfq .dq{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);
+    font-weight:700;margin-bottom:12px}
+  .sfo{display:flex;gap:11px;align-items:flex-start;padding:11px 12px;border-radius:12px;
+    background:var(--paper);border:1px solid var(--line);margin-bottom:8px;cursor:pointer;
+    transition:border-color .15s ease,background .15s ease}
+  .sfo:last-of-type{margin-bottom:0}
+  .sfo .box{flex:0 0 18px;height:18px;border-radius:5px;border:1.5px solid var(--sky-deep);margin-top:2px;position:relative}
+  .sfo.on{border-color:var(--ink);background:#fff}
+  .sfo.on .box{background:var(--ink);border-color:var(--ink)}
+  .sfo.on .box::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;
+    border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .otxt{font-size:14px;line-height:1.4}
+  .otxt b{display:block;font-size:14.5px;letter-spacing:-.01em}
+  .otxt span{color:var(--ink-soft);font-size:13px}
+  .dout{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:13.5px;
+    color:var(--ink-soft);opacity:.55;transition:opacity .25s ease}
+  .selfq.answered .dout{opacity:1}
+  .dout b{color:var(--ink)}
+  :root[data-theme="dark"] .selfq{background:rgba(255,255,255,.04)}
+  :root[data-theme="dark"] .sfo{background:rgba(255,255,255,.03)}
+  :root[data-theme="dark"] .sfo.on{background:rgba(166,220,236,.12);border-color:var(--sky-deep)}
+  :root[data-theme="dark"] .sfo.on .box{background:var(--sky-deep);border-color:var(--sky-deep)}
+
+  /* --- quote-forward cards (прямая речь) --- */
+  .qsay{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:19px;
+    line-height:1.32;letter-spacing:-.012em;margin:0 0 8px;display:block;color:var(--ink)}
+  .qans{font-size:12.5px;color:var(--ink-soft);margin:10px 0 0;padding-top:9px;border-top:1px solid var(--line)}
+  .qans b{color:var(--mark);font-weight:700}
+  :root[data-theme="dark"] .qans b{color:#9CC6D6}
+
+  /* --- chain with a break (карта обрыва) --- */
+  .chain{display:flex;align-items:center;margin:16px 0 4px;flex-wrap:wrap}
+  .chain .link{flex:1;min-width:92px;text-align:center;padding:13px 6px;border:1px solid var(--sky-deep);
+    background:rgba(166,220,236,.28);font-size:12.5px;font-weight:700;border-radius:12px}
+  .chain .link.broken{background:transparent;border:1px dashed #C46A5A;color:#C46A5A}
+  .chain .join{width:16px;height:1px;background:var(--sky-deep);flex:0 0 16px}
+  .chain .join.cut{background:none;border-top:1px dashed #C46A5A}
+  .chain-cap{font-size:12.5px;color:var(--ink-soft);margin:10px 0 0}
+  :root[data-theme="dark"] .chain .link{background:rgba(166,220,236,.12)}
+  @media(max-width:560px){.chain{flex-direction:column;align-items:stretch}
+    .chain .link{min-width:0}
+    .chain .join{width:1px;height:13px;margin:0 auto;flex:0 0 13px;background:var(--sky-deep)}
+    .chain .join.cut{border-top:0;border-left:1px dashed #C46A5A;background:none}}
+
+  /* --- donut 10% --- */
+  .donut{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:18px 0 0}
+  .donut figcaption{flex:1;min-width:220px;font-size:14.5px;color:var(--ink-soft);line-height:1.5;margin:0}
+  .donut figcaption b{color:var(--ink)}
+  :root[data-theme="dark"] .donut .dring{stroke:rgba(255,255,255,.14)}
+  :root[data-theme="dark"] .donut .dnum{fill:var(--on-dark)}
+  :root[data-theme="dark"] .donut .dsub{fill:var(--on-dark-soft)}
+
+  /* --- 2x2 matrix --- */
+  .mx{margin:18px 0 0}
+  .mx-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .mx-grid .q4{background:var(--paper);padding:15px 13px;min-height:100px}
+  .mx-grid .q4.hot{background:var(--sky)}
+  .q4 .qt4{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+  .q4.hot .qt4{color:#17323D}
+  .q4 .qv4{font-size:14px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+  .q4.hot .qv4{color:#141719}
+  .mx .axis{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);margin-top:8px}
+  .mx .axis-y{font-size:11px;color:var(--ink-soft);margin-bottom:6px}
+  :root[data-theme="dark"] .mx-grid .q4{background:rgba(255,255,255,.04)}
+  :root[data-theme="dark"] .mx-grid .q4.hot{background:var(--sky-deep)}
+
+  /* --- two rails (гайд vs консультация) --- */
+  .trks{margin:16px 0 0}
+  .trk{display:flex;align-items:center;gap:10px;padding:8px 0}
+  .trk .rn{flex:0 0 104px;font-size:12.5px;font-weight:800;letter-spacing:-.01em}
+  .trk .rt{flex:1;display:flex;align-items:center;gap:5px}
+  .trk .pt{width:11px;height:11px;border-radius:999px;background:var(--sky-deep);flex:0 0 11px}
+  .trk .pt.off{background:transparent;border:1px solid var(--line)}
+  .trk .pt.solid{background:var(--ink)}
+  .trk .seg{flex:1;height:1px;background:var(--line)}
+  .trk .seg.on{background:var(--sky-deep)}
+  .trk .seg.ink{background:var(--ink)}
+  .trk-cap{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px;padding-left:114px}
+  :root[data-theme="dark"] .trk .pt.solid{background:var(--on-dark)}
+  :root[data-theme="dark"] .trk .seg.ink{background:var(--on-dark-soft)}
+  @media(max-width:520px){.trk .rn{flex:0 0 84px;font-size:11.5px}.trk-cap{padding-left:0}}
+
+  /* --- week timeline --- */
+  .wtl{display:flex;margin:18px 0 0;border-top:1px solid var(--line)}
+  .wtl div{flex:1;padding:13px 10px 0;border-right:1px solid var(--line);position:relative}
+  .wtl div:last-child{border-right:0}
+  .wtl div::before{content:"";position:absolute;top:-4px;left:0;width:7px;height:7px;border-radius:999px;background:var(--sky-deep)}
+  .wtl .w{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--mark);font-weight:700}
+  .wtl .x{font-size:13.5px;line-height:1.42;margin-top:5px}
+  :root[data-theme="dark"] .wtl .w{color:#9CC6D6}
+  @media(max-width:560px){.wtl{display:block;border-top:0}
+    .wtl div{border-right:0;border-left:1px solid var(--line);padding:10px 0 14px 14px}
+    .wtl div::before{top:12px;left:-4px}}
+
+  /* --- two days (до/после) --- */
+  .days{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 0}
+  .day .dh{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+    font-weight:700;margin-bottom:8px}
+  .slot{border-radius:8px;padding:8px 10px;font-size:12.5px;margin-bottom:5px;line-height:1.3}
+  .slot.rut{background:rgba(196,106,90,.16);border:1px solid rgba(196,106,90,.34);color:#8A4638}
+  .slot.own{background:var(--sky);border:1px solid var(--sky-deep);color:#17323D;font-weight:700}
+  .slot.air{background:transparent;border:1px dashed var(--line);color:var(--ink-soft)}
+  .days-note{font-size:12px;color:var(--ink-soft);margin:10px 0 0;font-style:italic}
+  :root[data-theme="dark"] .slot.rut{color:#E8A594}
+  @media(max-width:520px){.days{grid-template-columns:1fr;gap:10px}}
+
+  /* --- swap rows (было/стало) --- */
+  .swaps{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:18px 0 0}
+  .swap-h{display:grid;grid-template-columns:1fr 34px 1fr;background:var(--card);
+    border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .swap-h div{padding:9px 14px}
+  .swap{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;border-bottom:1px solid var(--line)}
+  .swap:last-child{border-bottom:0}
+  .swap .sc{padding:13px 14px;font-size:13.5px;line-height:1.4}
+  .swap .sc.was{color:var(--ink-soft)}
+  .swap .sc.now{background:rgba(166,220,236,.3);font-weight:600}
+  .swap .arw{text-align:center;color:var(--sky-deep);font-size:15px}
+  :root[data-theme="dark"] .swap-h{background:rgba(255,255,255,.05)}
+  :root[data-theme="dark"] .swap .sc.now{background:rgba(166,220,236,.14)}
+  @media(max-width:520px){
+    .swap,.swap-h{grid-template-columns:1fr 26px 1fr}
+    .swap .sc{padding:11px 9px;font-size:12.5px}
+    .swap-h div{padding:8px 9px;font-size:10px}}
+
+  /* --- fork (развилка) --- */
+  .fork{margin:18px 0 0}
+  .fork .fq{display:inline-block;padding:11px 16px;border-radius:14px;background:var(--ink);
+    color:var(--paper);font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+  .branches{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;position:relative}
+  .branches::before{content:"";position:absolute;top:-13px;left:25%;right:25%;height:1px;background:var(--line)}
+  .br{border:1px solid var(--line);border-radius:14px;padding:15px 14px;background:var(--card);position:relative}
+  .br::before{content:"";position:absolute;top:-13px;left:50%;width:1px;height:13px;background:var(--line)}
+  .br .bh2{font-size:14px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+  .br .bres{font-size:13.5px;color:var(--ink-soft);line-height:1.45}
+  .btag{display:inline-block;margin-top:11px;padding:5px 11px;border-radius:999px;
+    font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.03em;
+    text-decoration:none;border:0;cursor:pointer}
+  button.btag{cursor:pointer}
+  .btag.g{background:var(--sky);color:#17323D}
+  .btag.n{background:var(--paper);border:1px solid var(--line);color:var(--ink-soft)}
+  :root[data-theme="dark"] .fork .fq{background:var(--sky-deep);color:#10171b}
+  :root[data-theme="dark"] .br{background:rgba(255,255,255,.04)}
+  :root[data-theme="dark"] .btag.n{background:transparent}
+  @media(max-width:520px){.branches{grid-template-columns:1fr}
+    .branches::before{display:none}.br::before{display:none}}
+
   /* vertical stepper — process, not cards */
   .steps{list-style:none;margin:18px 0 0;padding:0}
   .step{position:relative;padding:0 0 22px 40px}
@@ -1709,14 +1859,28 @@
     <h2>Консультация</h2>
     <p>Настройка ИИ с нуля и до первого результата &mdash; в контуре твоих личных и рабочих дел.</p></div>
 
+  <div class="selfq" id="selfq">
+    <div class="dq">что у тебя сейчас с ии?</div>
+    <div class="sfo" data-opt><span class="box"></span><span class="otxt"><b>Толком не начинал</b><span>Понимаю, что надо, но непонятно, с какой стороны заходить.</span></span></div>
+    <div class="sfo" data-opt><span class="box"></span><span class="otxt"><b>Пробовал, бросил</b><span>Спросил пару раз, получил воду, решил, что переоценено.</span></span></div>
+    <div class="sfo" data-opt><span class="box"></span><span class="otxt"><b>Пользуюсь, но по мелочи</b><span>Тексты, идеи, переводы. На реальные задачи так и не встало.</span></span></div>
+    <div class="dout">Любой вариант &mdash; <b>это не про способности и не про мотивацию.</b> Это про то, что связка между тобой и инструментом не собрана. Ее и собираем.</div>
+  </div>
+  <script>
+  (function(){var b=document.getElementById('selfq');if(!b)return;
+    b.addEventListener('click',function(e){var o=e.target.closest('[data-opt]');if(!o)return;
+      b.querySelectorAll('[data-opt]').forEach(function(x){x.classList.toggle('on',x===o)});
+      b.classList.add('answered');});})();
+  </script>
+
   <div class="prose">
     <p>Ко мне приходят из трех точек. Общее у них одно: дело не в способностях и не в том, что кто-то плохо старался. Мешает шум, страх и отсутствие фундамента &mdash; в таком порядке.</p>
   </div>
 
   <div class="hcards">
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Ты еще не начал</span><b class="hstm">«Надо бы разобраться с этим ИИ, но некогда»</b><p>Рутина съедает день, вечером нет сил, а ИИ ощущается как еще одна задача в список. Кажется, что сначала надо глубоко погрузиться &mdash; и что это вообще для айтишной тусовки. Нейросетей слишком много, непонятно, за что хвататься, и легче сказать «это не мое», чем разочароваться.</p></div>
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Ты попробовал и разочаровался</span><b class="hstm">«Почему у всех получается, а у меня нет?»</b><p>Несколько заходов, посредственные ответы, в итоге все переписал сам. Отсюда вывод «либо я не умею формулировать, либо это переоценено» &mdash; и ощущение, что все вокруг обсуждают, а ты вне контекста. На самом деле промпт был без контекста, а значит и результат вышел усредненным.</p></div>
-    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Ты пользуешься, но не системно</span><b class="hstm">«Знаю, что можно лучше, но не знаю как»</b><p>Ты используешь ИИ процентов на десять от возможного, сохраняешь чужие промпты и подборки, но не применяешь. Знания копятся обрывками, каждая новая задача снова начинается с нуля, и непонятно, как перенести чужой кейс в свой контекст.</p></div>
+    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Ты еще не начал</span><b class="qsay">«Надо бы разобраться с этим ИИ, но некогда»</b><p>Рутина съедает день, вечером нет сил, а ИИ ощущается как еще одна задача в список. Кажется, что сначала надо глубоко погрузиться &mdash; и что это вообще для айтишной тусовки. Нейросетей слишком много, непонятно, за что хвататься, и легче сказать «это не мое», чем разочароваться.</p><p class="qans">Что отвечаю: <b>начинать надо не с инструмента, а со своей недели</b></p></div>
+    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Ты попробовал и разочаровался</span><b class="qsay">«Почему у всех получается, а у меня нет?»</b><p>Несколько заходов, посредственные ответы, в итоге все переписал сам. Отсюда вывод «либо я не умею формулировать, либо это переоценено» &mdash; и ощущение, что все вокруг обсуждают, а ты вне контекста. На самом деле промпт был без контекста, а значит и результат вышел усредненным.</p><p class="qans">Что отвечаю: <b>ерунда получается там, где нет контекста</b></p></div>
+    <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Ты пользуешься, но не системно</span><b class="qsay">«Знаю, что можно лучше, но не знаю как»</b><p>Ты используешь ИИ процентов на десять от возможного, сохраняешь чужие промпты и подборки, но не применяешь. Знания копятся обрывками, каждая новая задача снова начинается с нуля, и непонятно, как перенести чужой кейс в свой контекст.</p><p class="qans">Что отвечаю: <b>остальные девяносто процентов &mdash; не про промпты</b></p></div>
   </div>
 
   <div class="prose" style="margin-top:22px">
@@ -1727,6 +1891,15 @@
   <div class="prose">
     <p>Между «пользуюсь» и «работает на меня» есть пять мест, где рвется. На консультации мы находим твое &mdash; и чиним именно его, а не все подряд.</p>
   </div>
+  <div class="chain">
+    <div class="link">Разговор</div><div class="join"></div>
+    <div class="link">Контекст</div><div class="join cut"></div>
+    <div class="link broken">Подключение</div><div class="join cut"></div>
+    <div class="link">Создание</div><div class="join"></div>
+    <div class="link">Применение</div>
+  </div>
+  <p class="chain-cap">Пунктиром показан пример обрыва. У тебя он может быть в другом звене &mdash; находим на встрече.</p>
+
   <div class="hcards">
     <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Разговор</span><b class="hstm">Ты просишь результат, но не даешь условий.</b><p>Кто ты, для кого это, что считается хорошим результатом, что уже пробовал. Модель отвечает усредненно, потому что вопрос был усредненный.</p></div>
     <div class="hcard"><span class="hnum"><i class="gl">&#10033;</i>Контекст</span><b class="hstm">Каждый разговор начинается с чистого листа.</b><p>Модель не знает, чем ты занимаешься и как ты пишешь, ты объясняешь одно и то же по кругу. Это та самая точка, где большинство решает, что ИИ переоценен.</p></div>
@@ -1737,6 +1910,37 @@
 
   <div class="pull">Мы чиним твой обрыв, а не проходим программу.</div>
 
+  <figure class="donut">
+    <svg width="132" height="132" viewBox="0 0 132 132" role="img" aria-label="десять процентов из ста">
+      <circle class="dring" cx="66" cy="66" r="52" fill="none" stroke="#DCDCD9" stroke-width="16"></circle>
+      <circle cx="66" cy="66" r="52" fill="none" stroke="#6FB9D6" stroke-width="16"
+              stroke-dasharray="32.7 294.3" stroke-linecap="round" transform="rotate(-90 66 66)"></circle>
+      <text class="dnum" x="66" y="62" text-anchor="middle" font-family="Inter,sans-serif" font-size="30"
+            font-weight="800" fill="#242424">10%</text>
+      <text class="dsub" x="66" y="82" text-anchor="middle" font-family="Inter,sans-serif" font-size="11"
+            fill="#6E6E6E">из возможного</text>
+    </svg>
+    <figcaption>Столько от возможностей ИИ берет человек, который «вроде пользуется».
+    <b>Остальные девяносто процентов &mdash; не про более умные промпты, а про контекст, подключение и передачу процессов.</b>
+    Ровно это мы и достраиваем.</figcaption>
+  </figure>
+
+
+  <div class="shead chunk" style="margin-top:34px"><h2>Что отдаем первым</h2></div>
+  <div class="prose">
+    <p>Не все задачи стоит отдавать ИИ, и это первое, что мы разводим. Смотрим на две вещи: часто ли задача повторяется и сколько времени съедает.</p>
+  </div>
+  <div class="mx">
+    <div class="axis-y">&uarr; часто повторяется</div>
+    <div class="mx-grid">
+      <div class="q4"><div class="qt4">повторяется &middot; быстро</div><div class="qv4">Шаблоны и заготовки</div></div>
+      <div class="q4 hot"><div class="qt4">повторяется &middot; долго</div><div class="qv4">Отдаем агенту первым делом</div></div>
+      <div class="q4"><div class="qt4">разово &middot; быстро</div><div class="qv4">Делай руками, не трогаем</div></div>
+      <div class="q4"><div class="qt4">разово &middot; долго</div><div class="qv4">Разовая помощь в диалоге</div></div>
+    </div>
+    <div class="axis"><span>быстро &rarr;</span><span>долго</span></div>
+  </div>
+
   <div class="shead chunk" style="margin-top:34px"><h2>Что мы делаем</h2></div>
   <ol class="steps">
     <li class="step"><span class="sdot">1</span><b class="sh">Разбираем твои процессы</b><p>Смотрим на реальную неделю: что ты делаешь руками, что повторяется, где утекает время. Отсюда видно, какие задачи имеет смысл отдавать ИИ, а какие нет.</p></li>
@@ -1744,6 +1948,14 @@
     <li class="step"><span class="sdot">3</span><b class="sh">Учимся искать и внедрять инструменты самостоятельно</b><p>Как выбрать, как установить, как подключить к своему контуру и как понять, что инструмент тебе не подходит. Чтобы следующая связка собиралась уже без меня.</p></li>
     <li class="step"><span class="sdot">4</span><b class="sh">Передаем агенту твою экспертизу</b><p>То, что ты знаешь и делаешь лучше всех, перестает быть заперто в твоей голове: описывается, отдается агенту и работает без твоего участия.</p></li>
   </ol>
+
+  <div class="wtl">
+    <div><div class="w">день ноль</div><div class="x">Разбор процессов и настройка. Уходишь с закрытой задачей, а не с планом.</div></div>
+    <div><div class="w">первая неделя</div><div class="x">Работаешь в новой среде на своих реальных делах.</div></div>
+    <div><div class="w">вторая</div><div class="x">Собираешь вторую связку &mdash; уже без меня.</div></div>
+    <div><div class="w">дальше</div><div class="x">Новые инструменты подключаешь сам, метод остается тот же.</div></div>
+  </div>
+
 
   <div class="shead chunk" style="margin-top:34px"><h2>Что обычно останавливает</h2></div>
   <div class="faq">
@@ -1760,12 +1972,87 @@
     <span class="cap">чем это отличается от гайда</span>
     <b>Гайд дает карту, консультация &mdash; твой маршрут</b>
     <p>Гайд показывает устройство рынка и доводит до первого результата &mdash; этого достаточно, чтобы стартовать самому. Полная настройка рабочего места, архитектура под твои задачи и разбор твоих процессов &mdash; это уже личная работа со мной.</p>
+
+  <div class="trks">
+    <div class="trk">
+      <div class="rn">Гайд</div>
+      <div class="rt"><span class="pt"></span><span class="seg on"></span><span class="pt"></span><span class="seg on"></span><span class="pt"></span><span class="seg"></span><span class="pt off"></span><span class="seg"></span><span class="pt off"></span></div>
+    </div>
+    <p class="trk-cap">Карта рынка &rarr; выбор инструмента &rarr; первый результат. Дальше сам.</p>
+    <div class="trk">
+      <div class="rn">Консультация</div>
+      <div class="rt"><span class="pt solid"></span><span class="seg ink"></span><span class="pt solid"></span><span class="seg ink"></span><span class="pt solid"></span><span class="seg ink"></span><span class="pt solid"></span><span class="seg ink"></span><span class="pt solid"></span></div>
+    </div>
+    <p class="trk-cap">Твои процессы &rarr; настроенная среда &rarr; навык внедрять самому &rarr; экспертиза передана агенту.</p>
+  </div>
   </div>
 
   <div class="shead chunk" style="margin-top:34px"><h2>С чем ты уходишь</h2></div>
   <div class="prose">
     <p>Настроенная среда, в которой ты уже поработал вместе со мной, и понимание, какие из твоих задач закрывает ИИ, а какие пока нет. Дальше рутина схлопывается, уверенность в своем будущем растет &mdash; и появляется ресурс, финансовый и временной, на те цели, которые ты так давно откладываешь.</p>
     <p>Инструменты устаревают каждые несколько месяцев. Не устаревает только навык взаимодействия с ИИ &mdash; за ним и приходят.</p>
+  </div>
+
+  <div class="days">
+    <div class="day">
+      <div class="dh">как идет день сейчас</div>
+      <div class="slot rut">Почта и переписки</div>
+      <div class="slot rut">Отчеты, таблицы, сборка данных</div>
+      <div class="slot rut">Поиск и копипаста между сервисами</div>
+      <div class="slot own">Свое, ради чего работаешь</div>
+      <div class="slot rut">Догоняешь вечером</div>
+    </div>
+    <div class="day">
+      <div class="dh">как идет после</div>
+      <div class="slot rut">Почта и переписки</div>
+      <div class="slot rut">Отчеты и таблицы</div>
+      <div class="slot own">Свое, ради чего работаешь</div>
+      <div class="slot air">Свободно</div>
+    </div>
+  </div>
+  <p class="days-note">Пропорции здесь условные: у каждого свой набор рутины, и на встрече мы считаем твой.</p>
+
+  <div class="swaps">
+    <div class="swap-h"><div>как сейчас</div><div></div><div>как станет</div></div>
+    <div class="swap">
+      <div class="sc was">Каждый раз объясняешь заново, кто ты и что делаешь</div>
+      <div class="arw">&rarr;</div>
+      <div class="sc now">Контекст сохранен, разговор продолжается</div>
+    </div>
+    <div class="swap">
+      <div class="sc was">ИИ отвечает общими словами</div>
+      <div class="arw">&rarr;</div>
+      <div class="sc now">Отвечает твоими данными и в твоей логике</div>
+    </div>
+    <div class="swap">
+      <div class="sc was">Помогает написать текст</div>
+      <div class="arw">&rarr;</div>
+      <div class="sc now">Ведет задачу от начала до результата</div>
+    </div>
+    <div class="swap">
+      <div class="sc was">Новый инструмент &mdash; снова разбираться с нуля</div>
+      <div class="arw">&rarr;</div>
+      <div class="sc now">Подключаешь сам, метод один и тот же</div>
+    </div>
+  </div>
+
+
+
+  <div class="shead chunk" style="margin-top:34px"><h2>Тебе точно сюда?</h2></div>
+  <div class="fork">
+    <span class="fq">Ты уже пробовал применить ИИ к своей работе?</span>
+    <div class="branches">
+      <div class="br">
+        <div class="bh2">Нет, еще не подступался</div>
+        <div class="bres">Тогда консультация пока избыточна. Возьми бесплатный гайд, пройди его за вечер и попробуй на одной своей задаче &mdash; станет видно, где именно встает.</div>
+        <button class="btag n" data-view="home">сначала гайд</button>
+      </div>
+      <div class="br">
+        <div class="bh2">Да, но результат не тот</div>
+        <div class="bres">Значит, дело не в незнании инструмента &mdash; рвется связка. Это как раз то, что разбирается за одну встречу на твоих реальных процессах.</div>
+        <span class="btag g">тебе сюда</span>
+      </div>
+    </div>
   </div>
 
   <div class="cons" style="margin-top:26px">
