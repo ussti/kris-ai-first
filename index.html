@@ -598,6 +598,15 @@
   .cons-h{display:block;margin-top:10px;font-size:23px;line-height:1.2;
     letter-spacing:-.018em;font-weight:800;color:var(--ink)}
   .cons-s{margin-top:8px;font-size:14.5px;line-height:1.45;color:var(--ink-soft)}
+  /* CTA: what happens after the click */
+  .cons-steps{list-style:none;margin:16px auto 0;max-width:340px;text-align:left;
+    display:flex;flex-direction:column;gap:8px}
+  .cons-steps li{position:relative;padding-left:22px;font-size:13.5px;line-height:1.4;
+    color:var(--ink-soft)}
+  .cons-steps li .gl{position:absolute;left:0;top:0;font-size:11px;font-style:normal;
+    line-height:1.55;color:#5C7F8D}
+  .cons-note{margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+  :root[data-theme="dark"] .cons-steps li .gl{color:#9CC6D6}
   .cons-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;
     padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--paper);
     text-decoration:none;font-size:14px;font-weight:700;letter-spacing:-.005em;
@@ -1096,7 +1105,7 @@
       <button class="toc-i" data-view="story"><span class="n">01</span><span class="t">Почему стоит поторопиться</span></button>
       <button class="toc-i" data-view="market"><span class="n">02</span><span class="t">Разберись, как устроен рынок</span></button>
       <button class="toc-i" data-view="faq"><span class="n">03</span><span class="t">Ответы на твои вопросы</span></button>
-      <a class="toc-i" href="https://ussti.github.io/kris-claude-guide/" target="_blank" rel="noopener"><span class="n">04</span><span class="t">Регистрация и оплата</span></a>
+      <a class="toc-i" href="https://ussti.github.io/kris-claude-guide/" rel="noopener"><span class="n">04</span><span class="t">Регистрация и оплата</span></a>
     </nav>
   </section>
   <section>
@@ -1125,7 +1134,7 @@
       <div>
         <div class="pf-name">Кристина</div>
         <div class="pf-btns">
-          <a class="pf-btn" href="https://t.me/ustikris" target="_blank" rel="noopener">Telegram-канал</a>
+          <a class="pf-btn" href="https://t.me/ustikris" rel="noopener">Telegram-канал</a>
           <a class="pf-btn alt" href="https://www.instagram.com/kris.usti" target="_blank" rel="noopener">@kris.usti</a>
           <p class="metanote">Instagram &mdash; деятельность организации Meta Platforms Inc. запрещена на территории РФ.</p>
         </div>
@@ -1662,7 +1671,7 @@
   <div class="keybox">
     <p>А пока подписывайся на канал &mdash; собираю сообщество энтузиастов. Там каждый день выходит пост с пользой: как применять ИИ на практике и готовые сценарии, проверенные на мне.</p>
     <div class="cta2">
-      <a class="btn sky" href="https://t.me/ustikris" target="_blank" rel="noopener">Подписаться на канал <span class="go">&rarr;</span></a>
+      <a class="btn sky" href="https://t.me/ustikris" rel="noopener">Подписаться на канал <span class="go">&rarr;</span></a>
       <button class="btn ghost sm" data-view="home">Вернуться к гайду</button>
     </div>
   </div>
@@ -1747,9 +1756,15 @@
 
   <div class="cons" style="margin-top:26px">
     <span class="cons-eb">записаться</span>
-    <b class="cons-h">Напиши мне</b>
-    <p class="cons-s">Расскажи свою ситуацию &mdash; подберем формат.</p>
-    <a class="cons-btn" href="https://t.me/ustikris" target="_blank" rel="noopener">Написать <span class="go">&rarr;</span></a>
+    <b class="cons-h">Разберем твой случай</b>
+    <p class="cons-s">Расскажи ситуацию &mdash; посмотрим, где у тебя рвется.</p>
+    <ol class="cons-steps">
+      <li><i class="gl">&#10033;</i>Пишешь мне в телеграм и коротко описываешь, чем занимаешься.</li>
+      <li><i class="gl">&#10033;</i>Задаю пару вопросов про твои задачи и то, что уже пробовал.</li>
+      <li><i class="gl">&#10033;</i>Говорю честно: нужна консультация или тебе хватит гайда.</li>
+    </ol>
+    <a class="cons-btn" href="https://t.me/ussti" rel="noopener">Написать <span class="go">&rarr;</span></a>
+    <p class="cons-note">Отвечаю сама, обычно в тот же день.</p>
   </div>
 
   <div class="cta2" style="margin-top:26px">
@@ -1776,7 +1791,7 @@
 
   <div class="shead" id="f-1" style="margin-top:28px"><h3 style="margin-top:8px">Деньги, доступ, безопасность</h3></div>
   <div class="faq">
-    <div class="qa"><div class="q"><span class="qt">Я из <span class="kw">России</span>, зарубежной карты нет. Смогу пользоваться?</span><span class="pm">+</span></div><div class="a"><p>Да. Часть зарубежных сервисов доступна из России напрямую, часть &mdash; нет. Но ты можешь ознакомиться с <a class="nm" href="https://ussti.github.io/kris-claude-guide/" target="_blank" rel="noopener">этим гайдом</a>. Персональный подбор варианта регистрации и оплаты под твой случай &mdash; в личной работе.</p></div></div>
+    <div class="qa"><div class="q"><span class="qt">Я из <span class="kw">России</span>, зарубежной карты нет. Смогу пользоваться?</span><span class="pm">+</span></div><div class="a"><p>Да. Часть зарубежных сервисов доступна из России напрямую, часть &mdash; нет. Но ты можешь ознакомиться с <a class="nm" href="https://ussti.github.io/kris-claude-guide/" rel="noopener">этим гайдом</a>. Персональный подбор варианта регистрации и оплаты под твой случай &mdash; в личной работе.</p></div></div>
     <div class="qa"><div class="q"><span class="qt">А если мой аккаунт <span class="kw">заблокируют</span> &mdash; я потеряю все настройки?</span><span class="pm">+</span></div><div class="a"><p>Нет, и в этом прелесть агентских сред. Агент работает прямо в локальных папках на твоем компьютере или на личном сервере: файлы, базы знаний и настроенные скиллы лежат <span class="u">у тебя на диске</span>. Аккаунт &mdash; это просто временно подключенный мозг. Заблокируют &mdash; берешь новый и подкладываешь ему ту же папку с контекстом.</p></div></div>
     <div class="qa"><div class="q"><span class="qt">Я <span class="kw">гуманитарий</span>, кода не знаю. Мне точно нужны агенты и терминал?</span><span class="pm">+</span></div><div class="a"><p>Именно поэтому и нужен AI-First подход: писать код руками сегодня не надо. Агент сам пишет скрипты, сам настраивает и сам выполняет команды, а ты общаешься с ним словами &mdash; через чат или визуальный интерфейс вроде <a class="nm" href="https://claude.com/cowork" target="_blank" rel="noopener">Claude Cowork</a>. Терминал остается как следующий уровень, если захочешь глубже.</p></div></div>
     <div class="qa"><div class="q"><span class="qt">У меня <span class="kw">слабый ноутбук</span>. Нужен мощный компьютер?</span><span class="pm">+</span></div><div class="a"><p>Нет. Вся тяжелая работа &mdash; инференс &mdash; идет на серверах <a class="nm" href="https://openai.com" target="_blank" rel="noopener">OpenAI</a> или <a class="nm" href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>. Твой ноутбук просто окно связи с этим мозгом.</p></div></div>
@@ -1936,7 +1951,7 @@
       + (a.geo==='ru'?'Путь оплаты подобран под Россию.':'Ты за рубежом — оплата напрямую, без обходных путей.');
     var step;
     if(track==='Anthropic' && a.geo==='ru')
-      step='Пройди мой пошаговый гайд «Claude из России»: регистрация и оплата подписки без зарубежной карты — <a class="nm" href="'+GUIDE_URL+'" target="_blank" rel="noopener">открыть гайд</a>.';
+      step='Пройди мой пошаговый гайд «Claude из России»: регистрация и оплата подписки без зарубежной карты — <a class="nm" href="'+GUIDE_URL+'" rel="noopener">открыть гайд</a>.';
     else if(track==='OpenAI')
       step='Зарегистрируйся на <a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a>, возьми подписку Plus и закинь в первый чат одну реальную задачу из своей рутины.';
     else
