@@ -1243,7 +1243,7 @@
   <a data-view="story"><span class="n">01</span>моя история</a>
   <a data-view="market"><span class="n">02</span>как устроен рынок</a>
   <a data-view="mindset"><span class="n">03</span>почему не получается</a>
-  <a data-view="quiz"><span class="n">04</span>опрос: скоро</a>
+  <a href="https://ussti.github.io/kris-where-to-start/" target="_blank" rel="noopener"><span class="n">04</span>опрос: с чего начать</a>
   <a class="plain" data-view="faq" style="margin-top:16px">Частые вопросы</a>
   <a class="plain" data-view="gloss">Словарь терминов</a>
   <a class="plain" data-view="about">Обо мне</a>
@@ -1275,8 +1275,8 @@
   <section>
     <div class="startcta">
       <p class="sc-h">С чего начать именно мне?</p>
-      <p class="sc-s">Разбор готовится — пока забери апдейты в канале</p>
-      <button class="startbtn" data-view="quiz"><span class="star"></span> Опрос: скоро будет</button>
+      <p class="sc-s">15 вопросов — покажу твою ступень, где обрыв и что забрать первым</p>
+      <a class="startbtn" href="https://ussti.github.io/kris-where-to-start/" target="_blank" rel="noopener"><span class="star"></span> Пройти опрос</a>
     </div>
   </section>
   <section>
@@ -1429,7 +1429,7 @@
 
   <div class="cta2">
     <button class="btn sm sky" data-view="market">Дальше: архитектура рынка <span class="go">&rarr;</span></button>
-    <button class="btn sm brown" data-view="quiz">Опрос: скоро будет <span class="go">&rarr;</span></button>
+    <a class="btn sm brown" href="https://ussti.github.io/kris-where-to-start/" target="_blank" rel="noopener">Опрос: с чего начать именно мне <span class="go">&rarr;</span></a>
   </div>
 </section></div>
 </div><!-- /v-story -->
@@ -1773,7 +1773,7 @@
   </div>
 
   <div class="cta2">
-    <button class="btn sm brown" data-view="quiz">Опрос: скоро будет <span class="go">&rarr;</span></button>
+    <a class="btn sm brown" href="https://ussti.github.io/kris-where-to-start/" target="_blank" rel="noopener">Опрос: с чего начать именно мне <span class="go">&rarr;</span></a>
   </div>
 </section></div>
 </div><!-- /v-market -->
@@ -1822,35 +1822,12 @@
 
   <div class="cta2">
     <button class="btn sm sky" data-view="faq">Дальше: частые вопросы <span class="go">&rarr;</span></button>
-    <button class="btn sm brown" data-view="quiz">Опрос: скоро будет <span class="go">&rarr;</span></button>
+    <a class="btn sm brown" href="https://ussti.github.io/kris-where-to-start/" target="_blank" rel="noopener">Опрос: с чего начать именно мне <span class="go">&rarr;</span></a>
   </div>
 </section></div>
 </div><!-- /v-mindset -->
 
 <!-- ======================= VIEW: QUIZ ======================= -->
-<div class="view" id="v-quiz" data-title="Опрос">
-<div class="wrap"><section>
-  <div class="shead"><span class="eyebrow">04 &middot; диагностика</span><h2>Опрос пока не готов, скоро поделюсь апдейтом</h2></div>
-
-  <div class="keybox">
-    <p>А пока подписывайся на канал &mdash; собираю сообщество энтузиастов. Там каждый день выходит пост с пользой: как применять ИИ на практике и готовые сценарии, проверенные на мне.</p>
-    <div class="cta2">
-      <a class="btn sky" href="https://t.me/ustikris" rel="noopener">Подписаться на канал <span class="go">&rarr;</span></a>
-      <button class="btn ghost sm" data-view="home">Вернуться к гайду</button>
-    </div>
-  </div>
-
-  <div style="display:none" aria-hidden="true">
-    <i id="qpb"></i>
-    <div id="qbody"></div>
-    <div id="qresult">
-      <b id="resTrack"></b><b id="resTool"></b><span id="resMode"></span>
-      <span id="resAccess"></span><p id="resWhy"></p><span id="resStep"></span>
-      <button id="qRestart"></button>
-    </div>
-  </div>
-</section></div>
-</div><!-- /v-quiz -->
 
 <!-- ==================== VIEW: CONSULTATION ==================== -->
 <div class="view" id="v-cons" data-title="Консультация">
@@ -2205,97 +2182,6 @@
     if(fnref){ var fndd=document.getElementById('fndd'); if(fndd) fndd.open=true; }
   });
 
-  /* ---- QUIZ: diagnostic -> track + tool + mode + access path ---- */
-  var Q=[
-    {key:'geo', q:'Ты сейчас в России?',
-     opts:[{t:'Да',v:'ru'},{t:'Нет / за рубежом',v:'other'}]},
-    {key:'card', q:'Есть карта или способ платить за рубежом?',
-     opts:[{t:'Да, есть',v:'yes'},{t:'Нет',v:'no'},{t:'Пока не знаю',v:'unknown'}]},
-    {key:'exp', q:'Какой у тебя опыт с ИИ?',
-     opts:[
-       {t:'Только ChatGPT или ничего',s:'совсем новичок',v:'chat'},
-       {t:'Пробовала разные нейросети',s:'но неглубоко',v:'some'},
-       {t:'Уже кодила или ставила агентов',s:'есть опыт',v:'dev'}]},
-    {key:'term', q:'Хочешь разобраться с терминалом?',
-     opts:[
-       {t:'Нет, хочу по-простому',s:'готовое приложение',v:'no'},
-       {t:'Да, хочу глубже',s:'терминал не пугает',v:'yes'}]},
-    {key:'setup', q:'Возьмешься за настройку аккаунта ради инструмента посильнее?',
-     opts:[
-       {t:'Да, доведу до конца',s:'сложные шаги не пугают',v:'yes'},
-       {t:'Хочу минимум шагов',s:'самый простой путь',v:'min'}]},
-    {key:'task', q:'Что хочешь делать первым?',
-     opts:[
-       {t:'Писать и думать',s:'тексты, разборы, планы',v:'text'},
-       {t:'Код и автоматизации',s:'свои инструменты, боты',v:'code'},
-       {t:'Визуал и дизайн',s:'посты, карусели, презентации',v:'visual'},
-       {t:'Рабочие процессы',s:'данные, документы, задачи',v:'work'}]}
-  ];
-  var qi=0, ans={};
-  var GUIDE_URL='https://ussti.github.io/kris-claude-guide/';
-  function decide(a){
-    var deep = a.term==='yes';
-    var track, tool;
-    if(a.task==='visual'){ track='Anthropic'; tool='Claude Design'; }
-    else if(a.task==='work'){ track='OpenAI'; tool=deep?'ChatGPT Work + Projects':'ChatGPT Work'; }
-    else { track='Anthropic';
-      if(a.task==='code') tool=deep?'Claude Code · терминал':'Claude Cowork';
-      else tool=deep?'Claude + стиль и Projects':'Claude';
-    }
-    var access;
-    if(a.geo==='other') access='Обычная подписка напрямую';
-    else if(a.setup==='min') access='Самый простой путь: агрегатор за рубли + ВиПиЭн';
-    else if(a.card==='yes') access='Зарубежная карта &mdash; оплата напрямую';
-    else access='Через агрегатор за рубли + ВиПиЭн';
-    var why = 'Под твою задачу и опыт беру '+track+'. '
-      + (deep?'Ты хочешь глубже — даю инструмент помощнее. ':'Даю простой вход без терминала. ')
-      + (a.geo==='ru'?'Путь оплаты подобран под Россию.':'Ты за рубежом — оплата напрямую, без обходных путей.');
-    var step;
-    if(track==='Anthropic' && a.geo==='ru')
-      step='Пройди мой пошаговый гайд «Claude из России»: регистрация и оплата подписки без зарубежной карты — <a class="nm" href="'+GUIDE_URL+'" rel="noopener">открыть гайд</a>.';
-    else if(track==='OpenAI')
-      step='Зарегистрируйся на <a class="nm" href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a>, возьми подписку Plus и закинь в первый чат одну реальную задачу из своей рутины.';
-    else
-      step='Зарегистрируйся на <a class="nm" href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, возьми подписку Pro и закинь в первый чат одну реальную задачу из своей рутины.';
-    return {track:track, tool:tool, access:access, step:step,
-      mode: deep?'Вглубь · терминал':'Быстро · без терминала', why:why};
-  }
-  function renderQ(){
-    document.getElementById('qpb').style.width=(qi/Q.length*100)+'%';
-    var item=Q[qi];
-    var h='<div class="qstep"><b>Вопрос '+(qi+1)+' / '+Q.length+'</b><h2>'+item.q+'</h2></div><div class="opts">';
-    item.opts.forEach(function(o,idx){
-      h+='<button class="opt" data-i="'+idx+'">'+o.t+(o.s?'<small>'+o.s+'</small>':'')+'</button>';
-    });
-    h+='</div>';
-    document.getElementById('qbody').innerHTML=h;
-    document.querySelectorAll('#qbody .opt').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        ans[item.key]=item.opts[+btn.getAttribute('data-i')].v;
-        qi++;
-        if(qi<Q.length){renderQ()}else{finishQuiz()}
-      });
-    });
-  }
-  function finishQuiz(){
-    document.getElementById('qpb').style.width='100%';
-    var r=decide(ans);
-    document.getElementById('resTrack').textContent=r.track;
-    document.getElementById('resTool').textContent=r.tool;
-    document.getElementById('resMode').textContent=r.mode;
-    document.getElementById('resAccess').textContent=r.access;
-    document.getElementById('resWhy').textContent=r.why;
-    document.getElementById('resStep').innerHTML=r.step;
-    document.getElementById('qbody').innerHTML='';
-    document.getElementById('qresult').style.display='block';
-  }
-  document.getElementById('qRestart').addEventListener('click',function(){
-    qi=0; ans={};
-    document.getElementById('qresult').style.display='none';
-    renderQ();
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-  renderQ();
 
   /* ============================================================
      NEW FORMAT (v12) — chapter reading layer
@@ -2310,7 +2196,7 @@
   };
   /* guide-level page nav — shown on pages that have no inner sections */
   var GUIDE=[['home','С чего начать'],['story','Моя история'],['market','Как устроен рынок'],
-             ['mindset','Почему не получается'],['faq','Ответы на вопросы'],['quiz','Опрос: скоро'],
+             ['mindset','Почему не получается'],['faq','Ответы на вопросы'],
              ['about','Обо мне'],['gloss','Словарь'],['cons','Консультация']];
   var guideMode=false;
   var rail=document.getElementById('rail'), rprog=document.getElementById('rprog');
@@ -2405,7 +2291,7 @@
   var CH_TITLE={story:'Моя история',market:'Как устроен рынок',mindset:'Почему не получается',faq:'Ответы на твои вопросы'};
   var CH_NEXT={story:['market','Дальше: как устроен рынок'],
                market:['mindset','Дальше: почему не получается'],
-               mindset:['quiz','Опрос: скоро будет']};
+               mindset:['faq','Дальше: ответы на вопросы']};
   var LAYER_NAME={'m-1':['Энергия','железо'],'m-2':['Мозг','модель'],
                   'm-3':['Рабочее тело','харнес'],'m-4':['Среда','интерфейс']};
 
